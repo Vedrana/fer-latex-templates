@@ -1,0 +1,12 @@
+#summary Stranice na koje se isplati baciti pogled.
+
+= Uvod =
+
+Ovdje stavljajte korisne linkove s njihovim opisima.
+
+
+== O tablicama i LaTeX-u ==
+
+Par gotovih primjera:
+  * http://www.maths.leeds.ac.uk/LaTeX/TableHelp1.pdf
+  * Par primjera korištenja sa slikama. Objašnjeni su neki bitniji parametri. Sami primjeri odlično izgledaju.
