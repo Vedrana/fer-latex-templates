@@ -107,87 +107,118 @@ datoteci \texttt{završni.cls}.
 
 \subsection{Dodavanje novih paketa (za prevoditelj)}
 
+
 \section{Razvojna okruženja i pomoćni alati}
 
+
 \section{Dodavanje popisa sadržaja, slika i tablica}
+% TODO: Navesti kako se sadržaj gradi (svako poglavlje, odjeljak i sl. gradi
+% sadržaj)
 
 \section{Osnovno \LaTeX~formatiranje}
 % TODO: emph, texttt, bold, crtice, razmaci i ``~'', navodnici, trotočka,
-% prelazak u novi red, paragrafi i sl., 
+% prelazak u novi red, paragrafi i sl., komentari
+
+
+\section{Dodavanje fusnota i referenci}
+Fusnote se dodaju naredbom \verb|\footnote{}|, npr.:
+\begin{verbatim}
+Popis fusnota\footnote{Objašnjenja koja se prikazuju
+na dnu stranice} nije potreban.
+\end{verbatim}
+Rezultat navedenog teksta je: ``Popis fusnota\footnote{Objašnjenja koja se
+prikazuju na dnu stranice} nije potreban.''
+
+Reference služe za povezivanje s nekim dijelom rada. Da bi ste omogućili
+referenciranje na neki dio rada, tom dijelu morate postaviti oznaku
+\engl{label} naredbom \verb|\label{}|, npr.:
+\begin{verbatim}
+\section{Dodavanje posvete}
+\label{sec:posveta}
+\end{verbatim}
+a, referencirate se pomoću naredbe \verb|\ref{}|, npr.:
+\begin{verbatim}
+Za navedeno pogledajte odjeljke \ref{sec:sazetak},
+\ref{sec:posveta} i \ref{sec:engl}
+\end{verbatim}
+
+Oznaku za referenciranje možete postaviti većini elemenata, a najčešće se
+koristi za označavanje poglavlja, odjeljaka, jednadžbi, tablica i slika.
+
 
 \section{Dodavanje listi, nabrajanja i definicija}
 
+
 \section{Dodavanje tablica}
+
 
 \section{Dodavanje slika}
 
+
 \section{Dodavanje formula}
+
 
 \section{Dodavanje programskog koda i sadržaja koji mora ostati neformatiran}
 
-\section{Dodavanje fusnota i referenci}
 
 \section{Podjela sadržaja na više stupaca}
+
 
 \section{Dodavanje literature}
 \label{sec:literatura}
 
+
 \subsection{Promjena načina citiranja}
+
 
 \section{Dodavanje indeksa}
 
+
 \section{Dodatci dokumenta \engl{appendix}}
+
 
 \section{Dodavanje sažetka rada}
 \label{sec:sazetak}
 
+
 \section{Dodavanje posvete}
 \label{sec:posveta}
 
+
 \section{Korištenje naredbe \texttt{engl}}
 \label{sec:engl}
+Naredba \verb|\engl{}| služi navođenju engleskog
+prijevoda nekog termina (radi se o nestandardnoj naredbi), npr.:
+\begin{verbatim}
+Tomu služi dodatak dokumenta \engl{appendix}.
+\end{verbatim}
+Rezultat je: ``Tomu služi dodatak dokumenta \engl{appendix}.''
+
 
 \section{Dodavanje novih paketa (za korištenje)}
 
+
 \bibliography{literatura}
 \bibliographystyle{plainnat}
+
 
 \appendix
 \chapter{Statistika rezultata čišćenja}
 Neki dodatak.
 
 \begin{sazetak}
-Za razliku od tradicionalnih tekstovnih dokumenata, web stranice tipično
-sadržavaju veliku količinu informacija koje se ne odnose izravno na njihov
-sadržaj, poput promidžbenih poruka, navigacijskih uputa, i sl. U kontekstu
-dubinske analize teksta i računalno-lingvističke obrade, takve informacije
-predstavljaju neželjeni šum.
-
-U okviru rada proučeni su postupci za automatsko čišćenje dokumenata u HTML-u od
-nepotrebnog sadržaja, razvijena programska implementacija postupka pogodna za
-ugradnju u pobirač dokumenata s web sjedišta te provodeno eksperimentalno
-vrednovanje postupka.
+Sažetak rada.
 
 \vspace{15pt}
-\noindent \textbf{Ključne riječi:} HTML, web stranice, uklanjanje šuma,
-automatsko čišćenje, dubinska analiza teksta
+\noindent \textbf{Ključne riječi:} Završni rad, Seminar, \LaTeX
 \end{sazetak}
 
-\engtitle{Web page cleaning techniques for text mining}
+\engtitle{Manual for bachelor thesis and Seminar \LaTeX~templates}
 \begin{abstract}
-Unlike traditional text documents, web pages typically contain large
-amount of information that doesn't refer to content of web page
-directly, for example advertisements, navigation etc. In context of
-text mining and computational linguistic processing, such information
-represent unwanted noise.
-
-This work describes automated web page cleaning techniques and
-presents program implementation and experimental evaluation of a
-cleaning technique suitable for using with web crawler.
+Sažetak na engleskom jeziku.
 
 \vspace{15pt}
-\noindent \textbf{Keywords:} HTML, web pages, boilerplate removal, automated web
-cleaner, text mining
+\noindent \textbf{Keywords:} bachelor thesis, seminar, \LaTeX
 \end{abstract}
 
 \end{document}
