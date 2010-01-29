@@ -1,3 +1,5 @@
+% Upute za LaTeX predložak ZR-a i Seminara, verzija: 0.1alpha
+
 \documentclass{zavrsni}
 \usepackage{algorithmic}
 \usepackage{algorithm}
@@ -8,7 +10,7 @@
 
 \begin{document}
 \worknumber{000}
-\title{Upute za korištenje \LaTeX predloška za Završni rad i Seminar}
+\title{Upute za korištenje \LaTeX~predloška za Završni rad i Seminar}
 \author{Ivan Krišto \and Boran Car}
 
 \maketitle
@@ -22,21 +24,98 @@
 
 \chapter{Upute za korištenje}
 % TODO: Kratko i jasno za ljude koji znaju koristiti LaTeX
+Osnova predloška je datoteka \texttt{zavrsni.cls}. Uz navedenu datoteku potrebna
+je \texttt{.tex} datoteka za sadržaj rada te \texttt{.bib} datoteka za literaturu
+(naziv \texttt{.bib} datoteke je proizvoljan, ali mora odgovarati argumentu koji
+predate naredbi \verb|\bibliography{}| (vidi odjeljak \ref{sec:literatura})). Sve
+navedene datoteke moraju se nalaziti u istom direktoriju.
+
+Povezivanje \texttt{.tex} dokumenta i predloška iz \texttt{zavrsni.cls}
+datoteke vrši se naredbom \verb|\documentclass{zavrsni}| koja mora biti prva
+naredba u dokumentu.
+
+Predložak, osim standardnih polja kao što \texttt{author} i \texttt{title}
+sadrži obavezno polje \texttt{worknumber} --- broj Završnog rada. Osnovna
+struktura \texttt{.tex} datoteke mora biti:
+\begin{verbatim}
+\documentclass{zavrsni}
+
+% Ovdje možete staviti dodatne pakete koji
+% su vam potrebni, npr.:
+\usepackage{longtable}
+\usepackage{multicol}
+
+\begin{document}
+\worknumber{000}
+\title{Naslov rada}
+\author{Vaše ime i prezime}
+\maketitle
+\tableofcontents
+% Tu možete staviti popis slika i tablica
+
+\chapter{Uvod}
+% Sadržaj rada, ostala poglavlja i odjeljci.
+
+\bibliography{literatura}
+\bibliographystyle{plainnat}
+
+% Dodatak nije obavezan
+\appendix
+\chapter{Poglavlje pod dodatkom}
+
+\begin{sazetak}
+Sažetak rada.
+
+\vspace{15pt}
+\noindent \textbf{Ključne riječi:} <popis ključnih riječi>
+\end{sazetak}
+
+\engtitle{Naslov rada na engleskom jeziku}
+\begin{abstract}
+Sažetak na engleskom jeziku.
+
+\vspace{15pt}
+\noindent \textbf{Keywords:} <popis ključnih riječi na engleskom>
+\end{abstract}
+
+\end{document}
+\end{verbatim}
+
+O stilu i strukturi dokumenta pogledajte poglavlje \ref{ch:stil-i-struktura}, a
+za upoznavanje s \LaTeX--om te nekim njegovim posebnostima i receptima pogledajte
+poglavlje \ref{ch:latex-upute}
+
+Napravljeni predložak sadrži rješenje za dodavanje sažetka rada i posvete te
+naredbu \texttt{engl}. Za navedeno pogledajte odjeljke \ref{sec:sazetak},
+\ref{sec:posveta} i \ref{sec:engl}
+
+Za pakete uključene u sam predložak pogledajte polja \texttt{RequirePackage} u
+datoteci \texttt{završni.cls}.
 
 \chapter{Stil i struktura}
+\label{ch:stil-i-struktura}
 % TODO: O stilu iz službenih MS Word uputa i općenito
 
 \chapter{Upute za \LaTeX}
+\label{ch:latex-upute}
 % TODO: O LaTeX-u
 
-\section{Instalacija \LaTeX prevoditelja}
+\section{Instalacija \LaTeX~prevoditelja}
 
 \subsection{Prevođenje \LaTeX~dokumenta}
-% TODO: Napomena kako se zbog nekih stvari prevođenje mora pokrenuti više puta 
+% TODO: Napomena kako se zbog nekih stvari prevođenje mora pokrenuti više puta
+
+\subsection{Dodavanje novih paketa (za prevoditelj)}
 
 \section{Razvojna okruženja i pomoćni alati}
 
 \section{Dodavanje popisa sadržaja, slika i tablica}
+
+\section{Osnovno \LaTeX~formatiranje}
+% TODO: emph, texttt, bold, crtice, razmaci i ``~'', navodnici, trotočka,
+% prelazak u novi red, paragrafi i sl., 
+
+\section{Dodavanje listi, nabrajanja i definicija}
 
 \section{Dodavanje tablica}
 
@@ -46,11 +125,29 @@
 
 \section{Dodavanje programskog koda i sadržaja koji mora ostati neformatiran}
 
+\section{Dodavanje fusnota i referenci}
+
+\section{Podjela sadržaja na više stupaca}
+
 \section{Dodavanje literature}
+\label{sec:literatura}
+
+\subsection{Promjena načina citiranja}
 
 \section{Dodavanje indeksa}
 
 \section{Dodatci dokumenta \engl{appendix}}
+
+\section{Dodavanje sažetka rada}
+\label{sec:sazetak}
+
+\section{Dodavanje posvete}
+\label{sec:posveta}
+
+\section{Korištenje naredbe \texttt{engl}}
+\label{sec:engl}
+
+\section{Dodavanje novih paketa (za korištenje)}
 
 \bibliography{literatura}
 \bibliographystyle{plainnat}
@@ -58,5 +155,39 @@
 \appendix
 \chapter{Statistika rezultata čišćenja}
 Neki dodatak.
+
+\begin{sazetak}
+Za razliku od tradicionalnih tekstovnih dokumenata, web stranice tipično
+sadržavaju veliku količinu informacija koje se ne odnose izravno na njihov
+sadržaj, poput promidžbenih poruka, navigacijskih uputa, i sl. U kontekstu
+dubinske analize teksta i računalno-lingvističke obrade, takve informacije
+predstavljaju neželjeni šum.
+
+U okviru rada proučeni su postupci za automatsko čišćenje dokumenata u HTML-u od
+nepotrebnog sadržaja, razvijena programska implementacija postupka pogodna za
+ugradnju u pobirač dokumenata s web sjedišta te provodeno eksperimentalno
+vrednovanje postupka.
+
+\vspace{15pt}
+\noindent \textbf{Ključne riječi:} HTML, web stranice, uklanjanje šuma,
+automatsko čišćenje, dubinska analiza teksta
+\end{sazetak}
+
+\engtitle{Web page cleaning techniques for text mining}
+\begin{abstract}
+Unlike traditional text documents, web pages typically contain large
+amount of information that doesn't refer to content of web page
+directly, for example advertisements, navigation etc. In context of
+text mining and computational linguistic processing, such information
+represent unwanted noise.
+
+This work describes automated web page cleaning techniques and
+presents program implementation and experimental evaluation of a
+cleaning technique suitable for using with web crawler.
+
+\vspace{15pt}
+\noindent \textbf{Keywords:} HTML, web pages, boilerplate removal, automated web
+cleaner, text mining
+\end{abstract}
 
 \end{document}
