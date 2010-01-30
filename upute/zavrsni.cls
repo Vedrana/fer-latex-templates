@@ -27,6 +27,7 @@
 \RequirePackage{caption}
 \RequirePackage{ifthen}
 \RequirePackage[nottoc]{tocbibind}
+\RequirePackage{url}
 
 \renewcommand{\captionlabelfont}{\bfseries}
 \renewcommand{\captionfont}{\small}
