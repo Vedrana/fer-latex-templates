@@ -6,12 +6,11 @@
 \usepackage{listings}
 \usepackage{longtable}
 \usepackage{multicol}
-\usepackage{url}
 \lstset{language=Java, tabsize=4}
 
 \begin{document}
 \worknumber{000}
-\title{Upute za korištenje \LaTeX~predloška za Završni rad i Seminar}
+\title{Upute za korištenje \LaTeX{} predloška za Završni rad i Seminar}
 \author{Ivan Krišto \and Boran Car}
 
 \maketitle
@@ -21,12 +20,14 @@
 \chapter{Uvod}
 % TODO: Čemu ovo
 % TODO: Zašto je LaTeX moćan
+% TODO: Navesti da je latex moćan, da su standardne stvari jednostavne i
+% lijepe, ali da za one koje mogu napraviti kaos se treba potruditi :D
 % TODO: O organizaciji dokumenta
 
 Nešto o moćnosti: \citep{taraborelli2009beauty}, \citep{cottrell1999word}.
 
 \chapter{Upute za korištenje}
-% TODO: Kratko i jasno za ljude koji znaju koristiti LaTeX
+% Kratko i jasno za ljude koji znaju koristiti LaTeX.
 Osnova predloška je datoteka \texttt{zavrsni.cls}. Uz navedenu datoteku potrebna
 je \texttt{.tex} datoteka za sadržaj rada te \texttt{.bib} datoteka za literaturu
 (naziv \texttt{.bib} datoteke je proizvoljan, ali mora odgovarati argumentu koji
@@ -84,6 +85,10 @@ Sažetak na engleskom jeziku.
 \end{document}
 \end{verbatim}
 
+Predložak se temelji na \emph{report} razredu te su gradivni elementi sadržaja
+dokumenta (hijerarhijski navedeno): \emph{chapter}, \emph{section}, \emph{subsection} i
+\emph{subsubsection}.
+
 O stilu i strukturi dokumenta pogledajte poglavlje \ref{ch:stil-i-struktura}, a
 za upoznavanje s \LaTeX--om te nekim njegovim posebnostima i receptima pogledajte
 poglavlje \ref{ch:latex-upute}
@@ -107,24 +112,28 @@ U nastavku su dane upute za \LaTeX, no sužene za potrebe brzog uvoda u rad s
 Ako se želite bolje upoznati s \LaTeX--om, konzultirajte poveznice navedene u
 dodatku \ref{ch:korisne-stranice} te knjige poput \citep{oetiket2007lshort}.
 
-\section{Instalacija \LaTeX~prevoditelja}
+\section{Instalacija \LaTeX{} prevoditelja}
+% TODO: Linux, windows
 
-\subsection{Prevođenje \LaTeX~dokumenta}
+
+\subsection{Prevođenje \LaTeX{} dokumenta}
 % TODO: Napomena kako se zbog nekih stvari prevođenje mora pokrenuti više puta
-
-\subsection{Dodavanje novih paketa (za prevoditelj)}
 
 
 \section{Razvojna okruženja i pomoćni alati}
+% TODO: Uhh..
 
 
 \section{Dodavanje popisa sadržaja, slika i tablica}
 % TODO: Navesti kako se sadržaj gradi (svako poglavlje, odjeljak i sl. gradi
 % sadržaj)
 
-\section{Osnovno \LaTeX~formatiranje}
+
+\section{Osnovno \LaTeX{} formatiranje}
 % TODO: emph, texttt, bold, crtice, razmaci i ``~'', navodnici, trotočka,
-% prelazak u novi red, paragrafi i sl., komentari, znakovi koje treba escapeati
+% prelazak u novi red, paragrafi i sl., komentari, znakovi koje treba
+% escapeati, gradivni elementi sadržaja (chapter, section, subsection,
+% subsubsection)
 
 
 \section{Dodavanje fusnota i referenci}
@@ -143,7 +152,7 @@ referenciranje na neki dio rada, tom dijelu morate postaviti oznaku
 \section{Dodavanje posvete}
 \label{sec:posveta}
 \end{verbatim}
-a, referencirate se pomoću naredbe \verb|\ref{}|, npr.:
+referencirate se pomoću naredbe \verb|\ref{}|, npr.:
 \begin{verbatim}
 Za navedeno pogledajte odjeljke \ref{sec:sazetak},
 \ref{sec:posveta} i \ref{sec:engl}
@@ -160,33 +169,54 @@ Odličan prikaz mogućnosti \texttt{enumitem} paketa iznosi
 
 
 \section{Dodavanje tablica}
+% TODO: Napisati, opširno, longtables paket također opisati, možda i booktabs?
 
 
 \section{Dodavanje slika}
+% TODO: Napisati
 
 
 \section{Dodavanje formula}
+% TODO: Napisati
 
 
 \section{Dodavanje programskog koda i sadržaja koji mora ostati neformatiran}
+% TODO: Napisati
 
 
 \section{Podjela sadržaja na više stupaca}
+% TODO: Napisati
+% Multicols paket
 
 
 \section{Dodavanje literature}
 \label{sec:literatura}
-% TODO: neke stvari oko bibtexa, npr. {{sadržaj koji ima i npr. \LaTeX}}, ``_''
+% TODO: neke stvari oko bibtexa, natbiba, npr. {{sadržaj koji ima i npr.
+% \LaTeX}},
+% ``_''
 % u url-u i sl.
 % Pogledati: http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
 
+
 \subsection{Promjena načina citiranja}
+% TODO: Napisati (promjena unutar stila -- parametri natbiba)
 
 
 \section{Dodavanje indeksa}
+% TODO: Napisati
 
 
 \section{Dodatci dokumenta \engl{appendix}}
+Dodavanje dodatak se vrši dodavanjem poglavlja nakon naredbe \verb|\appendix|.
+Ta poglavlja se označavaju velikim latiničnim slovima. Naredba \verb|\appendix|
+dolazi nakon literature (vidi odjeljak \ref{sec:literatura}). Primjer:
+\begin{verbatim}
+\appendix
+\chapter{Korisne Internet stranice o \LaTeX--u}
+\end{verbatim}
+Primjer rezultira poglavljem:\\*
+``\textbf{\Large Dodatak A\\*
+Korisne Internet stranice o \LaTeX--u}''
 
 
 \section{Dodavanje sažetka rada}
@@ -296,7 +326,7 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
 \textbf{LaTeX – A document preparation system:}
 \begin{itemize}
   \item \url{http://www.latex-project.org/}
-  \item Službena stranica \LaTeX~projekta.
+  \item Službena stranica \LaTeX{} projekta.
 \end{itemize}
 \textbf{The Comprehensive TeX Archive Network (CTAN):}
 \begin{itemize}
@@ -306,7 +336,7 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
 \textbf{TeX Frequently Asked Questions on the Web:}
 \begin{itemize}
   \item \url{http://www.tex.ac.uk/cgi-bin/texfaq2html}
-  \item Veliki \TeX~i \LaTeX~FAQ sa konkretnim problemima i poveznicama na
+  \item Veliki \TeX~i \LaTeX{} FAQ sa konkretnim problemima i poveznicama na
   korisne stranice.
 \end{itemize}
 \textbf{The Not So Short Introduction to LATEX2e:}
@@ -319,19 +349,19 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
   \item \url{http://web.math.hr/~ungar/lkratko2e_internet.pdf}
   \item Besplatna knjiga o \LaTeX--u na Hrvatskom jeziku.
 \end{itemize}
-\textbf{\LaTeX~wikibook:}
+\textbf{\LaTeX{} wikibook:}
 \begin{itemize}
   \item \url{http://en.wikibooks.org/wiki/LaTeX}
-  \item Wiki stranica sa objašnjenjima i kvalitetnim \LaTeX~receptima.
+  \item Wiki stranica sa objašnjenjima i kvalitetnim \LaTeX{} receptima.
 \end{itemize}
-\textbf{\LaTeX~courseware:}
+\textbf{\LaTeX{} courseware:}
 \begin{itemize}
   \item \url{http://ahyco.ffri.hr/seminari2007/latex/home.html}
-  \item Odličan \emph{courseware} pod nazivom \LaTeX~nastao u okviru kolegija
+  \item Odličan \emph{courseware} pod nazivom \LaTeX{} nastao u okviru kolegija
   ``Metodika nastave informatike II'' studijske grupe Matematika i informatika Filozofskog
   fakulteta u Rijeci.
 \end{itemize}
-\textbf{Detexify$^2$ -- \LaTeX~symbol classifier:}
+\textbf{Detexify$^2$ -- \LaTeX{} symbol classifier:}
 \begin{itemize}
   \item \url{http://detexify.kirelabs.org/classify.html}
   \item Interaktivni prepoznavatelj simbola. Iznimno koristan alat ako tražite
@@ -339,7 +369,7 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
 \end{itemize}
 \textbf{IEEE predavanje -- Uvod u \LaTeX:}
 \begin{itemize}
-  \item \url{http://www.fer.hr/ieee?\@=g4ct}
+  \item \url{http://www.fer.hr/ieee?@=g4ct}
   \item Predavanje koje je u travnju 2007.~godine održao mr.~sc.~Tomislav
   Petković. Popratni materijali koji se mogu naći u repozitoriju su izuzetno
   korisni.
@@ -349,6 +379,25 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
   \item \url{http://www.texample.net/tikz/}
   \item Primjeri korištenja \texttt{tikz} paketa za izradu izuzetno složenih
   dijagrama.
+\end{itemize}
+\textbf{Getting to grips with \LaTeX{}:}
+\begin{itemize}
+  \item \url{http://www.andy-roberts.net/misc/latex/}
+  \item \LaTeX{} tutoriali s velikim brojem primjera i objašnjenjima raznih
+  parametara često korištenih naredbi.
+\end{itemize}
+\textbf{Art of problem solving \LaTeX{} wiki:}
+\begin{itemize}
+  \item \url{http://www.artofproblemsolving.com/Wiki/index.php/LaTeX:About}
+  \item \LaTeX{} wiki sa konkretnim primjerima.
+\end{itemize}
+\textbf{IMAGE Lab, University of Florida, College of Liberal Arts \& Sciences
+\LaTeX{} overview:}
+\begin{itemize}
+  \item \url{http://www.image.ufl.edu/help/latex/}
+  \item Primjeri i upute za korištenje \LaTeX{}--a temeljeni na knjigama \emph{A
+  Beginner's Introduction to Typesetting with LaTeX} i \emph{The Not So Short
+  Introduction to LaTeX2e}.
 \end{itemize}
 
 
@@ -360,7 +409,7 @@ Sažetak rada.
 \noindent \textbf{Ključne riječi:} Završni rad, Seminar, \LaTeX
 \end{sazetak}
 
-\engtitle{Manual for bachelor thesis and Seminar \LaTeX~templates}
+\engtitle{Manual for bachelor thesis and Seminar \LaTeX{} templates}
 \begin{abstract}
 Sažetak na engleskom jeziku.
 
