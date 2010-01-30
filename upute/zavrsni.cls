@@ -139,9 +139,9 @@
 	\vspace*{\fill}
 }
 
-\def\worknumber#1{\gdef\@worknumber{#1}}
-\def\@worknumber{\@latex@warning@no@line{Broj rada nije definiran.
-Koristi \noexpand\worknumber za definiranje}}
+\def\thesisnumber#1{\gdef\@thesisnumber{#1}}
+\def\@thesisnumber{\@latex@warning@no@line{Broj rada nije definiran.
+Koristi \noexpand\thesisnumber za definiranje}}
 
 \if@titlepage
 	\renewcommand\maketitle{\begin{titlepage}%
@@ -155,7 +155,7 @@ Koristi \noexpand\worknumber za definiranje}}
 	\end{center}
 	\vfill
 	\begin{center}%
-		{\large ZAVR\v{S}NI RAD br.~\@worknumber \par}%
+		{\large ZAVR\v{S}NI RAD br.~\@thesisnumber \par}%
 		\vskip 1em%
 		{\huge \bfseries \@title \par}%
 		\vskip 1em%
