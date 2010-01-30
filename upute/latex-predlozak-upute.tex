@@ -6,6 +6,7 @@
 \usepackage{listings}
 \usepackage{longtable}
 \usepackage{multicol}
+\usepackage{url}
 \lstset{language=Java, tabsize=4}
 
 \begin{document}
@@ -21,6 +22,8 @@
 % TODO: Čemu ovo
 % TODO: Zašto je LaTeX moćan
 % TODO: O organizaciji dokumenta
+
+Nešto o moćnosti: \citep{taraborelli2009beauty}, \citep{cottrell1999word}.
 
 \chapter{Upute za korištenje}
 % TODO: Kratko i jasno za ljude koji znaju koristiti LaTeX
@@ -98,7 +101,11 @@ datoteci \texttt{završni.cls}.
 
 \chapter{Upute za \LaTeX}
 \label{ch:latex-upute}
-% TODO: O LaTeX-u
+U nastavku su dane upute za \LaTeX, no sužene za potrebe brzog uvoda u rad s
+\LaTeX--om i konkretnim predloškom.
+
+Ako se želite bolje upoznati s \LaTeX--om, konzultirajte poveznice navedene u
+dodatku \ref{ch:korisne-stranice} te knjige poput \citep{oetiket2007lshort}.
 
 \section{Instalacija \LaTeX~prevoditelja}
 
@@ -117,7 +124,7 @@ datoteci \texttt{završni.cls}.
 
 \section{Osnovno \LaTeX~formatiranje}
 % TODO: emph, texttt, bold, crtice, razmaci i ``~'', navodnici, trotočka,
-% prelazak u novi red, paragrafi i sl., komentari
+% prelazak u novi red, paragrafi i sl., komentari, znakovi koje treba escapeati
 
 
 \section{Dodavanje fusnota i referenci}
@@ -126,7 +133,7 @@ Fusnote se dodaju naredbom \verb|\footnote{}|, npr.:
 Popis fusnota\footnote{Objašnjenja koja se prikazuju
 na dnu stranice} nije potreban.
 \end{verbatim}
-Rezultat navedenog teksta je: ``Popis fusnota\footnote{Objašnjenja koja se
+Rezultat navedenoga teksta je: ``Popis fusnota\footnote{Objašnjenja koja se
 prikazuju na dnu stranice} nije potreban.''
 
 Reference služe za povezivanje s nekim dijelom rada. Da bi ste omogućili
@@ -147,6 +154,9 @@ koristi za označavanje poglavlja, odjeljaka, jednadžbi, tablica i slika.
 
 
 \section{Dodavanje listi, nabrajanja i definicija}
+% TODO: Navesit kako je enumitem paket moćniji od ovog standardnog i sl.
+Odličan prikaz mogućnosti \texttt{enumitem} paketa iznosi
+\citep{collins2008enumitem}.
 
 
 \section{Dodavanje tablica}
@@ -166,7 +176,9 @@ koristi za označavanje poglavlja, odjeljaka, jednadžbi, tablica i slika.
 
 \section{Dodavanje literature}
 \label{sec:literatura}
-
+% TODO: neke stvari oko bibtexa, npr. {{sadržaj koji ima i npr. \LaTeX}}, ``_''
+% u url-u i sl.
+% Pogledati: http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
 
 \subsection{Promjena načina citiranja}
 
@@ -179,10 +191,41 @@ koristi za označavanje poglavlja, odjeljaka, jednadžbi, tablica i slika.
 
 \section{Dodavanje sažetka rada}
 \label{sec:sazetak}
+Sažetak rada je obavezan dio koji dolazi na sam kraj rada. Za sažetak na
+Hrvatskom jeziku koristite okolinu \engl{environment} \emph{sazetak}, a za
+sažetak na Engleskom jeziku okolinu \emph{abstract}. Prije korištenja
+\emph{abstract} okoline potrebno je navesti naslov na engleskom jeziku naredbom
+\verb|\engtitle{}|. Primjer korištenja:
+\begin{verbatim}
+\begin{sazetak}
+Sažetak rada.
+
+\vspace{15pt}
+\noindent \textbf{Ključne riječi:} <popis ključnih riječi>
+\end{sazetak}
+
+\engtitle{Naslov rada na engleskom jeziku}
+\begin{abstract}
+Sažetak na engleskom jeziku.
+
+\vspace{15pt}
+\noindent \textbf{Keywords:} <popis ključnih riječi na engleskom>
+\end{abstract}
+\end{verbatim}
+Nakon sažetka dolazi kraj dokumenta, odnosno naredba:
+\begin{verbatim}
+\end{document}
+\end{verbatim}
 
 
 \section{Dodavanje posvete}
 \label{sec:posveta}
+Posveta se dodaje naredbom \verb|\posveta{}| na mjestu gdje želite stranicu s
+posvetom (npr.~prije tablice sadržaja --- iznad \verb|\tableofcontents|
+naredbe). Primjer korištenja:
+\begin{verbatim}
+\posveta{Svima koji žele naučiti koristiti \LaTeX{}.}
+\end{verbatim}
 
 
 \section{Korištenje naredbe \texttt{engl}}
@@ -190,12 +233,56 @@ koristi za označavanje poglavlja, odjeljaka, jednadžbi, tablica i slika.
 Naredba \verb|\engl{}| služi navođenju engleskog
 prijevoda nekog termina (radi se o nestandardnoj naredbi), npr.:
 \begin{verbatim}
-Tomu služi dodatak dokumenta \engl{appendix}.
+Dodatak dokumenta \engl{appendix}.
 \end{verbatim}
-Rezultat je: ``Tomu služi dodatak dokumenta \engl{appendix}.''
+Rezultat je: ``Dodatak dokumenta \engl{appendix}.''
 
 
-\section{Dodavanje novih paketa (za korištenje)}
+\section{Korištenje dodatnih paketa}
+\LaTeX{} paketi se mogu promatrati kao dodatne biblioteke u programskim
+jezicima. Dodavanje novih paketa vrši se \verb|\usepackage{}| naredbom.
+Navedena naredba dolazi nakon \verb|\documentclass{}| naredbe. Primjer
+korištenja:
+\begin{verbatim}
+\documentclass{zavrsni}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{multicol}
+\end{verbatim}
+
+\LaTeX{} distribucije dolaze sa velikim brojem već instaliranih paketa.
+Također, distribucije je moguće podesiti da, u slučaju korištenja paketa koji
+nije instaliran, same dohvate paket sa CTAN--a i instaliraju ga.
+
+Za više informacija o \LaTeX{} paketima, konzultirajte CTAN
+(\url{http://tug.ctan.org/}). Korisne upute za korištenje i instalaciju \LaTeX{}
+paketa možete naći na \url{http://en.wikibooks.org/wiki/LaTeX/Packages}.
+
+Bitno je spomenuti da se uz svaki \TeX{} paket sa CTAN--a može skinuti pripadna
+dokumentacija.
+
+
+\section{Provjera pravopisa}
+Programi \emph{aspell} i \emph{ispell} omogućavaju jednostavnu provjeru
+pravopisa \LaTeX{} dokumenata (razumiju sintaksu \TeX{}--a). Primjer korištenja:
+\begin{verbatim}
+aspell -c dokument.tex
+\end{verbatim}
+ili
+\begin{verbatim}
+ispell dokument.tex
+\end{verbatim}
+Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
+\begin{itemize}
+  \item \url{http://aspell.net/}
+  \item \url{http://www.gnu.org/software/ispell/ispell.html}
+  \item \url{http://cvs.linux.hr/spell/}
+  \item \url{http://aspell.net/win32/}
+  \item \url{http://gustav.fesb.hr/hr/ispell.html}
+  \item \url{http://en.wikipedia.org/wiki/GNU_Aspell}
+\end{itemize}
 
 
 \bibliography{literatura}
@@ -203,9 +290,69 @@ Rezultat je: ``Tomu služi dodatak dokumenta \engl{appendix}.''
 
 
 \appendix
-\chapter{Statistika rezultata čišćenja}
-Neki dodatak.
+\chapter{Korisne Internet stranice o \LaTeX--u}
+\label{ch:korisne-stranice}
+% TODO: Ovo nekako ljepše složiti
+\textbf{LaTeX – A document preparation system:}
+\begin{itemize}
+  \item \url{http://www.latex-project.org/}
+  \item Službena stranica \LaTeX~projekta.
+\end{itemize}
+\textbf{The Comprehensive TeX Archive Network (CTAN):}
+\begin{itemize}
+  \item \url{http://www.ctan.org/}
+  \item Osnovna arhiva paketa i materijala vezanih uz \TeX~sustav.
+\end{itemize}
+\textbf{TeX Frequently Asked Questions on the Web:}
+\begin{itemize}
+  \item \url{http://www.tex.ac.uk/cgi-bin/texfaq2html}
+  \item Veliki \TeX~i \LaTeX~FAQ sa konkretnim problemima i poveznicama na
+  korisne stranice.
+\end{itemize}
+\textbf{The Not So Short Introduction to LATEX2e:}
+\begin{itemize}
+  \item \url{http://tobi.oetiker.ch/lshort/lshort.pdf}
+  \item Izuzetno hvaljena knjiga o \LaTeX--u prigodna za početnike.
+\end{itemize}
+\textbf{Šime Ungar -- Ne baš tako kratak uvod u TeX s naglaskom na LaTeX2e:}
+\begin{itemize}
+  \item \url{http://web.math.hr/~ungar/lkratko2e_internet.pdf}
+  \item Besplatna knjiga o \LaTeX--u na Hrvatskom jeziku.
+\end{itemize}
+\textbf{\LaTeX~wikibook:}
+\begin{itemize}
+  \item \url{http://en.wikibooks.org/wiki/LaTeX}
+  \item Wiki stranica sa objašnjenjima i kvalitetnim \LaTeX~receptima.
+\end{itemize}
+\textbf{\LaTeX~courseware:}
+\begin{itemize}
+  \item \url{http://ahyco.ffri.hr/seminari2007/latex/home.html}
+  \item Odličan \emph{courseware} pod nazivom \LaTeX~nastao u okviru kolegija
+  ``Metodika nastave informatike II'' studijske grupe Matematika i informatika Filozofskog
+  fakulteta u Rijeci.
+\end{itemize}
+\textbf{Detexify$^2$ -- \LaTeX~symbol classifier:}
+\begin{itemize}
+  \item \url{http://detexify.kirelabs.org/classify.html}
+  \item Interaktivni prepoznavatelj simbola. Iznimno koristan alat ako tražite
+  neki simbol.
+\end{itemize}
+\textbf{IEEE predavanje -- Uvod u \LaTeX:}
+\begin{itemize}
+  \item \url{http://www.fer.hr/ieee?\@=g4ct}
+  \item Predavanje koje je u travnju 2007.~godine održao mr.~sc.~Tomislav
+  Petković. Popratni materijali koji se mogu naći u repozitoriju su izuzetno
+  korisni.
+\end{itemize}
+\textbf{\TeX{}ample TikZ and PGF:}
+\begin{itemize}
+  \item \url{http://www.texample.net/tikz/}
+  \item Primjeri korištenja \texttt{tikz} paketa za izradu izuzetno složenih
+  dijagrama.
+\end{itemize}
 
+
+% TODO: Napisati sažetak.
 \begin{sazetak}
 Sažetak rada.
 
