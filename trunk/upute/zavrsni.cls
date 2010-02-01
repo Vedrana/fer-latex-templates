@@ -28,6 +28,8 @@
 \RequirePackage{ifthen}
 \RequirePackage[nottoc]{tocbibind}
 \RequirePackage{url}
+\RequirePackage{longtable}
+\RequirePackage{multicol}
 
 \renewcommand{\captionlabelfont}{\bfseries}
 \renewcommand{\captionfont}{\small}

@@ -4,9 +4,8 @@
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{listings}
-\usepackage{longtable}
-\usepackage{multicol}
-\lstset{language=Java, tabsize=4}
+
+\lstset{language=Java, tabsize=2}
 
 \begin{document}
 \thesisnumber{000}
@@ -29,18 +28,18 @@ Iskoristiti: \citep{taraborelli2009beauty}, \citep{cottrell1999word}.
 \chapter{Upute za korištenje}
 % Kratko i jasno za ljude koji znaju koristiti LaTeX.
 Osnova predloška je datoteka \texttt{zavrsni.cls}. Uz navedenu datoteku potrebna
-je \texttt{.tex} datoteka za sadržaj rada te \texttt{.bib} datoteka za literaturu
-(naziv \texttt{.bib} datoteke je proizvoljan, ali mora odgovarati argumentu koji
+je \texttt{tex} datoteka za sadržaj rada te \texttt{bib} datoteka za literaturu
+(naziv \texttt{bib} datoteke je proizvoljan, ali mora odgovarati argumentu koji
 predate naredbi \verb|\bibliography{}| (vidi odjeljak \ref{sec:literatura})). Sve
 navedene datoteke moraju se nalaziti u istom direktoriju.
 
-Povezivanje \texttt{.tex} dokumenta i predloška iz \texttt{zavrsni.cls}
+Povezivanje \texttt{tex} dokumenta i predloška iz \texttt{zavrsni.cls}
 datoteke vrši se naredbom \verb|\documentclass{zavrsni}| koja mora biti prva
 naredba u dokumentu.
 
 Predložak, osim standardnih polja kao što \texttt{author} i \texttt{title}
 sadrži obavezno polje \texttt{thesisnumber} --- broj Završnog rada. Osnovna
-struktura \texttt{.tex} datoteke mora biti:
+struktura \texttt{tex} datoteke mora biti:
 \begin{verbatim}
 \documentclass{zavrsni}
 
@@ -173,7 +172,7 @@ Odličan prikaz mogućnosti \texttt{enumitem} paketa iznosi
 
 
 \section{Dodavanje slika}
-% TODO: Napisati
+% TODO: Napisati, navesti kako dodati više slika u redu (subfloat)
 
 
 \section{Dodavanje formula}
@@ -181,12 +180,92 @@ Odličan prikaz mogućnosti \texttt{enumitem} paketa iznosi
 
 
 \section{Dodavanje programskog koda i sadržaja koji mora ostati neformatiran}
-% TODO: Napisati
+Za programski kod možete iskoristiti paket \texttt{listings}. Paket nije
+uključen u predložak te ga morate dodati kako je opisano u odjeljku
+\ref{sec:koristenje-dod-paketa} Paket je potrebno dodatno konfigurirati da
+odgovara korištenom jeziku. Prije korištenja paketa dodajte naredbu, npr.~za
+programski jezik Javu:
+\begin{verbatim}
+\lstset{language=Java, tabsize=2}
+\end{verbatim}
+Primjer korištenja:
+\begin{lstlisting}
+public class TempIdentificatorFactory {
+	/** Pocetna brojcana vrijednost. */
+	private static int num = 0;
+	
+	/**
+	 * Generiranje unikatnih identifikatora
+	 * privremenih varijabli.
+	 * @return novi unikatni identifikator.
+	 */
+	public static String generateIdentificator() {
+		String newIdn = new String(num + "_tmp");
+		num++;
+		return newIdn;
+	}
+}
+\end{lstlisting}
+Kod je stavljen unutar okoline \texttt{lstlisting}:\\
+\verb|\begin{lstlisting}|\\*
+\verb|Kod.|\\*
+\verb|\end{lstlisting}|
+
+Paket \texttt{listings} ne podržava UTF--8 kodnu stranicu te za korištenje
+dijakritika morate iskoristiti neko drugo rješenje, npr.~paket
+\texttt{listingsutf8} ili okolinu \texttt{verbatim} koja sprječava formatiranje.
+
+Navedena okolina ima širu primjenu, tj.~služi za sav sadržaj za koji želite da
+održi razmake i prelaske u novi red iz izvorne, \texttt{tex} datoteke, te da se
+\TeX{} naredbe unutar tog sadržaja ne bi izvršile. Primjer korištenja:\\
+\verb|\begin{verbatim}|\\*
+\verb|Neki      tekst.|\\*
+\verb|\end{verbatim}|\\
+rezultat:
+\begin{verbatim}
+Neki      tekst.
+\end{verbatim}
+
+Okolina \texttt{verbatim} ima svoj linijski ekvivalent, \texttt{verb} naredbu.
+Primjer korištenja:
+\begin{verbatim}
+Tekst bez naglaska \verb|\emph{ove riječi}|.
+\end{verbatim}
+Rezultat: ``Tekst bez naglaska \verb|\emph{ove riječi}|.''
+
+Naredba \texttt{verb} funkcionira na način da ostavlja neobrađenim sve od
+prve pojave odjeljitelja, koji se određuje kao prvi znak nakon same naredbe (u
+primjeru to je znak ``|''), do njegove druge pojave.\footnote{Sličnu ideju s
+delimiterima koristi \texttt{sed} naredba Unix ljuski.}
 
 
 \section{Podjela sadržaja na više stupaca}
-% TODO: Napisati
-% Multicols paket
+Za podjelu sadržaja na stupce koristite \texttt{multicol} paket koji je
+uključen u predložak. Primjer korištenja:\footnote{Korišteni citati pripadaju
+Donaldu E.~Knuthu, tvorcu \TeX--a}
+\begin{verbatim}
+\begin{multicols}{2}
+The most important thing in the programming language is the
+name. A language will not succeed without a good name. I have
+recently invented a very good name and now I am looking for a
+suitable language.
+
+The hardest thing is to go to sleep at night, when there are
+so many urgent things needing to be done. A huge gap exists
+between what we know is possible with today's machines and
+what we have so far been able to finish.
+\end{multicols}
+\end{verbatim}
+Rezultat:
+\begin{multicols}{2}
+The most important thing in the programming language is the name. A language will
+not succeed without a good name. I have recently invented a very good name and
+now I am looking for a suitable language.
+
+The hardest thing is to go to sleep at night, when there are so many urgent
+things needing to be done. A huge gap exists between what we know is possible
+with today's machines and what we have so far been able to finish.
+\end{multicols}
 
 
 \section{Dodavanje literature}
@@ -199,8 +278,16 @@ Odličan prikaz mogućnosti \texttt{enumitem} paketa iznosi
 
 
 \subsection{Promjena načina citiranja}
-% TODO: Napisati (promjena unutar stila -- parametri natbiba)
-
+Trenutni način citiranja je ``(autor, godina).'' Ako želite promijeniti stil
+citiranja u ``[index]'' (npr.~[1]) tada u datoteci \texttt{zavrsni.cls}
+promjenite parametre \emph{natbib} paketa:
+\begin{verbatim}
+\RequirePackage[authoryear, round]{natbib}
+\end{verbatim}
+u
+\begin{verbatim}
+\RequirePackage[numbers, square]{natbib}
+\end{verbatim}
 
 \section{Dodavanje indeksa}
 % TODO: Napisati
@@ -215,8 +302,8 @@ dolazi nakon literature (vidi odjeljak \ref{sec:literatura}). Primjer:
 \chapter{Korisne Internet stranice o \LaTeX--u}
 \end{verbatim}
 Primjer rezultira poglavljem:\\*
-``\textbf{\Large Dodatak A\\*
-Korisne Internet stranice o \LaTeX--u}''
+``Dodatak A\\*
+Korisne Internet stranice o \LaTeX--u''
 
 
 \section{Dodavanje sažetka rada}
@@ -269,6 +356,7 @@ Rezultat je: ``Dodatak dokumenta \engl{appendix}.''
 
 
 \section{Korištenje dodatnih paketa}
+\label{sec:koristenje-dod-paketa}
 \LaTeX{} paketi se mogu promatrati kao dodatne biblioteke u programskim
 jezicima. Dodavanje novih paketa vrši se \verb|\usepackage{}| naredbom.
 Navedena naredba dolazi nakon \verb|\documentclass{}| naredbe. Primjer
