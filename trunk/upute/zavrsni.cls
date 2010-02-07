@@ -21,6 +21,7 @@
 % staviti:
 % [numbers, square]
 \RequirePackage[authoryear, round]{natbib}
+\RequirePackage{amssymb}
 \RequirePackage{amsmath}
 \RequirePackage{subfig}
 \RequirePackage{fixltx2e}

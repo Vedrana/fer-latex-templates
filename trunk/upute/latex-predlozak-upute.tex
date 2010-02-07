@@ -1,4 +1,4 @@
-% Upute za LaTeX predložak ZR-a i Seminara, verzija: 0.1alpha
+% Upute za LaTeX predložak ZR-a i Seminara, verzija: 0.1pre-alpha
 
 \documentclass{zavrsni}
 \usepackage{algorithmic}
@@ -154,12 +154,33 @@ Među razvojnim okruženjima mogu se istaknuti \emph{Texmaker} i \emph{Eclipse} 
 za sve poznatije operacijske sustave te podržavaju UTF--8 kodnu stranicu.
 \begin{itemize}
   \item Texmaker -- \url{http://www.xm1math.net/texmaker/}
-  \item Eclipse -- \url{http://www.eclipse.org/downloads/} (bilo koji paket
-  odgovara) te Texlipse --
-  \url{http://texlipse.sourceforge.net/manual/installation.html}.
+  \item Eclipse -- \url{http://www.eclipse.org/downloads/} (bilo koji paket);
+  Texlipse -- \url{http://texlipse.sourceforge.net/manual/installation.html}.
 \end{itemize}
 
-% TODO: Upute za podesiti texlipse
+Potrebno je podesiti razvojna okruženja na ispravne putanje od alata iz \TeX{}
+distribucije, te podesiti kodnu stranicu dokumenata na UTF--8.
+
+Za Texmaker potrebno je ići \emph{Options} $\Rightarrow$ \emph{Configure
+Texmaker} $\Rightarrow$ \emph{Editor} $\Rightarrow$ \emph{Editor Font Encoding}
+postaviti na UTF--8. Putanje do alata \TeX{} distribucije postavljaju se u
+odjeljku \emph{Commands}.
+
+Texlipse postavke se podešavaju unutar Eclipsea. Potrebno je ići na \emph{Window}
+$\Rightarrow$ \emph{Preferences} $\Rightarrow$ \emph{Texlipse} $\Rightarrow$
+\emph{Builder Settings} te tu podesiti putanje od \TeX{} alata. Kodna stranica
+se može podesiti za svaki projekt ili se može iskoristiti uobičajena kodna
+stranica. Preporuka je podesiti uobičajenu kodnu stranicu na UTF--8. Za
+podešavanje uobičajene kodne stranice potrebno je ići \emph{Window} $\Rightarrow$
+\emph{Preferences} $\Rightarrow$ \emph{General} $\Rightarrow$ \emph{Workspace}
+$\Rightarrow$ \emph{Text file encoding} postaviti na UTF--8. Za podešavanje
+kodne stranice pojedinog projekta, potrebno je otvoriti postavke projekta
+\engl{Preferences} te ići \emph{Resource} $\Rightarrow$ \emph{Text file encoding}.
+
+\TeX{} distribucije nude više prevoditelja, \emph{latex}, \emph{pslatex} i
+\emph{pdflatex}. Svaki prevoditelj prevodi u svoj format te je preporuka
+koristiti direktno \emph{pdflatex} (inače je potrebno koristiti alate kao što
+su \emph{ps2pdf} ili \emph{dvipdf} za dobivanje pdf dokumenta kao izlaza).
 
 
 \section{Dodavanje popisa sadržaja, slika i tablica}
@@ -309,8 +330,70 @@ Za izradu složenijih listi, nabrajanja i opisa iskoristite paket
 % TODO: spomenuti inkscape, graphviz, ebb, mathematicu, matlab, ..
 
 
-\section{Dodavanje formula}
-% TODO: Napisati
+\section{Dodavanje matematičkih izraza}
+Matematički izrazi se pišu u posebnoj okolini u koju se ulazi sa \verb|$|
+\ldots \verb|$|, \verb|\(| \ldots \verb|\)| za linijske izraze te sa \verb|\[| \ldots
+\verb|\]| ako želite da se ti izrazi nalaze u posebnoj liniji. Primjerice za
+linijske izraze:
+\begin{verbatim}
+``Prva dama: $\sin^2 \varphi + \cos^2 \varphi = 1$.''
+\end{verbatim}
+Rezultat: ``Prva dama: $\sin^2 \varphi + \cos^2 \varphi = 1$.''\\
+Za izraze koji se nalaze u posebnoj liniji:
+\begin{verbatim}
+\[ c^2 = a^2 + b^2 \]
+\end{verbatim}
+Rezultat:
+\[ c^2 = a^2 + b^2 \]
+
+U matematičku okolinu za izraze koji se nalaze u posebnoj liniji moguće je ući
+sa \verb|$$| \ldots \verb|$$|, ali nije preporučljivo jer nije kompatibilno sa
+nekim mogućnostima \LaTeX--a (no, unatoč tomu, često se koristi).
+
+Također, postoji još okolina za pisanje matematičkih izraza među kojima je
+bitno istaknuti okoline \texttt{equation}, koja donosi mogućnost označavanja
+jednadžbi (oznake se automatski generiraju), i \texttt{align} koja omogućava
+pisanje jednadžbi u više redova. Primjer za \texttt{equation} okolinu:
+\begin{verbatim}
+\begin{equation}
+f(t)\ast g(t) = \int^{\infty}_{-\infty} f(\tau)g(t-\tau)d\tau.
+\label{eq:conv}
+\end{equation}
+\end{verbatim}
+Rezultat:
+\begin{equation}
+f(t)\ast g(t) = \int^{\infty}_{-\infty} f(\tau)g(t-\tau)d\tau.
+\label{eq:conv}
+\end{equation}
+Primjer za \texttt{align} okolinu:
+\begin{verbatim}
+\begin{align}
+a&=b+c,\label{eq:a}\\
+d&=e+f+g,\\
+h&=i+j.\label{eq:h}
+\end{align}
+\end{verbatim}
+Rezultat:
+\begin{align}
+a&=b+c,\label{eq:a}\\
+d&=e+f+g,\\
+h&=i+j.\label{eq:h}
+\end{align}
+
+Osim uzastopnog prikaza više jednadžbi i poravnanja po znaku jednakosti, primjer
+pokazuje da je moguće označiti svaku pojedinu jednadžbu. Primjerice,
+\verb|``izraz za $h$ je dan jednadžbom \ref{eq:h}''|,
+rezultira sa ``izraz za $h$ je dan jednadžbom \ref{eq:h}''.
+
+
+Za dodatne informacije o pisanju matematičkih izraza u \LaTeX--u pogledajte
+Internet stranice \url{http://www.math.uiuc.edu/~hildebr/tex/displays.html} i
+\url{http://www.andy-roberts.net/misc/latex/latextutorial10.html} te pročitajte
+kratke upute za korištenje AMS paketa
+\url{ftp://ftp.ams.org/pub/tex/doc/amsmath/short-math-guide.pdf}. AMS paket je
+uključen u predložak. \nocite{downes2002shortams}
+
+%Citirati \citep{downes2002shortams}.
 
 
 \section{Dodavanje programskog koda i sadržaja koji mora ostati neformatiran}
