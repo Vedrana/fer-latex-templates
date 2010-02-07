@@ -13,6 +13,7 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage{graphicx}
 \RequirePackage{enumitem}
+\RequirePackage{enumerate}
 \RequirePackage{booktabs}
 \RequirePackage{lmodern}
 % Da bi se promjenio stil citiranja umjesto:
