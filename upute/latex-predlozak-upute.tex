@@ -460,7 +460,8 @@ Algoritme, osim u obliku neformatiranog teksta, možete dodavati pomoći više
 različitih paketa koje morate posebno uključiti. Primjer takvih paketa su \texttt{algorithmic} i \texttt{algorithm}. Navedene pakete morate dodati na
 način koji je opisan u \ref{sec:koristenje-dod-paketa}. Primjer korištenja je
 dan algoritmom\ \ref{algo:bubble-sort} (radi se o okolini koja se
-ne mora naći točno gdje je napisana).
+ne mora naći točno gdje je napisana). \LaTeX{} kod algoritma:
+\begin{verbatim}
 \begin{algorithm}
 \caption{Bubble sort}
 \label{algo:bubble-sort}
@@ -469,8 +470,31 @@ ne mora naći točno gdje je napisana).
 \STATE{\textbf{Izlaz:} sortirani niz.}
 \REPEAT
 \STATE{swapped := false}
-\FOR{($i := 0; i \le length(A); inc(i)$)}
-\IF{$A_{i} = A_{i+1}$}
+\STATE{n := length(A)}
+\FOR{($i := 0; i < n; inc(i)$)}
+\IF{$A_{i} > A_{i+1}$}
+\STATE{$swap(A_i, A_{i + 1})$}
+\STATE{swapped := true}
+\ENDIF
+\ENDFOR
+\STATE{$n := n - 1$}
+\UNTIL{$\lnot swapped$}
+\RETURN{A}
+\end{algorithmic}
+\end{algorithm}
+\end{verbatim}
+
+\begin{algorithm}
+\caption{Bubble sort}
+\label{algo:bubble-sort}
+\begin{algorithmic}
+\STATE{\textbf{Ulaz:} $A$ -- niz koji treba sortirati.}
+\STATE{\textbf{Izlaz:} sortirani niz.}
+\REPEAT
+\STATE{swapped := false}
+\STATE{n := length(A)}
+\FOR{($i := 0; i < n; inc(i)$)}
+\IF{$A_{i} > A_{i+1}$}
 \STATE{$swap(A_i, A_{i + 1})$}
 \STATE{swapped := true}
 \ENDIF
