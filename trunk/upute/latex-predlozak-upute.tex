@@ -396,9 +396,10 @@ uključen u predložak. \nocite{downes2002shortams}
 %Citirati \citep{downes2002shortams}.
 
 
-\section{Dodavanje programskog koda i sadržaja koji mora ostati neformatiran}
-Za programski kod možete iskoristiti paket \texttt{listings}. Paket nije
-uključen u predložak te ga morate dodati kako je opisano u odjeljku
+\section{Dodavanje programskog koda, sadržaja koji mora ostati neformatiran i
+algoritama}
+Za programski kod možete iskoristiti paket \texttt{listings}. Paket
+nije uključen u predložak te ga morate dodati kako je opisano u odjeljku
 \ref{sec:koristenje-dod-paketa} Paket je potrebno dodatno konfigurirati da
 odgovara korištenom jeziku. Prije korištenja paketa dodajte naredbu, npr.~za
 programski jezik Javu:
@@ -455,6 +456,31 @@ prve pojave odjeljitelja, koji se određuje kao prvi znak nakon same naredbe (u
 primjeru to je znak ``|''), do njegove druge pojave.\footnote{Sličnu ideju s
 delimiterima koristi \texttt{sed} naredba Unix ljuski.}
 
+Algoritme, osim u obliku neformatiranog teksta, možete dodavati pomoći više
+različitih paketa koje morate posebno uključiti. Primjer takvih paketa su \texttt{algorithmic} i \texttt{algorithm}. Navedene pakete morate dodati na
+način koji je opisan u \ref{sec:koristenje-dod-paketa}. Primjer korištenja je
+dan algoritmom\ \ref{algo:bubble-sort} (radi se o okolini koja se
+ne mora naći točno gdje je napisana).
+\begin{algorithm}
+\caption{Bubble sort}
+\label{algo:bubble-sort}
+\begin{algorithmic}
+\STATE{\textbf{Ulaz:} $A$ -- niz koji treba sortirati.}
+\STATE{\textbf{Izlaz:} sortirani niz.}
+\REPEAT
+\STATE{swapped := false}
+\FOR{($i := 0; i \le length(A); inc(i)$)}
+\IF{$A_{i} = A_{i+1}$}
+\STATE{$swap(A_i, A_{i + 1})$}
+\STATE{swapped := true}
+\ENDIF
+\ENDFOR
+\STATE{$n := n - 1$}
+\UNTIL{$\lnot swapped$}
+\RETURN{A}
+\end{algorithmic}
+\end{algorithm}
+
 
 \section{Podjela sadržaja na više stupaca}
 Za podjelu sadržaja na stupce koristite \texttt{multicol} paket koji je
@@ -498,10 +524,10 @@ okoline unutar \texttt{multicol} okoline potrebno je koristiti
 \end{minipage}
 \end{verbatim}
 
-Za korištenje tablica iskoristite također \texttt{multipage} paket ili, ako imate
-šire tablice za koje želite da se pojave u širini cijele stranice,
-\texttt{table*} okolinu koja ima funkcionalnost \texttt{table} okoline ali se
-uvijek proteže cijelom širinom stranice.
+Za korištenje tablica iskoristite također \texttt{multipage} paket sa
+\texttt{tabular} okolinom ili, ako imate šire tablice za koje želite da se pojave
+u širini cijele stranice, \texttt{table*} okolinu koja ima funkcionalnost
+\texttt{table} okoline ali se uvijek proteže cijelom širinom stranice.
 
 \section{Dodavanje literature}
 \label{sec:literatura}
