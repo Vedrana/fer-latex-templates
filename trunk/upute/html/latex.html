@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="hr">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Što je LaTeX i kako mi može pomoći u pisanju završnog rada</title>
+
+	<link rel="stylesheet" href="http://www.joeandjim.com/media/css/blueprint/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="http://www.joeandjim.com/media/css/blueprint/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="http://www.joeandjim.com/media/css/lueprint/ie.css" type="text/css" media="screen, projection"><![endif]-->
+
+	<!-- Import fancy-type plugin for the sample page. -->
+	<link rel="stylesheet" href="http://www.joeandjim.com/media/css/blueprint/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<style type="text/css">
+		body {padding-top:20px; font-size:0.9em;}
+		h1 {font-size:2em;}
+		h2 {font-size:1.5em;}
+		h3.faqq {font-size:1.2em; cursor:pointer;}
+		h3.closed {background-image:url() no-repeat 0 0;}
+		div#toc {position:absolute; top:5px; right:0px;}
+		div#toc ol {padding-left:1.5em;}
+		div.content {position:relative;}
+		.hidden {display:none;}
+		pre.sh_latex {font-size:1.2em; font-family:monospace; padding-left:5px;}
+	</style>
+	<link type="text/css" rel="stylesheet" href="http://www.joeandjim.com/media/css/sh_nedit.min.css">
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://www.joeandjim.com/media/js/sh_main.min.js"></script>
+	<script type="text/javascript" src="http://www.joeandjim.com/media/js/sh_latex.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('div.faqa').toggle(0);
+			$('div.faqq').toggleClass('closed');
+			$('h3.faqq').click(function() { $(this).next().slideToggle(200); $(this).toggleClass('closed'); });
+		});
+	</script>
+</head>
+<body onload="sh_highlightDocument();">
+	<div class="container">
+	<h1>Što je LaTeX i kako mi može pomoći u pisanju završnog rada?</h1>
+	<hr>
+	<p class="alt">
+	Cilj ovog vodiča je upoznati čitatelja s LaTeX-om, pomoći mu oko tipičnih početničkih
+	pitanja i uputiti ga na druge, korisne izvore informacija.
+	Namijenjen je prvenstveno studentima FER-a koji pišu seminar ili završni rad, 
+	no vjerujemo da će biti od koristi i drugima.
+	Jedna od čestih zabluda je da je LaTeX nešto komplicirano i da će vam dodatno otežati rad, 
+	no to nije istina. Nadamo se da ćemo vam s ovim vodičem još više olakšati.
+	Vidjet ćete, jednostavno je!</p>
+	<hr>
+	<div class="content">
+	<div class="span-7" id="toc">
+		<h2>Sadržaj</h2>
+		<ol>
+			<li><a href="#uvod">Uvod</a></li>
+			<li><a href="#primjer">Primjer dokumenta</a></li>
+			<li><a href="#instalacija">Instalacija</a>
+				<ol>
+					<li><a href="#instalacija-windows">Microsoft Windows</a></li>
+					<li><a href="#instalacija-linux">Linux</a></li>
+				</ol>
+			</li>
+			<li><a href="#faq">FAQ</a></li>
+			<li><a href="#references">Reference</a></li>
+		</ol>
+	</div>
+
+	<div class="span-16 colborder last">
+	<h2 id="uvod">Uvod</h2>
+	<p>Nunc congue ipsum vestibulum libero. Aenean vitae justo. Nam eget tellus. Etiam convallis, est eu lobortis mattis, lectus tellus tempus felis, a ultricies erat ipsum at metus.</p>
+	<p>Maecenas vel metus quis magna pharetra fermentum. <em>Integer sit amet tortor</em>. Maecenas porttitor, pede sed gravida auctor, nulla augue aliquet elit, at pretium urna orci ut metus. Aliquam in dolor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed aliquam, tellus id ornare posuere, quam nunc accumsan turpis, at convallis tellus orci et nisl. Phasellus congue neque a lorem.</p>
+	<pre class="sh_latex">
+\documentclass{zavrsni}
+\title{Moj završni rad}
+\author{Pero Perić}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\chapter{Uvod}
+Svaki rad ima uvod.
+
+\chapter{Zaključak}
+
+\end{document}
+	</pre>
+
+	<h2 id="faq">FAQ</h2>
+
+	<h3 class="faqq">Kako dodati slike/fotografije u dokument?</h3>
+	<div class="faqa">
+	<p>Nunc congue ipsum vestibulum libero. Aenean vitae justo. Nam eget tellus. Etiam convallis, est eu lobortis mattis, lectus tellus tempus felis, a ultricies erat ipsum at metus.</p>
+	</div>
+
+	<h3 class="faqq">Kako dodati programski kod?</h3>
+	<div class="faqa">
+	<p>Nunc congue ipsum vestibulum libero. Aenean vitae justo. Nam eget tellus. Etiam convallis, est eu lobortis mattis, lectus tellus tempus felis, a ultricies erat ipsum at metus.</p>
+	</div>  
+
+	<h2>Reference</h2>
+	<p>Nunc congue ipsum vestibulum libero. Aenean vitae justo. Nam eget tellus. Etiam convallis, est eu lobortis mattis, lectus tellus tempus felis, a ultricies erat ipsum at metus.</p>
+	</div>
+	</div>
+	</div>
+  </body>
+</html>
