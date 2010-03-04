@@ -96,7 +96,10 @@ dokumenta (hijerarhijski navedeno): \emph{chapter}, \emph{section}, \emph{subsec
 
 O stilu i strukturi dokumenta pogledajte poglavlje \ref{ch:stil-i-struktura}, a
 za upoznavanje s \LaTeX--om te nekim njegovim posebnostima i receptima pogledajte
-poglavlje \ref{ch:latex-upute}
+poglavlje \ref{ch:latex-upute} Ako želite koristiti drugačiji font od
+trenutnog, u datoteci \texttt{zavrsni.cls} promijenite liniju
+\verb|\RequirePackage{lmodern}| u npr., \verb|\RequirePackage{times}| za font
+Times New Roman.
 
 Napravljeni predložak sadrži rješenje za dodavanje sažetka rada i posvete te
 naredbu \texttt{engl}. Za navedeno pogledajte odjeljke \ref{sec:sazetak},
@@ -130,7 +133,7 @@ i za Windowse). Većina Linux distribucija dolazi pripremljena za rad sa
 \LaTeX--om, ili je prevoditelja izuzetno jednostavno instalirati preko sistemskog
 upravitelja paketima (apt, yum, pacman, \ldots). Za Mik\TeX{} je bitno napomenuti
 da samo najnovija verzija može skidati nove pakete, tako da ako se nađete u
-prilici da vam Mik\TeX{} odbija skinuti novi paket koji želite koristiti,
+situaciji da vam Mik\TeX{} odbija skinuti novi paket koji želite koristiti,
 najvjerojatnije je problem do verzije.
 
 
@@ -319,9 +322,96 @@ Za izradu složenijih listi, nabrajanja i opisa iskoristite paket
 
 
 \section{Dodavanje tablica}
-% TODO: Napisati, opširno, longtables paket također opisati, možda i booktabs?
-% text wrapping
+Tablice dodajete preko \texttt{tabular} i \texttt{table} okolina. Primjer
+tablice:
+\begin{verbatim}
+\begin{table}[htb]
+\caption{Konstante}
+\label{tbl:konstante}
+\centering
+\begin{tabular}{llr} \toprule
+Konstanta & Opis & Vrijednost\\ \midrule
+$\pi$ & Pi & 3.14159 \\
+$e$ & Eulerov broj & 2.71828 \\
+$\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
+\end{tabular}
+\end{table}
+\end{verbatim}
+Rezultat je tablica \ref{tbl:konstante}.
+\begin{table}[htb]
+\caption{Konstante}
+\label{tbl:konstante}
+\centering
+\begin{tabular}{llr} \toprule
+Konstanta & Opis & Vrijednost\\ \midrule
+$\pi$ & Pi & 3.14159 \\
+$e$ & Eulerov broj & 2.71828 \\
+$\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
+\end{tabular}
+\end{table}
 
+Opis datog primjera po dijelovima:
+\begin{itemize}
+\item \verb|\begin{table}[htb]|\\*
+Početak \texttt{table} okoline sa pozicioniranjem, ``h'' -- \emph{here}, ``t''
+-- \emph{top}, ``b'' -- \emph{bottom}. Table je tzv.\ lebdeća \engl{floating}
+okolina te joj pozicioniranjem govorimo gdje želimo da se naša tablica
+postavi. \LaTeX{} ima svoje alate pozicioniranja lebdećih okolina na način da
+ih smjesti po tipografskim pravilima npr., \LaTeX{} neće dopustiti da se tablica
+razvuče na dvije stranice tako da se prelomi po sredini, već će cijelu tablicu
+prebaciti na novu stranicu. Bitno je spomenuti da se za tablice koje veličinom
+prelaze jedan list papira mora koristiti \texttt{longtable} paket. Paket je
+uključen u stil, a upoznavanje s paketom je najbolje napraviti preko primjera
+koje možete naći na \url{http://users.sdsc.edu/~ssmallen/latex/longtable.html}
+ili \url{http://www.astro.psu.edu/gradinfo/psuthesis/longtable.html}.
+
+\item \verb|\caption{Konstante}|\\*
+Naslov tablice. Naslov tablice uvijek dolazi iznad tablice.
+
+\item \verb|\label{tbl:konstante}|\\*
+Oznaka preko koje se referencirate na tablicu npr., \verb|\ref{tbl:konstante}|.
+
+\item \verb|\centering|\\*
+Naredba koja centrira tablicu.
+
+\item \verb|\begin{tabular}{llr}|\\*
+Okolina za unos tabličnih podataka. Parametar ``\verb|{llr}|'' navodi da tablica
+ima tri stupca, pri čemu su prva dva poravnata lijevo, a treći je poravnat
+desno. Ako želite vertikalnu liniju između prvog i drugo stupca, kao parametar
+morate navesti ``\verb@{l|lr}@.'' Dobar pregled parametara i njihovih
+objašnjenja možete naći na
+\url{http://www.andy-roberts.net/misc/latex/latextutorial4.html}.
+
+\item 
+\begin{verbatim}
+Konstanta & Opis & Vrijednost\\ \midrule
+$\pi$ & Pi & 3.14159 \\
+$e$ & Eulerov broj & 2.71828 \\
+$\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
+\end{verbatim}
+Podatci u tablici. Podatci u pojedinim stupcima se odvajaju znakom ``\&.'' Redovi
+tablice se prekidaju sekvencom ``\verb|\\|.'' Naredbe \verb|\toprule|,
+\verb|\midrule|, \verb|\bottomrule| i \verb|\hline| odvajaju retke horizontalnim
+linijama. Same naredbe se razlikuju u debljini linije koju stvaraju i količinama
+praznine iznad i ispod linije. Preporuka je raditi tablice bez vertikalnih
+linija, sa linijom \verb|\toprule| iznad naslova stupaca, linijom \verb|\midrule|
+ispod naslova te linijom \verb|\bottomrule| ispod zadnjeg podatka
+\citep{simon2005booktabs}.
+\end{itemize}
+
+Prilikom izrade tablica preporuka je poštivati smjernice koje su date u
+dokumentaciji \texttt{booktabs} paketa \citep{simon2005booktabs}:
+\begin{itemize}
+  \item nemojte koristiti vertikalne linije,
+  \item nemojte koristiti dvostruke linije,
+  \item jedinice stavljajte u naslov stupca, ne u tijelo tablice\\*
+(npr., ako imate stupac ``Masa'', umjesto da za podatke navodite npr., ``1
+kg'', jedinicu stavite u naslov -- ``Masa (kg)''),
+  \item uvijek stavljajte broj ispred decimalne točke; znači ``0.1,'' a ne
+``.1,''
+  \item nemojte koristiti ``ditto'' znak za ponavljanje prethodne vrijednosti;
+ostavite praznu liniju ili ponovo navedite vrijednost.
+\end{itemize}
 
 \section{Dodavanje slika}
 % TODO: Napisati, navesti kako dodati više slika u redu (subfloat)
@@ -393,15 +483,11 @@ kratke upute za korištenje AMS paketa
 \url{ftp://ftp.ams.org/pub/tex/doc/amsmath/short-math-guide.pdf}. AMS paket je
 uključen u predložak. \nocite{downes2002shortams}
 
-%Citirati \citep{downes2002shortams}.
-
-
-\section{Dodavanje programskog koda, sadržaja koji mora ostati neformatiran i
-algoritama}
+\section{Dodavanje programskog koda, sadržaja koji mora ostati neformatiran i algoritama}
 Za programski kod možete iskoristiti paket \texttt{listings}. Paket
 nije uključen u predložak te ga morate dodati kako je opisano u odjeljku
 \ref{sec:koristenje-dod-paketa} Paket je potrebno dodatno konfigurirati da
-odgovara korištenom jeziku. Prije korištenja paketa dodajte naredbu, npr.~za
+odgovara korištenom jeziku. Prije korištenja paketa dodajte naredbu, npr.\ za
 programski jezik Javu:
 \begin{verbatim}
 \lstset{language=Java, tabsize=2}
@@ -430,10 +516,11 @@ Kod je stavljen unutar okoline \texttt{lstlisting}:\\
 \verb|\end{lstlisting}|
 
 Paket \texttt{listings} ne podržava UTF--8 kodnu stranicu te za korištenje
-dijakritika morate iskoristiti neko drugo rješenje, npr.~paket
-\texttt{listingsutf8} ili okolinu \texttt{verbatim} koja sprječava formatiranje.
+dijakritika morate iskoristiti neko drugo rješenje, npr.\ paket
+\texttt{listingsutf8} ili okolinu \texttt{verbatim} koja spriječava
+formatiranje.
 
-Navedena okolina ima širu primjenu, tj.~služi za sav sadržaj za koji želite da
+Navedena okolina ima širu primjenu, tj.\ služi za sav sadržaj za koji želite da
 održi razmake i prelaske u novi red iz izvorne, \texttt{tex} datoteke, te da se
 \TeX{} naredbe unutar tog sadržaja ne bi izvršile. Primjer korištenja:\\
 \verb|\begin{verbatim}|\\*
@@ -564,7 +651,7 @@ u širini cijele stranice, \texttt{table*} okolinu koja ima funkcionalnost
 
 \subsection{Promjena načina citiranja}
 Trenutni način citiranja je ``(autor, godina).'' Ako želite promijeniti stil
-citiranja u ``[index]'' (npr.~[1]) tada u datoteci \texttt{zavrsni.cls}
+citiranja u ``[index]'' (npr.\ [1]) tada u datoteci \texttt{zavrsni.cls}
 promjenite parametre \emph{natbib} paketa:
 \begin{verbatim}
 \RequirePackage[authoryear, round]{natbib}
@@ -619,11 +706,13 @@ Nakon sažetka dolazi kraj dokumenta, odnosno naredba:
 \end{document}
 \end{verbatim}
 
+U popis ključnih riječi navedite pojmove bitne za vaš rad koji nisu već
+spomenuti u naslovu.
 
 \section{Dodavanje posvete}
 \label{sec:posveta}
 Posveta se dodaje naredbom \verb|\posveta{}| na mjestu gdje želite stranicu s
-posvetom (npr.~prije tablice sadržaja --- iznad \verb|\tableofcontents|
+posvetom (npr.\ prije tablice sadržaja --- iznad \verb|\tableofcontents|
 naredbe). Primjer korištenja:
 \begin{verbatim}
 \posveta{Svima koji žele naučiti koristiti \LaTeX{}.}
@@ -704,12 +793,12 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
 \textbf{The Comprehensive TeX Archive Network (CTAN):}
 \begin{itemize}
   \item \url{http://www.ctan.org/}
-  \item Osnovna arhiva paketa i materijala vezanih uz \TeX~sustav.
+  \item Osnovna arhiva paketa i materijala vezanih uz \TeX\ sustav.
 \end{itemize}
 \textbf{TeX Frequently Asked Questions on the Web:}
 \begin{itemize}
   \item \url{http://www.tex.ac.uk/cgi-bin/texfaq2html}
-  \item Veliki \TeX~i \LaTeX{} FAQ sa konkretnim problemima i poveznicama na
+  \item Veliki \TeX\ i \LaTeX{} FAQ sa konkretnim problemima i poveznicama na
   korisne stranice.
 \end{itemize}
 \textbf{The Not So Short Introduction to LATEX2e:}
@@ -743,7 +832,7 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
 \textbf{IEEE predavanje -- Uvod u \LaTeX:}
 \begin{itemize}
   \item \url{http://www.fer.hr/ieee?@=g4ct}
-  \item Predavanje koje je u travnju 2007.~godine održao mr.~sc.~Tomislav
+  \item Predavanje koje je u travnju 2007.\ godine održao mr.~sc.~Tomislav
   Petković. Popratni materijali koji se mogu naći u repozitoriju su izuzetno
   korisni.
 \end{itemize}
