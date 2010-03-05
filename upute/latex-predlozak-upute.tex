@@ -662,17 +662,57 @@ u širini cijele stranice, \texttt{table*} okolinu koja ima funkcionalnost
 
 \section{Dodavanje literature}
 \label{sec:literatura}
+Za navođenje literature u \LaTeX{} dokumentima zadužen je alat Bib\TeX{}.
+Bib\TeX{} omogućuje korištenje raznih stilova prikaza navoda literature i
+referenciranja preko naredbe \verb|\bibliographystyle{}|.
 
-% TODO: neke stvari oko bibtexa, natbiba, npr. {{sadržaj koji ima i npr.
-% \LaTeX}},
-% ``_''
-% u url-u i sl.
-% Pogledati: http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+Literaturu možete navoditi unutar \texttt{thebibliography} okoline ili
+korištenjem \texttt{bib} baze literature (preporučeni način). Baza literature je
+standardna tekstualna datoteka sa nastavkom ``bib'' koja sadrži Bib\TeX{} zapise,
+a u dokument se uključuje naredbom \verb|\bibliography{}|, npr.\
+\verb|\bibliography{literatura}| za datoteku \texttt{literatura.bib}. Primjer
+Bib\TeX{} zapisa:
+\begin{verbatim}
+@article{greenwade93,
+  author  = "George D. Greenwade",
+  title   = "The {C}omprehensive {T}ex {A}rchive {N}etwork",
+  year    = "1993",
+  journal = "TUGBoat",
+  volume  = "14",
+  number  = "3",
+  pages   = "342--351"
+}
+\end{verbatim}
+Tip zapisa \emph{article} navodi da se radi o članku. Neki drugi tipovi zapisa
+su \emph{book}, \emph{manual}, \emph{techreport}, \emph{misc}, i sl. Razlikuju
+se u propisanim obaveznim i neobaveznim poljima te semantici (neki Bib\TeX{}
+stilovi različito prikazuju pojedine tipove zapisa).
 
+Za referenciranje na navod literature koriste se naredbe \verb|\citep{}| i
+\verb|citet{}| (ove naredbe su specifične za \texttt{natbib} paket koji se
+koristi u ovom stilu, sam Bib\TeX{} koristi \verb|\cite{}| naredbu). Kao
+parametar tim naredbama predaje se ključ navoda, npr.\ ``greenwade93'' iz
+gornjeg primjera. Naredba \texttt{citep} proizvodi standardni navod literature,
+a \texttt{citet} navodi ime autora, primjerice:
+\begin{verbatim}
+Primjer korištenja enumitem paketa
+dan je u \citep{collins2008enumitem}.
+
+\citet{collins2008enumitem} opisuje
+korištenje enumitem paketa.
+\end{verbatim}
+``Primjer korištenja enumitem paketa dan je u \citep{collins2008enumitem}.''
+
+\noindent ``\citet{collins2008enumitem} opisuje korištenje enumitem paketa.''
+
+Više o \texttt{natbib} paketu možete pročitati na
+\url{http://merkel.zoneo.net/Latex/natbib.php}, a više detalja o dodavanju
+literature u \LaTeX{} dokumente možete naći na
+\url{http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management}.
 
 \subsection{Promjena načina citiranja}
 Trenutni način citiranja je ``(autor, godina).'' Ako želite promijeniti stil
-citiranja u ``[index]'' (npr.\ [1]) tada u datoteci \texttt{zavrsni.cls}
+citiranja u ``[indeks]'' (npr.\ [1]) tada u datoteci \texttt{zavrsni.cls}
 promjenite parametre \emph{natbib} paketa:
 \begin{verbatim}
 \RequirePackage[authoryear, round]{natbib}
