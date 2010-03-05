@@ -26,7 +26,7 @@
 
 % Navesti kako oni koji već znaju koristiti latex trebaju samo pročitati
 % \ref{ch:upute} i \ref{ch:stil-i-struktura}, dok je ostatak dokumenta
-% namjenjen osobama koje se prvi put susreću s LaTeX--om.
+% namjenjen osobama koje se prvi put susreću s LaTeX-om.
 
 Iskoristiti: \citep{taraborelli2009beauty}, \citep{cottrell1999word}.
 
@@ -44,7 +44,7 @@ datoteke vrši se naredbom \verb|\documentclass{zavrsni}| koja mora biti prva
 naredba u dokumentu.
 
 Predložak, osim standardnih polja kao što \texttt{author} i \texttt{title}
-sadrži obavezno polje \texttt{thesisnumber} --- broj Završnog rada. Osnovna
+sadrži obavezno polje \texttt{thesisnumber} -- broj Završnog rada. Osnovna
 struktura \texttt{tex} datoteke mora biti:
 \begin{verbatim}
 \documentclass{zavrsni}
@@ -95,7 +95,7 @@ dokumenta (hijerarhijski navedeno): \emph{chapter}, \emph{section}, \emph{subsec
 \emph{subsubsection}.
 
 O stilu i strukturi dokumenta pogledajte poglavlje \ref{ch:stil-i-struktura}, a
-za upoznavanje s \LaTeX--om te nekim njegovim posebnostima i receptima pogledajte
+za upoznavanje s \LaTeX-om te nekim njegovim posebnostima i receptima pogledajte
 poglavlje \ref{ch:latex-upute} Ako želite koristiti drugačiji font od
 trenutnog, u datoteci \texttt{zavrsni.cls} promijenite liniju
 \verb|\RequirePackage{lmodern}| u npr., \verb|\RequirePackage{times}| za font
@@ -115,22 +115,22 @@ datoteci \texttt{završni.cls}.
 \chapter{Upute za \LaTeX}
 \label{ch:latex-upute}
 U nastavku su dane upute za \LaTeX, no sužene za potrebe brzog uvoda u rad s
-\LaTeX--om i konkretnim predloškom.
+\LaTeX-om i konkretnim predloškom.
 
-Ako se želite bolje upoznati s \LaTeX--om, konzultirajte poveznice navedene u
+Ako se želite bolje upoznati s \LaTeX-om, konzultirajte poveznice navedene u
 dodatku \ref{ch:korisne-stranice} te knjige poput \citep{oetiket2007lshort}.
 
 \section{Instalacija \LaTeX{} prevoditelja}
 \LaTeX{} dokumenti (dokumenti s \texttt{tex} ekstenzijom) se prevode krajnji
 format (npr.\ \texttt{pdf}), tj.\ jezgra produkcije dokumenata je \TeX{}
 prevoditelj.\footnote{\LaTeX{} je zapravo samo jedan (malo veći) dodatak
-\TeX--a.}
+\TeX-a.}
 
 Postoji više prevoditelja (tj.\ distribucija), no za Microsoft Windowse se
 preporučuje Mik\TeX{} distribucija dostupna na \url{http://www.miktex.org/}, a za
 Linux \TeX{} Live dostupan na \url{http://www.tug.org/texlive/} (koji je dostupan
 i za Windowse). Većina Linux distribucija dolazi pripremljena za rad sa
-\LaTeX--om, ili je prevoditelja izuzetno jednostavno instalirati preko sistemskog
+\LaTeX-om, ili je prevoditelja izuzetno jednostavno instalirati preko sistemskog
 upravitelja paketima (apt, yum, pacman, \ldots). Za Mik\TeX{} je bitno napomenuti
 da samo najnovija verzija može skidati nove pakete, tako da ako se nađete u
 situaciji da vam Mik\TeX{} odbija skinuti novi paket koji želite koristiti,
@@ -138,23 +138,43 @@ najvjerojatnije je problem do verzije.
 
 
 \subsection{Prevođenje \LaTeX{} dokumenta}
-% TODO: Napomena kako se zbog nekih stvari prevođenje mora pokrenuti više puta
 \LaTeX{} dokumenti su obične tekstualne datoteke s ekstenzijom \texttt{tex}
-čiji sadržaj poštiva pravila \TeX{} sintakse.
-% TODO: Dovršiti..
+pisane \TeX{} sintaksom.
+
+Krajnji dokumenti se dobivaju prevođenjem \texttt{tex} datoteka u npr.,
+\texttt{pdf} format. Primjerice:
+\begin{verbatim}
+pdflatex dokument.tex
+\end{verbatim}
+
+Svaka \LaTeX{} distribucija sadrži prevoditelje za različite alate
+(npr.\ \texttt{latex} za \texttt{dvi}, \texttt{pdflatex} za \texttt{pdf} i sl.)
+te alate za konverziju između formata (npr.\ \texttt{ps2pdf}).
+
+Prevođenje \LaTeX{} dokumenata je dobro prepustiti razvojnom okruženju radi
+razumljivijeg formatiranja ispisa grešaka i upozorenja.
+
+Bitno je napomenuti da je ponekad više puta potrebno pokrenuti prevoditelja da
+bi se dobili ispravni rezultati (npr., može se dogoditi da reference nisu
+prepoznate, tablica sadržaja nije ispravna i sl.). Razlog tomu je stvaranje
+pomoćnih datoteka prilikom prevođenja (aux, bbl, toc i ostale datoteke) koje se
+koriste prilikom prevođenja. Prilikom prvog prevođenja, prevoditelj traži te
+datoteke te budući da ne postoje, stvara ih. Prilikom sljedećeg prevođenja,
+prevoditelj nalazi potrebne datoteke te ih koristi za generiranje izlaznog
+dokumenta.
 
 \section{Razvojna okruženja}
-Za pisanje \LaTeX{} dokumenata dovoljan je bilo koji tekst editor ---
+Za pisanje \LaTeX{} dokumenata dovoljan je bilo koji tekst editor, 
 primjerice Notepad++ (\url{http://notepad-plus.sourceforge.net/uk/site.htm}) za
 Windowse ili Vim (\url{http://www.vim.org/}) za Linux.
 
 Postoji veliki broj \LaTeX{} razvojnih okruženja koja pokušavaju ubrzati rad
 korisnika. Tu je bitno napomenuti da većina \LaTeX{} razvojnih okruženja na
-Windowsima ne podržava UTF--8 kodnu stranicu!
+Windowsima ne podržava UTF-8 kodnu stranicu!
 
 Među razvojnim okruženjima mogu se istaknuti \emph{Texmaker} i \emph{Eclipse} sa
 \emph{Texlipse} dodatkom. Navedena razvojna okruženja su besplatna, dostupna
-za sve poznatije operacijske sustave te podržavaju UTF--8 kodnu stranicu.
+za sve poznatije operacijske sustave te podržavaju UTF-8 kodnu stranicu.
 \begin{itemize}
   \item Texmaker -- \url{http://www.xm1math.net/texmaker/}
   \item Eclipse -- \url{http://www.eclipse.org/downloads/} (bilo koji paket);
@@ -162,21 +182,21 @@ za sve poznatije operacijske sustave te podržavaju UTF--8 kodnu stranicu.
 \end{itemize}
 
 Potrebno je podesiti razvojna okruženja na ispravne putanje od alata iz \TeX{}
-distribucije, te podesiti kodnu stranicu dokumenata na UTF--8.
+distribucije, te podesiti kodnu stranicu dokumenata na UTF-8.
 
 Za Texmaker potrebno je ići \emph{Options} $\Rightarrow$ \emph{Configure
 Texmaker} $\Rightarrow$ \emph{Editor} $\Rightarrow$ \emph{Editor Font Encoding}
-postaviti na UTF--8. Putanje do alata \TeX{} distribucije postavljaju se u
+postaviti na UTF-8. Putanje do alata \TeX{} distribucije postavljaju se u
 odjeljku \emph{Commands}.
 
 Texlipse postavke se podešavaju unutar Eclipsea. Potrebno je ići na \emph{Window}
 $\Rightarrow$ \emph{Preferences} $\Rightarrow$ \emph{Texlipse} $\Rightarrow$
 \emph{Builder Settings} te tu podesiti putanje od \TeX{} alata. Kodna stranica
 se može podesiti za svaki projekt ili se može iskoristiti uobičajena kodna
-stranica. Preporuka je podesiti uobičajenu kodnu stranicu na UTF--8. Za
+stranica. Preporuka je podesiti uobičajenu kodnu stranicu na UTF-8. Za
 podešavanje uobičajene kodne stranice potrebno je ići \emph{Window} $\Rightarrow$
 \emph{Preferences} $\Rightarrow$ \emph{General} $\Rightarrow$ \emph{Workspace}
-$\Rightarrow$ \emph{Text file encoding} postaviti na UTF--8. Za podešavanje
+$\Rightarrow$ \emph{Text file encoding} postaviti na UTF-8. Za podešavanje
 kodne stranice pojedinog projekta, potrebno je otvoriti postavke projekta
 \engl{Preferences} te ići \emph{Resource} $\Rightarrow$ \emph{Text file encoding}.
 
@@ -438,7 +458,7 @@ Rezultat:
 
 U matematičku okolinu za izraze koji se nalaze u posebnoj liniji moguće je ući
 sa \verb|$$| \ldots \verb|$$|, ali nije preporučljivo jer nije kompatibilno sa
-nekim mogućnostima \LaTeX--a (no, unatoč tomu, često se koristi).
+nekim mogućnostima \LaTeX-a (no, unatoč tomu, često se koristi).
 
 Također, postoji još okolina za pisanje matematičkih izraza među kojima je
 bitno istaknuti okoline \texttt{equation}, koja donosi mogućnost označavanja
@@ -476,7 +496,7 @@ pokazuje da je moguće označiti svaku pojedinu jednadžbu. Primjerice,
 rezultira sa ``izraz za $h$ je dan jednadžbom \ref{eq:h}''.
 
 
-Za dodatne informacije o pisanju matematičkih izraza u \LaTeX--u pogledajte
+Za dodatne informacije o pisanju matematičkih izraza u \LaTeX-u pogledajte
 Internet stranice \url{http://www.math.uiuc.edu/~hildebr/tex/displays.html} i
 \url{http://www.andy-roberts.net/misc/latex/latextutorial10.html} te pročitajte
 kratke upute za korištenje AMS paketa
@@ -515,7 +535,7 @@ Kod je stavljen unutar okoline \texttt{lstlisting}:\\
 \verb|Kod.|\\*
 \verb|\end{lstlisting}|
 
-Paket \texttt{listings} ne podržava UTF--8 kodnu stranicu te za korištenje
+Paket \texttt{listings} ne podržava UTF-8 kodnu stranicu te za korištenje
 dijakritika morate iskoristiti neko drugo rješenje, npr.\ paket
 \texttt{listingsutf8} ili okolinu \texttt{verbatim} koja spriječava
 formatiranje.
@@ -596,7 +616,7 @@ ne mora naći točno gdje je napisana). \LaTeX{} kod algoritma:
 \section{Podjela sadržaja na više stupaca}
 Za podjelu sadržaja na stupce koristite \texttt{multicol} paket koji je
 uključen u predložak. Primjer korištenja:\footnote{Korišteni citati pripadaju
-Donaldu E.~Knuthu, tvorcu \TeX--a}
+Donaldu E.~Knuthu, tvorcu \TeX-a}
 \begin{verbatim}
 \begin{multicols}{2}
 The most important thing in the programming language is the
@@ -642,6 +662,7 @@ u širini cijele stranice, \texttt{table*} okolinu koja ima funkcionalnost
 
 \section{Dodavanje literature}
 \label{sec:literatura}
+
 % TODO: neke stvari oko bibtexa, natbiba, npr. {{sadržaj koji ima i npr.
 % \LaTeX}},
 % ``_''
@@ -661,8 +682,8 @@ u
 \RequirePackage[numbers, square]{natbib}
 \end{verbatim}
 
-\section{Dodavanje indeksa}
-% TODO: Napisati
+% \section{Dodavanje indeksa}
+% Ma, ovo je nepotrebno..
 % http://www.tex.ac.uk/cgi-bin/texfaq2html?label=makeindex
 
 \section{Dodatci dokumenta \engl{appendix}}
@@ -671,11 +692,11 @@ Ta poglavlja se označavaju velikim latiničnim slovima. Naredba \verb|\appendix
 dolazi nakon literature (vidi odjeljak \ref{sec:literatura}). Primjer:
 \begin{verbatim}
 \appendix
-\chapter{Korisne Internet stranice o \LaTeX--u}
+\chapter{Korisne Internet stranice o \LaTeX-u}
 \end{verbatim}
 Primjer rezultira poglavljem:\\*
 ``Dodatak A\\*
-Korisne Internet stranice o \LaTeX--u''
+Korisne Internet stranice o \LaTeX-u''
 
 
 \section{Dodavanje sažetka rada}
@@ -712,7 +733,7 @@ spomenuti u naslovu.
 \section{Dodavanje posvete}
 \label{sec:posveta}
 Posveta se dodaje naredbom \verb|\posveta{}| na mjestu gdje želite stranicu s
-posvetom (npr.\ prije tablice sadržaja --- iznad \verb|\tableofcontents|
+posvetom (npr.\ prije tablice sadržaja -- iznad \verb|\tableofcontents|
 naredbe). Primjer korištenja:
 \begin{verbatim}
 \posveta{Svima koji žele naučiti koristiti \LaTeX{}.}
@@ -746,19 +767,19 @@ korištenja:
 
 \LaTeX{} distribucije dolaze sa velikim brojem već instaliranih paketa.
 Također, distribucije je moguće podesiti da, u slučaju korištenja paketa koji
-nije instaliran, same dohvate paket sa CTAN--a i instaliraju ga.
+nije instaliran, same dohvate paket sa CTAN-a i instaliraju ga.
 
 Za više informacija o \LaTeX{} paketima, konzultirajte CTAN
 (\url{http://tug.ctan.org/}). Korisne upute za korištenje i instalaciju \LaTeX{}
 paketa možete naći na \url{http://en.wikibooks.org/wiki/LaTeX/Packages}.
 
-Bitno je spomenuti da se uz svaki \TeX{} paket sa CTAN--a može skinuti pripadna
+Bitno je spomenuti da se uz svaki \TeX{} paket sa CTAN-a može skinuti pripadna
 dokumentacija.
 
 
 \section{Provjera pravopisa}
 Programi \emph{aspell} i \emph{ispell} omogućavaju jednostavnu provjeru
-pravopisa \LaTeX{} dokumenata (razumiju sintaksu \TeX{}--a). Primjer korištenja:
+pravopisa \LaTeX{} dokumenata (razumiju sintaksu \TeX{}-a). Primjer korištenja:
 \begin{verbatim}
 aspell -c dokument.tex
 \end{verbatim}
@@ -782,7 +803,7 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
 
 
 \appendix
-\chapter{Korisne Internet stranice o \LaTeX--u}
+\chapter{Korisne Internet stranice o \LaTeX-u}
 \label{ch:korisne-stranice}
 % TODO: Ovo nekako ljepše složiti
 \textbf{LaTeX – A document preparation system:}
@@ -804,12 +825,12 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
 \textbf{The Not So Short Introduction to LATEX2e:}
 \begin{itemize}
   \item \url{http://tobi.oetiker.ch/lshort/lshort.pdf}
-  \item Izuzetno hvaljena knjiga o \LaTeX--u prigodna za početnike.
+  \item Izuzetno hvaljena knjiga o \LaTeX-u prigodna za početnike.
 \end{itemize}
 \textbf{Šime Ungar -- Ne baš tako kratak uvod u TeX s naglaskom na LaTeX2e:}
 \begin{itemize}
   \item \url{http://web.math.hr/~ungar/lkratko2e_internet.pdf}
-  \item Besplatna knjiga o \LaTeX--u na Hrvatskom jeziku.
+  \item Besplatna knjiga o \LaTeX-u na Hrvatskom jeziku.
 \end{itemize}
 \textbf{\LaTeX{} wikibook:}
 \begin{itemize}
@@ -857,14 +878,14 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
 \LaTeX{} overview:}
 \begin{itemize}
   \item \url{http://www.image.ufl.edu/help/latex/}
-  \item Primjeri i upute za korištenje \LaTeX{}--a temeljeni na knjigama \emph{A
+  \item Primjeri i upute za korištenje \LaTeX{}-a temeljeni na knjigama \emph{A
   Beginner's Introduction to Typesetting with LaTeX} i \emph{The Not So Short
   Introduction to LaTeX2e}.
 \end{itemize}
 \textbf{The Comprehensive \LaTeX{} Symbol List}
 \begin{itemize}
   \item \url{http://www.ctan.org/tex-archive/info/symbols/comprehensive/symbols-letter.pdf}
-  \item Lista 5913 simbola dostupna iz raznih paketa na CTAN--u.
+  \item Lista 5913 simbola dostupna iz raznih paketa na CTAN-u.
 \end{itemize}
 \textbf{The Visual \LaTeX{} FAQ}
 \begin{itemize}
