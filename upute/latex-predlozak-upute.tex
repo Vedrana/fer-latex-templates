@@ -8,6 +8,25 @@
 \usepackage{multicol}
 \lstset{language=Java, tabsize=2}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes,shadows}
+\tikzstyle{abstractbox} = [draw=black, fill=white, rectangle, 
+inner sep=10pt, style=rounded corners, drop shadow={fill=black,
+opacity=1}]
+\tikzstyle{abstracttitle} =[fill=white]
+
+\newcommand{\boxresult}[2][fill=white]{
+  \begin{center}
+    \begin{tikzpicture}
+      \node [abstractbox, #1] (box)
+      {\begin{minipage}{0.90\linewidth}
+          \footnotesize #2
+        \end{minipage}};
+      \node[abstracttitle, right=10pt] at (box.north west) {Rezultat};
+    \end{tikzpicture}
+  \end{center}
+}
+
 \begin{document}
 \thesisnumber{000}
 \title{Upute za korištenje \LaTeX{} predloška za Završni rad i Seminar}
@@ -236,8 +255,8 @@ Fusnote se dodaju naredbom \verb|\footnote{}|, npr.:
 Popis fusnota\footnote{Objašnjenja koja se prikazuju
 na dnu stranice} nije potreban.
 \end{verbatim}
-Rezultat navedenoga teksta je: ``Popis fusnota\footnote{Objašnjenja koja se
-prikazuju na dnu stranice} nije potreban.''
+\boxresult{Popis fusnota\footnote{Objašnjenja koja se
+prikazuju na dnu stranice} nije potreban.}
 
 Reference služe za povezivanje s nekim dijelom rada. Da bi ste omogućili
 referenciranje na neki dio rada, tom dijelu morate postaviti oznaku
@@ -268,11 +287,12 @@ Liste tvore u okolini \texttt{itemize}, nabrajanja u okolini
   \item druga stavka.
 \end{itemize}
 \end{verbatim}
-Rezultat:
+\boxresult{
 \begin{itemize}
   \item prva stavka,
   \item druga stavka.
 \end{itemize}
+}
 
   \item[Lista s više razina] -- kod:
 \begin{verbatim}
@@ -284,14 +304,14 @@ Rezultat:
   \end{itemize}
 \end{itemize}
 \end{verbatim}
-Rezultat:
+\boxresult{
 \begin{itemize}
   \item prva stavka,
   \item druga stavka,
   \begin{itemize}
     \item druga razina. 
   \end{itemize}
-\end{itemize}
+\end{itemize}}
 
   \item[Nabrajanje] -- kod:
 \begin{verbatim}
@@ -300,11 +320,11 @@ Rezultat:
   \item druga stavka.
 \end{enumerate}
 \end{verbatim}
-Rezultat:
+\boxresult{
 \begin{enumerate}
   \item prva stavka,
   \item druga stavka.
-\end{enumerate}
+\end{enumerate}}
 
   \item[Nabrajanje s proizvoljnim brojačem] -- kod:
 \begin{verbatim}
@@ -313,11 +333,11 @@ Rezultat:
   \item druga stavka.
 \end{enumerate}
 \end{verbatim}
-Rezultat:
+\boxresult{
 \begin{enumerate}[(a)]
   \item prva stavka,
   \item druga stavka.
-\end{enumerate}
+\end{enumerate}}
 
   \item[Opisi] -- kod:
 \begin{verbatim}
@@ -327,18 +347,18 @@ Rezultat:
   \item[Toki pona:] minimalistički umjetni prirodni jezik.
 \end{description}
 \end{verbatim}
-Rezultat:
+\boxresult{
 \begin{description}
   \item[Esperanto:] najpoznatiji umjetni prirodni jezik.
   \item[Lojban:] sintaksno jednoznačan umjetni prirodni jezik.
   \item[Toki pona:] minimalistički umjetni prirodni jezik.
-\end{description}
+\end{description}}
 
 \end{description}
 
 Za izradu složenijih listi, nabrajanja i opisa iskoristite paket
 \texttt{enumitem}. Odličan prikaz njegovih mogućnosti iznosi
-\citep{collins2008enumitem}.
+\citep{collins2008enum}.
 
 
 \section{Dodavanje tablica}
@@ -448,13 +468,14 @@ linijske izraze:
 \begin{verbatim}
 ``Prva dama: $\sin^2 \varphi + \cos^2 \varphi = 1$.''
 \end{verbatim}
-Rezultat: ``Prva dama: $\sin^2 \varphi + \cos^2 \varphi = 1$.''\\
+\boxresult{``Prva dama: $\sin^2 \varphi + \cos^2 \varphi = 1$.''}
 Za izraze koji se nalaze u posebnoj liniji:
 \begin{verbatim}
 \[ c^2 = a^2 + b^2 \]
 \end{verbatim}
-Rezultat:
+\boxresult{
 \[ c^2 = a^2 + b^2 \]
+}
 
 U matematičku okolinu za izraze koji se nalaze u posebnoj liniji moguće je ući
 sa \verb|$$| \ldots \verb|$$|, ali nije preporučljivo jer nije kompatibilno sa
@@ -470,11 +491,11 @@ f(t)\ast g(t) = \int^{\infty}_{-\infty} f(\tau)g(t-\tau)d\tau.
 \label{eq:conv}
 \end{equation}
 \end{verbatim}
-Rezultat:
+\boxresult{
 \begin{equation}
 f(t)\ast g(t) = \int^{\infty}_{-\infty} f(\tau)g(t-\tau)d\tau.
 \label{eq:conv}
-\end{equation}
+\end{equation}}
 Primjer za \texttt{align} okolinu:
 \begin{verbatim}
 \begin{align}
@@ -483,17 +504,19 @@ d&=e+f+g,\\
 h&=i+j.\label{eq:h}
 \end{align}
 \end{verbatim}
-Rezultat:
+\boxresult{
 \begin{align}
 a&=b+c,\label{eq:a}\\
 d&=e+f+g,\\
 h&=i+j.\label{eq:h}
-\end{align}
+\end{align}}
 
 Osim uzastopnog prikaza više jednadžbi i poravnanja po znaku jednakosti, primjer
-pokazuje da je moguće označiti svaku pojedinu jednadžbu. Primjerice,
-\verb|``izraz za $h$ je dan jednadžbom \ref{eq:h}''|,
-rezultira sa ``izraz za $h$ je dan jednadžbom \ref{eq:h}''.
+pokazuje da je moguće označiti svaku pojedinu jednadžbu. Primjerice:
+\begin{verbatim}
+``izraz za $h$ je dan jednadžbom \ref{eq:h}''
+\end{verbatim}
+\boxresult{``izraz za $h$ je dan jednadžbom \ref{eq:h}''}
 
 
 Za dodatne informacije o pisanju matematičkih izraza u \LaTeX-u pogledajte
@@ -512,7 +535,7 @@ programski jezik Javu:
 \begin{verbatim}
 \lstset{language=Java, tabsize=2}
 \end{verbatim}
-Primjer korištenja:
+Primjer:
 \begin{lstlisting}
 public class TempIdentificatorFactory {
 	/** Pocetna brojcana vrijednost. */
@@ -630,7 +653,7 @@ between what we know is possible with today's machines and
 what we have so far been able to finish.
 \end{multicols}
 \end{verbatim}
-Rezultat:
+\boxresult{
 \begin{multicols}{2}
 The most important thing in the programming language is the name. A language will
 not succeed without a good name. I have recently invented a very good name and
@@ -639,7 +662,7 @@ now I am looking for a suitable language.
 The hardest thing is to go to sleep at night, when there are so many urgent
 things needing to be done. A huge gap exists between what we know is possible
 with today's machines and what we have so far been able to finish.
-\end{multicols}
+\end{multicols}}
 
 Bitno je primjetiti da \texttt{multicol} okolina nije kompatibilna sa
 \texttt{figure} i \texttt{table} okolinama. Za ubacivanje \texttt{figure}
@@ -695,15 +718,13 @@ parametar tim naredbama predaje se ključ navoda, npr.\ ``greenwade93'' iz
 gornjeg primjera. Naredba \texttt{citep} proizvodi standardni navod literature,
 a \texttt{citet} navodi ime autora, primjerice:
 \begin{verbatim}
-Primjer korištenja enumitem paketa
-dan je u \citep{collins2008enumitem}.
-
-\citet{collins2008enumitem} opisuje
-korištenje enumitem paketa.
+Primjer korištenja enumitem paketa dan je u \citep{collins2008enum}.
+\citet{collins2008enum} opisuje korištenje enumitem paketa.
 \end{verbatim}
-``Primjer korištenja enumitem paketa dan je u \citep{collins2008enumitem}.''
 
-\noindent ``\citet{collins2008enumitem} opisuje korištenje enumitem paketa.''
+\boxresult{``Primjer korištenja enumitem paketa dan je u
+\citep{collins2008enum}.''\\*
+``\citet{collins2008enum} opisuje korištenje enumitem paketa.''}
 
 Više o \texttt{natbib} paketu možete pročitati na
 \url{http://merkel.zoneo.net/Latex/natbib.php}, a više detalja o dodavanju
@@ -734,15 +755,14 @@ dolazi nakon literature (vidi odjeljak \ref{sec:literatura}). Primjer:
 \appendix
 \chapter{Korisne Internet stranice o \LaTeX-u}
 \end{verbatim}
-Primjer rezultira poglavljem:\\*
-``Dodatak A\\*
-Korisne Internet stranice o \LaTeX-u''
+\boxresult{``Dodatak A\\*
+Korisne Internet stranice o \LaTeX-u''}
 
 
 \section{Dodavanje sažetka rada}
 \label{sec:sazetak}
 Sažetak rada je obavezan dio koji dolazi na sam kraj rada. Za sažetak na
-Hrvatskom jeziku koristite okolinu \engl{environment} \emph{sazetak}, a za
+Hrvatskom jeziku koristite okolinu \emph{sazetak}, a za
 sažetak na Engleskom jeziku okolinu \emph{abstract}. Prije korištenja
 \emph{abstract} okoline potrebno je navesti naslov na engleskom jeziku naredbom
 \verb|\engtitle{}|. Primjer korištenja:
@@ -787,7 +807,7 @@ prijevoda nekog termina (radi se o nestandardnoj naredbi), npr.:
 \begin{verbatim}
 Dodatak dokumenta \engl{appendix}.
 \end{verbatim}
-Rezultat je: ``Dodatak dokumenta \engl{appendix}.''
+\boxresult{Dodatak dokumenta \engl{appendix}.}
 
 
 \section{Korištenje dodatnih paketa}
