@@ -362,6 +362,7 @@ Za izradu složenijih listi, nabrajanja i opisa iskoristite paket
 
 
 \section{Dodavanje tablica}
+\label{sec:tablice}
 Tablice dodajete preko \texttt{tabular} i \texttt{table} okolina. Primjer
 tablice:
 \begin{verbatim}
@@ -393,17 +394,20 @@ $\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
 Opis datog primjera po dijelovima:
 \begin{itemize}
 \item \verb|\begin{table}[htb]|\\*
-Početak \texttt{table} okoline sa pozicioniranjem, ``h'' -- \emph{here}, ``t''
--- \emph{top}, ``b'' -- \emph{bottom}. Table je tzv.\ lebdeća \engl{floating}
-okolina te joj pozicioniranjem govorimo gdje želimo da se naša tablica
-postavi. \LaTeX{} ima svoje alate pozicioniranja lebdećih okolina na način da
-ih smjesti po tipografskim pravilima npr., \LaTeX{} neće dopustiti da se tablica
-razvuče na dvije stranice tako da se prelomi po sredini, već će cijelu tablicu
-prebaciti na novu stranicu. Bitno je spomenuti da se za tablice koje veličinom
-prelaze jedan list papira mora koristiti \texttt{longtable} paket. Paket je
-uključen u stil, a upoznavanje s paketom je najbolje napraviti preko primjera
-koje možete naći na \url{http://users.sdsc.edu/~ssmallen/latex/longtable.html}
-ili \url{http://www.astro.psu.edu/gradinfo/psuthesis/longtable.html}.
+Početak \texttt{table} okoline sa pozicioniranjem, ``h'' -- \emph{here}, ``t'' --
+\emph{top}, ``b'' -- \emph{bottom}. Table je tzv.\ lebdeća \engl{floating}
+okolina te joj pozicioniranjem govorimo gdje želimo da se naša tablica postavi.
+\LaTeX{} ima svoje algoritme pozicioniranja lebdećih okolina tako da ih smješta
+po tipografskim pravilima npr., \LaTeX{} neće dopustiti da se tablica razvuče na
+dvije stranice tako da se prelomi po sredini, već će cijelu tablicu prebaciti na
+novu stranicu. Ako se nađete u situaciji da vam pozicija gdje je \LaTeX{}
+smjestio lebdeću okolinu ne odgovara, kao parametar pozicioniranja možete navesti
+``!'' (npr., ``[!htb]''), no preporuka je pozicioniranje prepustiti \LaTeX-ovim
+algoritmima. Bitno je spomenuti da se za tablice koje veličinom prelaze jedan
+list papira mora koristiti \texttt{longtable} paket. Paket je uključen u stil, a
+upoznavanje s paketom je najbolje napraviti preko primjera koje možete naći na
+\url{http://users.sdsc.edu/~ssmallen/latex/longtable.html} ili
+\url{http://www.astro.psu.edu/gradinfo/psuthesis/longtable.html}.
 
 \item \verb|\caption{Konstante}|\\*
 Naslov tablice. Naslov tablice uvijek dolazi iznad tablice.
@@ -454,10 +458,58 @@ ostavite praznu liniju ili ponovo navedite vrijednost.
 \end{itemize}
 
 \section{Dodavanje slika}
+Slike se dodaju preko \texttt{figure} okoline. Primjer je slika
+\ref{fig:fer-logo}. Kod kojim je dobivena slika:
+\begin{verbatim}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2cm]{img/FER_logo.jpg}
+\caption{Logo FER-a}
+\label{fig:fer-logo}
+\end{figure}
+\end{verbatim}
+
+Okolina \texttt{figure}, poput \texttt{table} okoline, spada u lebdeće okoline i
+ne mora se naći točno na mjestu gdje ste je naveli. Za detalje pogledajte
+odjeljak \ref{sec:tablice}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=1.7cm]{img/FER_logo.jpg}
+\caption{Logo FER-a.}
+\label{fig:fer-logo}
+\end{figure}
+
+Naredba \verb|\includegraphics{}| prima slike u \emph{jpg}, \emph{png} i
+\emph{pdf} formatima ako se koristi s \emph{pdflatex} prevoditeljem. Dodatnim
+opcijama naredbe sliku je moguće skalirati po visini (npr.,
+\texttt{[height=2cm]}), širini ili za određeni faktor (parametar
+\texttt{scale}) te rotirati za određeni kut u stupnjevima (parametar
+\texttt{angle}). Detaljnije o uključivanju slika u \LaTeX{} dokumente
+pročitajte na \url{http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics}.
+Alati poput \emph{Mathematice} mogu generirati slike u
+vektorskom formatu \emph{eps} bez definiranog ``bounding boxa.'' Za ispravno
+definiranje ``bounding boxa'' vektorskih formata možete iskoristiti
+besplatni, višeplatformski alat za vektorsku grafiku \emph{inkscape} dostupan na
+\url{http://www.inkscape.org/} ili kozolni alat \emph{ebb} koji dolazi uz
+\LaTeX{} distribucije te generira ``bounding box'' i za rasterske formate poput
+\emph{png} formata. Primjer korištenja \emph{ebb} alata za sliku ``slika.png'':
+\begin{verbatim}
+ebb slika.png
+\end{verbatim}
+Alat generira datoteku ``slika.bb'' koju stavite u direktorij sa slikom.
+
+Ako sliku trebate staviti unutar teksta, koristite paket \texttt{wrapfig}, a
+za prikaz više slika u niz koristite paket \texttt{subfig}. Oba paketa su
+uključena u datoteku \texttt{zavrsni.cls}. Za primjere korištenja
+\texttt{wrapfig} i \texttt{subfig} paketa te savjete oko korištenja lebdećih
+okolina pogledajte stranicu
+\url{http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions}.
+
+
 % TODO: Napisati, navesti kako dodati više slika u redu (subfloat)
 % TODO: Iskoristiti
 % http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
-% TODO: spomenuti inkscape, graphviz, ebb, mathematicu, matlab, ..
 
 
 \section{Dodavanje matematičkih izraza}
@@ -526,7 +578,8 @@ kratke upute za korištenje AMS paketa
 \url{ftp://ftp.ams.org/pub/tex/doc/amsmath/short-math-guide.pdf}. AMS paket je
 uključen u predložak. \nocite{downes2002shortams}
 
-\section{Dodavanje programskog koda, sadržaja koji mora ostati neformatiran i algoritama}
+\section{Dodavanje programskog koda, sadržaja koji mora ostati neformatiran i
+pseudokoda}
 Za programski kod možete iskoristiti paket \texttt{listings}. Paket
 nije uključen u predložak te ga morate dodati kako je opisano u odjeljku
 \ref{sec:koristenje-dod-paketa} Paket je potrebno dodatno konfigurirati da
@@ -586,11 +639,12 @@ prve pojave odjeljitelja, koji se određuje kao prvi znak nakon same naredbe (u
 primjeru to je znak ``|''), do njegove druge pojave.\footnote{Sličnu ideju s
 delimiterima koristi \texttt{sed} naredba Unix ljuski.}
 
-Algoritme, osim u obliku neformatiranog teksta, možete dodavati pomoći više
-različitih paketa koje morate posebno uključiti. Primjer takvih paketa su \texttt{algorithmic} i \texttt{algorithm}. Navedene pakete morate dodati na
-način koji je opisan u \ref{sec:koristenje-dod-paketa}. Primjer korištenja je
-dan algoritmom\ \ref{algo:bubble-sort} (radi se o okolini koja se
-ne mora naći točno gdje je napisana). \LaTeX{} kod algoritma:
+Pseudokod, osim u obliku neformatiranog teksta, možete dodavati pomoći više
+različitih paketa koje morate posebno uključiti. Primjer takvih paketa su
+\texttt{algorithmic} i \texttt{algorithm}. Navedene pakete morate dodati na način
+koji je opisan u \ref{sec:koristenje-dod-paketa}. Primjer korištenja je dan
+algoritmom~\ref{algo:bubble-sort} (radi se o lebdećoj okolini koja se ne mora
+naći točno gdje je napisana). \LaTeX{} kod algoritma:
 \begin{verbatim}
 \begin{algorithm}
 \caption{Bubble sort}
@@ -944,7 +998,8 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
 \end{itemize}
 \textbf{The Comprehensive \LaTeX{} Symbol List}
 \begin{itemize}
-  \item \url{http://www.ctan.org/tex-archive/info/symbols/comprehensive/symbols-letter.pdf}
+  \item
+  \url{http://www.ctan.org/tex-archive/info/symbols/comprehensive/symbols-letter.pdf}
   \item Lista 5913 simbola dostupna iz raznih paketa na CTAN-u.
 \end{itemize}
 \textbf{The Visual \LaTeX{} FAQ}
@@ -961,7 +1016,7 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
 Sažetak rada.
 
 \vspace{15pt}
-\noindent \textbf{Ključne riječi:} Završni rad, Seminar, \LaTeX
+\noindent \textbf{Ključne riječi:} \ldots
 \end{sazetak}
 
 \engtitle{Manual for bachelor thesis and Seminar \LaTeX{} templates}
@@ -969,7 +1024,7 @@ Sažetak rada.
 Sažetak na engleskom jeziku.
 
 \vspace{15pt}
-\noindent \textbf{Keywords:} bachelor thesis, seminar, \LaTeX
+\noindent \textbf{Keywords:} \ldots
 \end{abstract}
 
 \end{document}

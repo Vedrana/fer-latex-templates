@@ -24,6 +24,7 @@
 \RequirePackage{amssymb}
 \RequirePackage{amsmath}
 \RequirePackage{subfig}
+\RequirePackage{wrapfig}
 \RequirePackage{fixltx2e}
 \RequirePackage[outsidefoot]{pageno}
 \RequirePackage{caption}
