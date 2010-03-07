@@ -1,4 +1,4 @@
-% Upute za LaTeX predložak ZR-a i Seminara, verzija: 0.1pre-alpha
+% Upute za LaTeX predložak ZR-a i Seminara, verzija: 0.2pre-alpha
 
 \documentclass{zavrsni}
 \usepackage{algorithmic}
@@ -30,7 +30,7 @@ opacity=1}]
 \begin{document}
 \thesisnumber{000}
 \title{Upute za korištenje \LaTeX{} predloška za Završni rad i Seminar}
-\author{Ivan Krišto \and Boran Car}
+\author{Ivan Krišto \and Boran Car \and Mateja Čuljak}
 
 \maketitle
 
@@ -42,6 +42,10 @@ opacity=1}]
 % TODO: Navesti da je latex moćan, da su standardne stvari jednostavne i
 % lijepe, ali da za one koje mogu napraviti kaos se treba potruditi :D
 % TODO: O organizaciji dokumenta
+
+% TODO: kolaboracija
+% TODO: prezentacije
+% TODO: multiple files
 
 % Navesti kako oni koji već znaju koristiti latex trebaju samo pročitati
 % \ref{ch:upute} i \ref{ch:stil-i-struktura}, dok je ostatak dokumenta
@@ -129,34 +133,40 @@ datoteci \texttt{završni.cls}.
 
 \chapter{Stil i struktura}
 \label{ch:stil-i-struktura}
-Stil završnog rada (format, font, prored, margine i sl.) je određen predloškom te se nije potrebno brinuti o njemu. U nastavku će detaljnije biti opisana struktura završnog rada. 
-Na početak završnog rada uvezuje se prva stranica istovjetna naslovnoj, izvornik završnog zadatka, prazna stranica (ili stranica sa zahvalom) i sadržaj rada.
+Stil završnog rada (format, font, prored, margine i sl.) je određen predloškom te
+se nije potrebno brinuti o njemu. U nastavku će detaljnije biti opisana struktura
+Završnog rada preuzeta iz uputa na stranici
+\url{http://www.fer.hr/predmet/zavrad}.
+
+Na početak završnog rada uvezuje se \emph{naslovna stranica}, \emph{izvornik
+Završnog zadatka} (dokument koji podižete na vašem Zavodu), \emph{stranica sa zahvalom}
+(ili prazna stranica) te ostatak rada (naslovna stranica se broji kao prva te
+je stranica sa popisom sadržaja četvrta, stoga je označena rimskim brojem ``iv'').
 
 \section{Osnovna poglavlja završnog rada}
 Osnovna poglavlja su:
-\begin{itemize}
-\item uvod;
-\item poglavlja vezana uz temu (naslovi poglavlja dogovaraju se s mentorom);
-\item zaključak (kandidat vlastoručno potpisuje završni rad iza zaključka);
-\item literatura;
+\begin{enumerate}
+\item uvod,
+\item poglavlja vezana uz temu (naslovi poglavlja dogovaraju se s mentorom),
+\item zaključak (kandidat vlastoručno potpisuje završni rad iza zaključka),
+\item literatura,
 \item naslov, sažetak i ključne riječi (na hrvatskom i engleskom).
-\end{itemize}
+\end{enumerate}
 Završni rad mora imati sažetak od približno stotinjak riječi.
 
 \section{Ostale upute}
-U svim dokumentima obavezno primjenjivati SI jedinice. Slike, formule i tablice treba
-numerirati. Opis tablice stavlja se iznad tablice, a opis slike ispod slike. U opisu slike ili
-tablice pišu se samo podaci neophodni za njeno razumijevanje. Dodatna objašnjenja daju se u tekstu uz povezivanje sa slikom ili
-tablicom. Osi i parametri na slikama i grafičkim prikazima trebaju biti obilježeni. Daljnji opis
-tog grafičkog prikaza treba se nalaziti u tekstu rada. Formule se obilježavaju brojevima u
-zagradi, uz desni rub stranice, a u tekstu se poziva na broj formule.
-
+U svim dokumentima obavezno primjenjivati \emph{SI} jedinice. Slike, formule i tablice
+treba numerirati. Opis tablice stavlja se \emph{iznad tablice}, a opis slike
+\emph{ispod slike}. U opisu slike ili tablice pišu se samo podaci neophodni za njeno
+razumijevanje. Dodatna objašnjenja daju se u tekstu uz povezivanje sa slikom ili
+tablicom. Osi i parametri na slikama i grafičkim prikazima trebaju biti
+obilježeni. Daljnji opis tog grafičkog prikaza treba se nalaziti u tekstu rada.
+Formule se obilježavaju brojevima u zagradi, uz desni rub stranice, a u tekstu se
+poziva na broj formule.
 
 \section{Privitak završnog rada}
-Privitak može činiti tehnička dokumentacija vezana uz završni rad (npr. električka i položajna
-shema sklopa, sastavnica, predložak tiskane veze, plan bušenja, ispis programa s detaljnim
-opisom).
-
+Privitak može činiti tehnička dokumentacija vezana uz završni rad (npr.\
+električka i položajna shema sklopa, sastavnica, predložak tiskane veze i sl.).
 
 \chapter{Upute za \LaTeX}
 \label{ch:latex-upute}
@@ -194,8 +204,9 @@ pdflatex dokument.tex
 \end{verbatim}
 
 Svaka \LaTeX{} distribucija sadrži prevoditelje za različite alate
-(npr.\ \texttt{latex} za \texttt{dvi}, \texttt{pdflatex} za \texttt{pdf} i sl.)
-te alate za konverziju između formata (npr.\ \texttt{ps2pdf}).
+(\texttt{latex} za \texttt{dvi}, \texttt{pdflatex} za \texttt{pdf} te
+\texttt{pslatex} za \texttt{ps}) te alate za konverziju između formata (npr.\
+\texttt{ps2pdf}).
 
 Prevođenje \LaTeX{} dokumenata je dobro prepustiti razvojnom okruženju radi
 razumljivijeg formatiranja ispisa grešaka i upozorenja.
@@ -259,6 +270,102 @@ a popis tablica naredbom \verb|\listoftables|.
 
 
 \section{Osnovno \LaTeX{} formatiranje}
+\LaTeX{} dokument se sastoji od dijela sa sadržajem i dijela sa stilom što čini
+upravljanje stilom relativno jednostavnim.
+
+\subsection{Struktura \LaTeX{} dokumenta}
+Osnovni dijelovi \LaTeX{} dokumenta su definicija stila naredbom
+\verb|\documentclass{}| te okolina \texttt{document}. Naredba
+\texttt{documentclass} kao parametar prima definirani stil (predložak za Završni
+rad je stil definiran u datoteci \texttt{zavrsni.cls}; ostali često korišteni
+stilovi su \emph{article} te \emph{report} na kojem se temelji stil predloška za
+Završni rad).
+
+U okolinu \texttt{document} dolazi sadržaj dokumenta. Primjer
+osnovne strukture dokumenta možete vidjeti u \ref{ch:upute} poglavlju.
+
+\subsection{Formatiranje sadržaja}
+Sadržaj se dijeli na poglavlja \engl{chapter}, odjeljke \engl{section},
+pododjeljke \engl{subsection}, podpododjeljke \engl{subsubsection} te
+paragrafe. Primjer podjele sadržaja:
+\begin{verbatim}
+\chapter{Poglavlje 1}
+Tekst 1. poglavlja.
+
+\section{Odjeljak 1.1}
+Tekst odjeljka 1.1.
+
+\subsection{Pododjeljak 1.1.1}
+Tekst pododjeljka.
+
+\subsubsection{Podpododjeljak 1.1.1.1}
+Tekst podpododjeljka.
+
+\chapter{Poglavlje 2}
+Tekst 2. poglavlja.
+
+\section{Odjeljak 2.1}
+Tekst odjeljka 2.1.
+\end{verbatim}
+
+Tekst unutar poglavlja i odjeljaka dijeli se na paragrafe. Novi paragraf se
+stvara preskakanjem jednog reda, primjerice:
+\begin{verbatim}
+It said: ``The History of every major Galactic Civilization tends
+to pass through three distinct and recognizable phases, those of
+Survival, Inquiry and Sophistication, otherwise known as the How,
+Why and Where phases.''
+
+``For instance, the first phase is characterized by the question
+\emph{How can we eat?} the second by the question \emph{Why do we
+eat?} and the third by the question \emph{Where shall we have
+lunch?}''
+  
+  -- The Hitchhiker's Guide to the Galaxy by Douglas Adams
+\end{verbatim}
+Rezultat:
+
+It said: ``The History of every major Galactic Civilization tends
+to pass through three distinct and recognizable phases, those of
+Survival, Inquiry and Sophistication, otherwise known as the How,
+Why and Where phases.''
+
+``For instance, the first phase is characterized by the question
+\emph{How can we eat?} the second by the question \emph{Why do we
+eat?} and the third by the question \emph{Where shall we have
+lunch?}''
+  
+  -- The Hitchhiker's Guide to the Galaxy by Douglas Adams
+
+Novi red u kodu ne čini novi red u dokumentu te prazni red stvara novi
+paragraf. Da bi se dobio novi red bez stvaranja novog paragrafa morate
+iskoristiti sekvencu ``\verb|\\|'', primjerice (haiku Mjesec, Vladimir
+Devid\'e):
+\begin{verbatim}
+Mirno jezero.\\
+Žaba skoči na Mjesec\\
+i sveg ga smrska.
+\end{verbatim}
+\boxresult{
+Mirno jezero.\\
+Žaba skoči na Mjesec\\
+i sveg ga smrska.
+}
+
+Sekvencom ``\verb|\\|'' se ne može stvoriti prazna linija. Za prazninu između
+redaka iskoristite naredbu \verb|\vspace{}|, npr., \verb|\vspace{10pt}|
+(umjesto ``pt'' možete staviti drugu jedinicu).
+
+\LaTeX{} također ignorira višestruke razmake, npr., ``\verb|tri   razmaka|''
+rezultira sa ``tri   razmaka.'' Dodatni razmak možete postići naredbom
+\verb|\hspace{}|.
+
+\subsection{Naredbe i okoline}
+- Naredbe i okoline
+  - Često korištene naredbe
+ 
+- Posebne sitnice i problemi sa neprelamanjem
+
 % TODO: emph, texttt, bold, crtice, razmaci i ``~'', navodnici, trotočka,
 % prelazak u novi red, paragrafi i sl., komentari, znakovi koje treba
 % escapeati, gradivni elementi sadržaja (chapter, section, subsection,
@@ -431,7 +538,7 @@ novu stranicu. Ako se nađete u situaciji da vam pozicija gdje je \LaTeX{}
 smjestio lebdeću okolinu ne odgovara, kao parametar pozicioniranja možete navesti
 ``!'' (npr., ``[!htb]''), no preporuka je pozicioniranje prepustiti \LaTeX-ovim
 algoritmima. Bitno je spomenuti da se za tablice koje veličinom prelaze jedan
-list papira mora koristiti \texttt{longtable} paket. Paket je uključen u stil, a
+list papira mora koristiti \texttt{longtable} paket. Paket je uključen u predložak, a
 upoznavanje s paketom je najbolje napraviti preko primjera koje možete naći na
 \url{http://users.sdsc.edu/~ssmallen/latex/longtable.html} ili
 \url{http://www.astro.psu.edu/gradinfo/psuthesis/longtable.html}.
@@ -528,15 +635,10 @@ Alat generira datoteku ``slika.bb'' koju stavite u direktorij sa slikom.
 
 Ako sliku trebate staviti unutar teksta, koristite paket \texttt{wrapfig}, a
 za prikaz više slika u niz koristite paket \texttt{subfig}. Oba paketa su
-uključena u datoteku \texttt{zavrsni.cls}. Za primjere korištenja
+uključena u predložak. Za primjere korištenja
 \texttt{wrapfig} i \texttt{subfig} paketa te savjete oko korištenja lebdećih
 okolina pogledajte stranicu
 \url{http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions}.
-
-
-% TODO: Napisati, navesti kako dodati više slika u redu (subfloat)
-% TODO: Iskoristiti
-% http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
 
 
 \section{Dodavanje matematičkih izraza}
@@ -792,9 +894,17 @@ su \emph{book}, \emph{manual}, \emph{techreport}, \emph{misc}, i sl. Razlikuju
 se u propisanim obaveznim i neobaveznim poljima te semantici (neki Bib\TeX{}
 stilovi različito prikazuju pojedine tipove zapisa).
 
+Pretraživači baza znanstvenih članaka poput Google
+Scholara\footnote{\url{http://scholar.google.hr/}} i
+Citeseera\footnote{\url{http://citeseerx.ist.psu.edu/}} uz svaki članak nude i
+njegov Bib\TeX{} zapis. Za Google Scholar tu opciju je potrebno eksplicitno
+omogućiti (u postavkama navedite da se prikazuju veze za uvoz navoda iz
+Bib\TeX-a).
+
+
 Za referenciranje na navod literature koriste se naredbe \verb|\citep{}| i
 \verb|citet{}| (ove naredbe su specifične za \texttt{natbib} paket koji se
-koristi u ovom stilu, sam Bib\TeX{} koristi \verb|\cite{}| naredbu). Kao
+koristi u ovom predlošku, sam Bib\TeX{} koristi \verb|\cite{}| naredbu). Kao
 parametar tim naredbama predaje se ključ navoda, npr.\ ``greenwade93'' iz
 gornjeg primjera. Naredba \texttt{citep} proizvodi standardni navod literature,
 a \texttt{citet} navodi ime autora, primjerice:
