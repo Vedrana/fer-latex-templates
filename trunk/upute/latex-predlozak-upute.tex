@@ -47,6 +47,19 @@ opacity=1}]
 % TODO: prezentacije
 % TODO: multiple files
 
+% > Evo što bih stavio u uvod:
+% > - što je LaTeX? (Zapravo, nikako nisam siguran kako se pravilno,
+% > precizno i ukratko izraziti što je LaTeX i u kakvoj je vezi s TeX-om,
+% > na našem jeziku :-))
+% > - zašto LaTeX? (4 glavna razloga: 1. korisnik brine samo o strukturi
+% > 2. dokumenti ispadnu lijepi 3. stvoreno za znanost 4. pošto su obične
+% > tekstualne datoteke moguće ih je čuvati u VCS-u )
+% > - kakvu tu ulogu ima zavrsni.cls i što je to
+% > - preporučiti knjigu (not so short...) i one wiki stranice kao glavne
+% > izvore informacija --- ovo bih posebno istaknu, pa ako žele neka
+% > nastave čitati tu knjigu i da razumiju da će im zavrsni.cls omogućiti
+% > da dokument izgleda kako treba
+
 % Navesti kako oni koji već znaju koristiti latex trebaju samo pročitati
 % \ref{ch:upute} i \ref{ch:stil-i-struktura}, dok je ostatak dokumenta
 % namjenjen osobama koje se prvi put susreću s LaTeX-om.
@@ -56,10 +69,9 @@ Iskoristiti: \citep{taraborelli2009beauty}, \citep{cottrell1999word}.
 \chapter{Upute za korištenje}
 \label{ch:upute}
 % Kratko i jasno za ljude koji znaju koristiti LaTeX.
+% TODO: Dio o seminaru.
 Osnova predloška je datoteka \texttt{zavrsni.cls}. Uz navedenu datoteku potrebna
-je \texttt{tex} datoteka za sadržaj rada te \texttt{bib} datoteka za literaturu
-(naziv \texttt{bib} datoteke je proizvoljan, ali mora odgovarati argumentu koji
-predate naredbi \verb|\bibliography{}| (vidi odjeljak \ref{sec:literatura})). Sve
+je \texttt{tex} datoteka za sadržaj rada te \texttt{bib} datoteka za literaturu. Sve
 navedene datoteke moraju se nalaziti u istom direktoriju.
 
 Povezivanje \texttt{tex} dokumenta i predloška iz \texttt{zavrsni.cls}
@@ -361,15 +373,58 @@ rezultira sa ``tri   razmaka.'' Dodatni razmak možete postići naredbom
 \verb|\hspace{}|.
 
 \subsection{Naredbe i okoline}
-- Naredbe i okoline
-  - Često korištene naredbe
- 
-- Posebne sitnice i problemi sa neprelamanjem
+Izgled, stil i struktura \LaTeX{} dokumenta se definiraju naredbama i
+okolinama. Naredbe su jednostavni elementi \LaTeX--a koji primaju argumente te
+se transformiraju u oblikovani tekst. Naredbe počinju s unazadnom kosom crtom
+``\verb|\|'' koju slijedi naziv naredbe te njeni argumenti. Primjeri poziva
+naredbe bez argumenta, sa jednim argumentom te sa dva argumenta:
+\begin{verbatim}
+\naredba
+\naredba{a}
+\naredba{a}{b}
+\end{verbatim}
+Uz argumente postoje i parametri. Argumenti naredbi se zadaju u vitičastim
+zagradama, a parametri u uglatim (``[]'').
 
-% TODO: emph, texttt, bold, crtice, razmaci i ``~'', navodnici, trotočka,
+Okoline se mogu promatrati kao naredbe koje primaju jedan segment dokumenta.
+Početak djelovanja okoline se označava naredbom \verb|\begin{}|, a kraj
+naredbom \verb|\end{}|, primjerice:
+\begin{verbatim}
+\begin{okolina}
+Segment dokumenta unutar okoline.
+\end{okolina}
+\end{okolina}
+\end{verbatim}
+Dodatni argumenti i parametri okoline se navode uz naredbu \verb|\begin{}|.
+
+Neke često korištene \LaTeX{} naredbe se mogu vidjeti u tablici
+\ref{tbl:ceste-naredbe}.
+\begin{table}[htb]
+\caption{Često korištene naredbe}
+\label{tbl:ceste-naredbe}
+\centering
+\begin{tabular}{l l l l}
+\toprule
+Naredba & Opis & Primjer & Rezultat\\ \midrule
+\texttt{emph} & Naglašavanje teksta & \verb|\emph{riječ}| & \emph{riječ} \\
+\texttt{textbf} & Podebljavanje teksta & \verb|\textbf{riječ}| & \textbf{riječ} \\
+\texttt{texttt} & ``Typewriter'' font & \verb|\texttt{riječ}| & \texttt{riječ}\\
+\texttt{textsf} & ``Sans serif'' font & \verb|\textsf{riječ}| &  \textsf{riječ}\\
+\texttt{ref} & Referenciranje & \verb|\ref{tbl:ceste-naredbe}| &  \ref{tbl:ceste-naredbe}\\
+\bottomrule
+\end{tabular}
+\end{table}
+% TODO: Dopuniti.
+ 
+\subsection{Neki detalji o formatiranju}
+- Posebne sitnice i problemi sa neprelamanjem
+navodnici
+razmaci
+%\glqq foo\grqq aliases may be "` and "'o\grqq aliases may be "` and "'
+
+% TODO: crtice, razmaci i ``~'', navodnici, trotočka,
 % prelazak u novi red, paragrafi i sl., komentari, znakovi koje treba
-% escapeati, gradivni elementi sadržaja (chapter, section, subsection,
-% subsubsection)
+% escapeati
 
 % Because TeX usually assumes that periods are used to end sentences, by default it
 % puts extra whitespace after each period that is followed by a space character in
@@ -1057,6 +1112,7 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
 \chapter{Korisne Internet stranice o \LaTeX-u}
 \label{ch:korisne-stranice}
 % TODO: Ovo nekako ljepše složiti
+% TODO: Sortirati po korisnosti i navesti kriterij sortiranja.
 \textbf{LaTeX – A document preparation system:}
 \begin{itemize}
   \item \url{http://www.latex-project.org/}
