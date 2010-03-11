@@ -29,7 +29,7 @@ opacity=1}]
 
 \begin{document}
 \thesisnumber{000}
-\title{Upute za korištenje \LaTeX{} predloška za Završni rad i Seminar}
+\title{Upute za korištenje \LaTeX{} predloška za Završni i Diplomski rad te Seminar}
 \author{Ivan Krišto \and Boran Car \and Mateja Čuljak}
 
 \maketitle
@@ -37,10 +37,32 @@ opacity=1}]
 \tableofcontents
 
 \chapter{Uvod}
-% TODO: Čemu ovo
-% TODO: Zašto je LaTeX moćan
-% TODO: Navesti da je latex moćan, da su standardne stvari jednostavne i
-% lijepe, ali da za one koje mogu napraviti kaos se treba potruditi :D
+% Zašto upute?
+Upute prvenstveno služe približavanju \LaTeX-a što široj populaciji studenata.
+Namjena uputa je ukratko objasniti način korištenja predložaka za pismene radove
+te dati kratke upute i savjete oko izrade dokumenata u \LaTeX-u. Upute su vođene
+problemima vezanim uz formatiranje teksta Završnog i Diplomskog rada te Seminara
+koji su obrađeni jednostavnim primjerima.
+
+\LaTeX{} je sustav za visokokvalitetno slovoslagarstvo. Omogućava jednostavnu, a
+kvalitetnu izradu raznovrsnih tekstova. \LaTeX je zapravo dodatak \TeX-a, sustava
+kojeg je još 1976.\ godine razvio izuzetno utjecajan matematičar i računarski
+znanstvenik, Donald E.\ Knuth. Sam \LaTeX{} je također napisan od utjecajne
+znanstvene ličnosti, Lesliea Lamporta.
+
+Osnovna ideja \LaTeX-a je koncentriranje posla izrade dokumenata na strukturu i
+sadržaj, a ne na izgled.\footnote{Sličan princip spada u osnove programskog inženjerstva.}
+
+Bitno je za napomenuti da \LaTeX{} omogućava jednostavnu izradu lijepih dokumenata
+po predefiniranim stilovima. Veći stilski zahvati znaju biti izuzetno teški (npr.,
+čak i izrada ovog predloška) i zahtjevaju bolje poznavanje \LaTeX-a ili čak samog
+\TeX-a. Navedena činjenica se ne smije gledati isključivo u negativnom kontekstu jer
+ta nuspojava dizajna \TeX{} sustava često osigurava poštivanje tipografskih principa
+koji su ugrađeni u same temelje \TeX-a i \LaTeX-a. Složenost primjene većih stilskih
+zahvata je usko vezana s mogućnostima koje \TeX{} nudi, a one daleko nadilaze sve
+trenutno dostupne tzv.\ \emph{WYSIWYG}\footnote{What You See Is What You Get} tekst
+procesore poput \emph{Microsoft Worda}, \emph{Word Perfecta} ili \emph{OpenOffice Writera}.
+
 % TODO: O organizaciji dokumenta
 
 % TODO: kolaboracija
@@ -48,9 +70,6 @@ opacity=1}]
 % TODO: multiple files
 
 % > Evo što bih stavio u uvod:
-% > - što je LaTeX? (Zapravo, nikako nisam siguran kako se pravilno,
-% > precizno i ukratko izraziti što je LaTeX i u kakvoj je vezi s TeX-om,
-% > na našem jeziku :-))
 % > - zašto LaTeX? (4 glavna razloga: 1. korisnik brine samo o strukturi
 % > 2. dokumenti ispadnu lijepi 3. stvoreno za znanost 4. pošto su obične
 % > tekstualne datoteke moguće ih je čuvati u VCS-u )
@@ -69,7 +88,7 @@ Iskoristiti: \citep{taraborelli2009beauty}, \citep{cottrell1999word}.
 \chapter{Upute za korištenje}
 \label{ch:upute}
 % Kratko i jasno za ljude koji znaju koristiti LaTeX.
-% TODO: Dio o seminaru.
+% TODO: Dio o seminaru. Zašto se sve vodi oko ZR-a..
 Osnova predloška je datoteka \texttt{zavrsni.cls}. Uz navedenu datoteku potrebna
 je \texttt{tex} datoteka za sadržaj rada te \texttt{bib} datoteka za literaturu. Sve
 navedene datoteke moraju se nalaziti u istom direktoriju.
@@ -411,6 +430,7 @@ Naredba & Opis & Primjer & Rezultat\\ \midrule
 \texttt{texttt} & ``Typewriter'' font & \verb|\texttt{riječ}| & \texttt{riječ}\\
 \texttt{textsf} & ``Sans serif'' font & \verb|\textsf{riječ}| &  \textsf{riječ}\\
 \texttt{ref} & Referenciranje & \verb|\ref{tbl:ceste-naredbe}| &  \ref{tbl:ceste-naredbe}\\
+\texttt{url} & Formatiranje URL-ova & \verb|\url{www.hr}| &  \url{www.hr}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1202,6 +1222,11 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
   konkretnom primjeru recepta i poveznicom na Internet stranicu sa detaljnim
   opisom recepta.
 \end{itemize}
+\textbf{\TeX{} by Topic}
+\begin{itemize}
+  \item \url{https://savannah.nongnu.org/projects/texbytopic}
+  \item Odlična knjiga za napredne korisnike \TeX-a (elektronska verzija je besplatna).
+\end{itemize}
 
 
 % TODO: Napisati sažetak.
@@ -1212,7 +1237,7 @@ Sažetak rada.
 \noindent \textbf{Ključne riječi:} \ldots
 \end{sazetak}
 
-\engtitle{Manual for bachelor thesis and Seminar \LaTeX{} templates}
+\engtitle{Manual for Bachelor thesis, Master thesis and Seminar \LaTeX{} templates}
 \begin{abstract}
 Sažetak na engleskom jeziku.
 
