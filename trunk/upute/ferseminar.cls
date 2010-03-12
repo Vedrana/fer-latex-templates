@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{seminar}
+\ProvidesClass{ferseminar}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 
