@@ -45,17 +45,19 @@ problemima vezanim uz formatiranje teksta Završnog i Diplomskog rada te Seminar
 koji su obrađeni jednostavnim primjerima.
 
 \LaTeX{} je sustav za visokokvalitetno slovoslagarstvo. Omogućava jednostavnu, a
-kvalitetnu izradu raznovrsnih tekstova. \LaTeX je zapravo dodatak \TeX-a, sustava
+kvalitetnu izradu raznovrsnih tekstova. \LaTeX{} je zapravo dodatak \TeX-a, sustava
 kojeg je još 1976.\ godine razvio izuzetno utjecajan matematičar i računarski
-znanstvenik, Donald E.\ Knuth. Sam \LaTeX{} je također napisan od utjecajne
+znanstvenik, Donald E.~Knuth. Sam \LaTeX{} je također napisan od utjecajne
 znanstvene ličnosti, Lesliea Lamporta.
 
 Osnovna ideja \LaTeX-a je koncentriranje posla izrade dokumenata na strukturu i
 sadržaj, a ne na izgled.\footnote{Sličan princip spada u osnove programskog inženjerstva.}
+Primjerice, izgled dokumenta, čiji je sadržaj napisan te struktura složena, izgled
+mijenja jednostavnom izmjenom predloška.\footnote{Predložak je skup definicija stila.}
 
 Bitno je za napomenuti da \LaTeX{} omogućava jednostavnu izradu lijepih dokumenata
-po predefiniranim stilovima. Veći stilski zahvati znaju biti izuzetno teški (npr.,
-čak i izrada ovog predloška) i zahtjevaju bolje poznavanje \LaTeX-a ili čak samog
+po predefiniranim stilovima. Veći stilski zahvati znaju biti izuzetno teški (čak i
+izrada ovog predloška) i zahtjevaju bolje poznavanje \LaTeX-a ili čak samog
 \TeX-a. Navedena činjenica se ne smije gledati isključivo u negativnom kontekstu jer
 ta nuspojava dizajna \TeX{} sustava često osigurava poštivanje tipografskih principa
 koji su ugrađeni u same temelje \TeX-a i \LaTeX-a. Složenost primjene većih stilskih
@@ -63,39 +65,61 @@ zahvata je usko vezana s mogućnostima koje \TeX{} nudi, a one daleko nadilaze s
 trenutno dostupne tzv.\ \emph{WYSIWYG}\footnote{What You See Is What You Get} tekst
 procesore poput \emph{Microsoft Worda}, \emph{Word Perfecta} ili \emph{OpenOffice Writera}.
 
-% TODO: O organizaciji dokumenta
+Osobe neupućene u rad s \LaTeX-om možda najviše zanima usporedba \LaTeX-a i alata
+poput \emph{Microsoft Worda}, \emph{OpenOffice Writera}. U svrhu poticanja
+korištenja \LaTeX-a navedene su prednosti \LaTeX-a nad danas uobičajenim tekst
+procesorima. Osnovna prednost je već spomenuto odjeljivanje sadržaja i strukture
+od stila. Navedeno omogućava konzistentnost stila kroz dokument i olakšava
+publikaciju dokumenata. Slijedeća bitna prednost je činjenica da se \TeX{}
+dokumenti pišu kao obične tekstualne datoteke sa \TeX{} sintaksom. To omogućava
+prenosivost dokumenta kroz verzije \TeX-a (primjerice, dokument napisan MS Wordom
+2007 nije čitljiv u MS Wordu 2000). Navedena činjenica je tim bitnija što
+olakšava pisanje velikim dokumenata, primjerice, korištenjem \LaTeX-ove
+mogućnosti da se dokument sastoji od više datoteka (radi se o korištenju
+\verb|\include{}| naredbe, vidi:
+\url{http://en.wikibooks.org/wiki/LaTeX/Multiple_files})
+ili dokumenata koje istovremeno piše više ljudi (knjige, razne korisničke upute i
+sl.) korištenjem sustava za verzioniranje (VCS sustavi poput SVN-a, Mercuriala i
+Gita).\footnote{Ove upute su razvijene korištenjem SVN VCS sustava te su dostupne
+na \url{http://code.google.com/p/fer-latex-templates/}} Više o sustavima za
+verzioniranje i \LaTeX-u pročitajte na
+\url{http://en.wikibooks.org/wiki/LaTeX/Collaborative_Writing_of_LaTeX_Documents}.
 
-% TODO: kolaboracija
-% TODO: prezentacije
-% TODO: multiple files
+Za dodatne argumente u korist \LaTeX-a konzultirajte \citep{taraborelli2009beauty}
+i \citep{cottrell1999word}.
 
-% > Evo što bih stavio u uvod:
-% > - zašto LaTeX? (4 glavna razloga: 1. korisnik brine samo o strukturi
-% > 2. dokumenti ispadnu lijepi 3. stvoreno za znanost 4. pošto su obične
-% > tekstualne datoteke moguće ih je čuvati u VCS-u )
-% > - kakvu tu ulogu ima zavrsni.cls i što je to
-% > - preporučiti knjigu (not so short...) i one wiki stranice kao glavne
-% > izvore informacija --- ovo bih posebno istaknu, pa ako žele neka
-% > nastave čitati tu knjigu i da razumiju da će im zavrsni.cls omogućiti
-% > da dokument izgleda kako treba
+Cilj ovih uputa je omogućiti korisniku što bezbolniju izradu Diplomskog rada, Završnog
+rada ili Seminara korištenjem \LaTeX-a. Dane su osnovne potrebne informacije te poveznice
+za daljnje upoznavanje s \LaTeX-om. Kao osnovnu literaturu za upoznavanje s \LaTeX-om
+iskoristite \url{http://en.wikibooks.org/wiki/LaTeX/} te knjige \citep{oetiket2007lshort}
+i \citep{ungar2002uvod}. Mislilo se i na iskusnije korisnike \LaTeX-a te su upute koncipirane
+na način da napredni korisnici trebaju pročitati samo \ref{ch:upute} i
+\ref{ch:stil-i-struktura} poglavlje te odjeljke koji su eksplicitno navedeni u ta dva poglavlja.
+Novim korisnicima \LaTeX-a se predlaže da preskoče \ref{ch:upute} poglavlje te se koncentriraju
+na \ref{ch:latex-upute} poglavlje, odnosno odjeljke koji ih zanimaju (primjerice, ako
+u vašem radu nemate potrebu za korištenjem tablica ili dodatnih paketa, nemojte se zamarati
+čitanjem tih odjeljaka).
 
-% Navesti kako oni koji već znaju koristiti latex trebaju samo pročitati
-% \ref{ch:upute} i \ref{ch:stil-i-struktura}, dok je ostatak dokumenta
-% namjenjen osobama koje se prvi put susreću s LaTeX-om.
-
-Iskoristiti: \citep{taraborelli2009beauty}, \citep{cottrell1999word}.
 
 \chapter{Upute za korištenje}
 \label{ch:upute}
 % Kratko i jasno za ljude koji znaju koristiti LaTeX.
-% TODO: Dio o seminaru. Zašto se sve vodi oko ZR-a..
-Osnova predloška je datoteka \texttt{zavrsni.cls}. Uz navedenu datoteku potrebna
+Osnova predloška je \texttt{cls} datoteka. Uz navedenu datoteku potrebna
 je \texttt{tex} datoteka za sadržaj rada te \texttt{bib} datoteka za literaturu. Sve
 navedene datoteke moraju se nalaziti u istom direktoriju.
 
-Povezivanje \texttt{tex} dokumenta i predloška iz \texttt{zavrsni.cls}
-datoteke vrši se naredbom \verb|\documentclass{zavrsni}| koja mora biti prva
-naredba u dokumentu.
+Razvijena su tri predloška, predlošci za Završni i Diplomski rad te za Seminar.
+Radi jednostavnosti, konkretnosti i sličnosti među razvijenim predlošcima za
+upute će se uvijek referencirati na Završni radi datoteku \texttt{zavrsni.cls}
+iako sve navedeno vrijedi i za ostale predloške. Razlike u predlošcima su
+navedene u ovom poglavlju ispod primjera uporabe.
+
+Povezivanje \texttt{tex} dokumenta i predloška iz \texttt{zavrsni.cls} datoteke
+vrši se naredbom \verb|\documentclass{zavrsni}| koja mora biti prva naredba u
+dokumentu. Za Diplomski rad koristite datoteku \texttt{diplomski.cls} i razred
+\texttt{diplomski}, a za Seminar \texttt{ferseminar.cls} i razred
+\texttt{ferseminar}.\footnote{Razred ``seminar'' već postoji unutar \LaTeX-a i
+namjenjen je izradi prezentacija.}
 
 Predložak, osim standardnih polja kao što \texttt{author} i \texttt{title}
 sadrži obavezno polje \texttt{thesisnumber} -- broj Završnog rada. Osnovna
@@ -144,6 +168,13 @@ Sažetak na engleskom jeziku.
 \end{document}
 \end{verbatim}
 
+Ukoliko koristite predložak za Diplomski rad ili Seminar, umjesto naredbe \verb|\documentclass{zavrsni}|
+morate navesti \verb|\documentclass{diplomski}|, odnosno \verb|\documentclass{ferseminar}|.
+Uz to, Seminar nema ``broj rada,'' tj.\ ne postoji naredba \verb|\thesisnumber{}|, ali je potrebno navesti
+voditelja rada naredbom \verb|\voditelj{}| (tj.\ umjesto naredbe \verb|\thesisnumber{}| stavite naredbu
+\verb|\voditelj{}| i kao argument navedite ime i prezime vašeg mentora ili mentorice odnosno voditelja
+vašeg rada).
+
 Predložak se temelji na \emph{report} razredu te su gradivni elementi sadržaja
 dokumenta (hijerarhijski navedeno): \emph{chapter}, \emph{section}, \emph{subsection} i
 \emph{subsubsection}.
@@ -157,7 +188,8 @@ Times New Roman.
 
 Napravljeni predložak sadrži rješenje za dodavanje sažetka rada i posvete te
 naredbu \texttt{engl}. Za navedeno pogledajte odjeljke \ref{sec:sazetak},
-\ref{sec:posveta} i \ref{sec:engl}
+\ref{sec:posveta} i \ref{sec:engl} Diplomski i Završni rad moraju imati naveden
+sažetak dok Seminar ne mora.
 
 Za pakete uključene u sam predložak pogledajte polja \texttt{RequirePackage} u
 datoteci \texttt{završni.cls}.
