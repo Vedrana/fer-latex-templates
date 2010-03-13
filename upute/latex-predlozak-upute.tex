@@ -1,11 +1,10 @@
-% Upute za LaTeX predložak ZR-a i Seminara, verzija: 0.2pre-alpha
+% Upute za LaTeX predložak ZR-a i Seminara, verzija: 0.3beta
 
 \documentclass{zavrsni}
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{listings}
 \usepackage{longtable}
-\usepackage{multicol}
 \lstset{language=Java, tabsize=2}
 
 \usepackage{tikz}
@@ -37,7 +36,6 @@ opacity=1}]
 \tableofcontents
 
 \chapter{Uvod}
-% Zašto upute?
 Upute prvenstveno služe približavanju \LaTeX-a što široj populaciji studenata.
 Namjena uputa je ukratko objasniti način korištenja predložaka za pismene radove
 te dati kratke upute i savjete oko izrade dokumenata u \LaTeX-u. Upute su vođene
@@ -130,7 +128,6 @@ struktura \texttt{tex} datoteke mora biti:
 % Ovdje možete staviti dodatne pakete koji
 % su vam potrebni, npr.:
 \usepackage{longtable}
-\usepackage{multicol}
 
 \begin{document}
 \thesisnumber{000}
@@ -153,16 +150,14 @@ struktura \texttt{tex} datoteke mora biti:
 \begin{sazetak}
 Sažetak rada.
 
-\vspace{15pt}
-\noindent \textbf{Ključne riječi:} <popis ključnih riječi>
+\kljucnerijeci{<popis ključnih riječi>}
 \end{sazetak}
 
 \engtitle{Naslov rada na engleskom jeziku}
 \begin{abstract}
 Sažetak na engleskom jeziku.
 
-\vspace{15pt}
-\noindent \textbf{Keywords:} <popis ključnih riječi na engleskom>
+\keywords{<popis ključnih riječi na engleskom>}
 \end{abstract}
 
 \end{document}
@@ -196,26 +191,27 @@ datoteci \texttt{završni.cls}.
 
 \chapter{Stil i struktura}
 \label{ch:stil-i-struktura}
-Stil završnog rada (format, font, prored, margine i sl.) je određen predloškom te
+Stil Završnog rada (format, font, prored, margine i sl.) je određen predloškom te
 se nije potrebno brinuti o njemu. U nastavku će detaljnije biti opisana struktura
 Završnog rada preuzeta iz uputa na stranici
-\url{http://www.fer.hr/predmet/zavrad}.
+\url{http://www.fer.hr/predmet/zavrad}. Sve navedeno za Završni rad vrijedi i za Diplomski.
 
 Na početak završnog rada uvezuje se \emph{naslovna stranica}, \emph{izvornik
 Završnog zadatka} (dokument koji podižete na vašem Zavodu), \emph{stranica sa zahvalom}
 (ili prazna stranica) te ostatak rada (naslovna stranica se broji kao prva te
 je stranica sa popisom sadržaja četvrta, stoga je označena rimskim brojem ``iv'').
 
-\section{Osnovna poglavlja završnog rada}
+\section{Osnovna poglavlja Završnog rada}
 Osnovna poglavlja su:
 \begin{enumerate}
 \item uvod,
 \item poglavlja vezana uz temu (naslovi poglavlja dogovaraju se s mentorom),
-\item zaključak (kandidat vlastoručno potpisuje završni rad iza zaključka),
+\item zaključak (kandidat vlastoručno potpisuje Završni rad iza zaključka),
 \item literatura,
 \item naslov, sažetak i ključne riječi (na hrvatskom i engleskom).
 \end{enumerate}
-Završni rad mora imati sažetak od približno stotinjak riječi.
+Završni rad mora imati sažetak od približno stotinjak riječi. Prilikom navođenja
+ključnih riječi izbjegavajte pojmove koji su već navedeni u naslovu rada.
 
 \section{Ostale upute}
 U svim dokumentima obavezno primjenjivati \emph{SI} jedinice. Slike, formule i tablice
@@ -324,13 +320,6 @@ kodne stranice pojedinog projekta, potrebno je otvoriti postavke projekta
 \emph{pdflatex}. Svaki prevoditelj prevodi u svoj format te je preporuka
 koristiti direktno \emph{pdflatex} (inače je potrebno koristiti alate kao što
 su \emph{ps2pdf} ili \emph{dvipdf} za dobivanje pdf dokumenta kao izlaza).
-
-
-\section{Dodavanje popisa sadržaja, slika i tablica}
-Sadržaj se dodaje naredbom \verb|\tableofcontents| na mjestu gdje ga želite
-prikazati. Analogno tome, popis slika se dodaje naredbom \verb|\listoffigures|,
-a popis tablica naredbom \verb|\listoftables|.
-
 
 \section{Osnovno \LaTeX{} formatiranje}
 \LaTeX{} dokument se sastoji od dijela sa sadržajem i dijela sa stilom što čini
@@ -444,7 +433,6 @@ naredbom \verb|\end{}|, primjerice:
 \begin{okolina}
 Segment dokumenta unutar okoline.
 \end{okolina}
-\end{okolina}
 \end{verbatim}
 Dodatni argumenti i parametri okoline se navode uz naredbu \verb|\begin{}|.
 
@@ -468,27 +456,103 @@ Naredba & Opis & Primjer & Rezultat\\ \midrule
 \end{table}
 % TODO: Dopuniti.
  
-\subsection{Neki detalji o formatiranju}
-- Posebne sitnice i problemi sa neprelamanjem
-navodnici
-razmaci
-%\glqq foo\grqq aliases may be "` and "'o\grqq aliases may be "` and "'
+\subsection{Posebnosti \LaTeX-a i neki detalji o formatiranju}
+Radi poštivanja pravila tipografije, \LaTeX{} ima posebnosti koje morate
+poštivati da bi vaši dokumenti izgledali što ljepše.
 
-% TODO: crtice, razmaci i ``~'', navodnici, trotočka,
-% prelazak u novi red, paragrafi i sl., komentari, znakovi koje treba
-% escapeati
+Osnovni problem na koji će te nailaziti proizlazi iz \LaTeX-ovih pokušaja
+da poravna sadržaj. Pri poravnanju koristi se dodavanjem razmaka između riječi
+i prelamanjem riječi na slogove. Ponekad se dogodi da je riječ loše prelomljena, 
+primjerice, kad je potrebno prelomiti neku riječ koja sadrži dijakritike ili kad
+koristite verbatim naredbe (uključujući \verb|\url{}| naredbu). Ukoliko dođe do
+problema s prelamanjem, iskoristite naredbu \verb|\hyphenation{}| čiji primjer
+uporabe možete vidjeti na \url{http://ahyco.ffri.hr/seminari2007/latex/2.1.html}.
 
-% Because TeX usually assumes that periods are used to end sentences, by default it
-% puts extra whitespace after each period that is followed by a space character in
-% the input. To defeat this heuristic, when a non-sentence-ending period is to be
-% followed by a space, the space must be an explicit blank. For example "Smith et
-% al.\ claim that...".
-% The converse of the previous problem happens when a capital letter precedes a
-% sentence-ending period in the input. For example "...using the Pentium III. This
-% means that...". In this case LaTeX assumes that the period terminates an
-% abbreviation and follows it with inter-word space rather than inter-sentence
-% space. Fix this by writing "...Pentium III\@. This...".
+Po tipografskim pravilima nakon kraja rečenice (tj.\ točke) trebalo bi doći malo
+više od standardnog razmaka. Radi toga, \LaTeX{} pretpostavlja da je svaka točka
+kraj rečenice i tu ubaci malo veći razmak. Da bi to spriječili, možete iskoristiti
+sekvencu ``\verb|\ |'' koja eksplicitno kaže da želite standardni razmak. Uz tu
+sekvencu, bitan je i posebni znak ``\textasciitilde{}'' koji stvara standardni razmak
+uz uvijet da se na tom razmaku linija teksta ne smije prelomiti, tj.\ ako napišete
+``\verb|prof.~dr.~sc.~Donald~E.~Knuth|'' \LaTeX{} vam garantira da će se cijelo ime sa punom
+titulom naći na istoj liniji. Naredbu ``\verb|\ |'' koristite uvijek nakon točke koja ne
+označava kraj rečenice osim kad prethodni dio i dio nakon točke ne čine jednu neprelomivu
+cjelinu, npr., titulu. Primjeri:
+\begin{verbatim}
+prof. dr. sc. Donald E. Knuth\\
+prof.\ dr.\ sc.\ Donald E.\ Knuth\\
+prof.~dr.~sc.~Donald~E.~Knuth
+\end{verbatim}
+\boxresult{prof. dr. sc. Donald E. Knuth\\
+prof.\ dr.\ sc.\ Donald E.\ Knuth\\
+prof.~dr.~sc.~Donald~E.~Knuth}
 
+Ako pogledate dokumente napravljene \LaTeX-om, možete primjetiti različite vrste navodnika
+među kojima svi dijele istu osobinu, razlikuje se otvaranje i zatvaranje navodnika. Budući
+da se radi o prirodnom jeziku, računalu nije lako pretpostaviti kad se navodnik otvara, a kad
+zatvara (prisjetite se samo problema sa krajem rečenice), stoga morate koristiti posebne sekvence
+ili naredbe da bi postigli ispravne navodnike. Preporuka je koristiti
+\textasciigrave\textasciigrave \texttt{riječ}\textquotesingle\textquotesingle\ 
+ili \verb|\glqq riječ\grqq|, a za navodnike unutar navodnika \textasciigrave \texttt{riječ}\textquotesingle.
+Primjeri korištenja navodnika (citat, doc.~dr.~sc.~Siniša Šegvić):
+\begin{verbatim}
+"Bugovi su socijalna bića, uvijek dolaze u grupama."\\
+`Bugovi su socijalna bića, uvijek dolaze u grupama.'\\
+``Bugovi su socijalna bića, uvijek dolaze u grupama.''\\
+\glqq Bugovi su socijalna bića, uvijek dolaze u grupama.\grqq
+\end{verbatim}
+\boxresult{"Bugovi su socijalna bića, uvijek dolaze u grupama."\\
+`Bugovi su socijalna bića, uvijek dolaze u grupama.'\\
+``Bugovi su socijalna bića, uvijek dolaze u grupama.''\\
+\glqq Bugovi su socijalna bića, uvijek dolaze u grupama.\grqq}
+Primjetite da se navodnici (kao i fusnote) pišu nakon točke.
+
+Za stilski kvalitetan rad također je potrebno ispravno koristi crtice i trotočku.
+U \LaTeX-u postoji više tipova crtica, kratka, ``-'', srednja ``--'' i duga
+``---'' te posebna naredba, \verb|\ldots| koja ispravno prikazuje trotočku (štoviše, ponekad vam
+i MS Word pokuša produžiti crticu ako je dovoljno očito ono što želite postići te
+skoro uvijek pokuša ispravno prikazati trotočku). Kratku crticu (\verb|-|) koristite između riječi,
+srednju (\verb|--|) između brojeva, a dugu (\verb|---|) pri odvajanju podrečenice. U našem jeziku
+korištenje crtice nije strogo definirano\footnote{Više o crticama pročitajte u članku: \url{http://hrcak.srce.hr/file/67827}}
+stoga, dane upute su samo prijedlog. Ako trebate ``minus'' ispred broja uvijek uđite u mod za matematiku.
+Primjeri za crtice i trotočku:
+\begin{verbatim}
+``agencija `Drugdje'...''\\
+``agencija `Drugdje'\ldots''\\
+``hrvatsko-njemački''\\
+``31--42''\\
+``rekao je `može' --- uglavnom iz straha --- te nastavio''\\
+``to je $-1$, a ne -1''
+\end{verbatim}
+\boxresult{``agencija `Drugdje'...''\\
+``agencija `Drugdje'\ldots''\\
+``hrvatsko-njemački''\\
+``31--42''\\
+``rekao je `može' --- uglavnom iz straha --- te nastavio''\\
+``to je $-1$, a ne -1''}
+
+\LaTeX{} sadrži posebne znakove koji su osnova njegove sintakse. Ako te znakove koristite u običnom tekstu,
+morate ih \emph{isključiti} \engl{escape} znakom ``\verb|\|.'' Popis posebnih znakova i njihov prikaz u teksu:
+\begin{verbatim}
+\$  \%  \_  \}  \{  \&  \#
+\end{verbatim}
+\boxresult{\$  \%  \_  \}  \{  \&  \#}
+Znak ``\textbackslash'' se ne može dobiti isključivanjem, već morate iskoristiti naredbu iz standardnog
+\LaTeX{} paketa, \verb|\textbackslash|.
+
+Svi navedeni znakovi osim \# i \% se mogu susresti u naredbama unutar ovih uputa. Znak \# služi
+za naprednije \TeX{} programiranje (referenciranje argumenata), a \% kao početak linijskog komentara, primjerice:
+\begin{verbatim}
+Film ``\$9.99'' je odličan! % TODO: Ponovo pogledati.
+\end{verbatim}
+\boxresult{
+Film ``\$9.99'' je odličan! % TODO: Ponovo pogledati.
+}
+
+\section{Dodavanje popisa sadržaja, slika i tablica}
+Sadržaj se dodaje naredbom \verb|\tableofcontents| na mjestu gdje ga želite
+prikazati. Analogno tome, popis slika se dodaje naredbom \verb|\listoffigures|,
+a popis tablica naredbom \verb|\listoftables|.
 
 \section{Dodavanje fusnota i referenci}
 Fusnote se dodaju naredbom \verb|\footnote{}|, npr.:
@@ -1068,16 +1132,14 @@ sažetak na Engleskom jeziku okolinu \emph{abstract}. Prije korištenja
 \begin{sazetak}
 Sažetak rada.
 
-\vspace{15pt}
-\noindent \textbf{Ključne riječi:} <popis ključnih riječi>
+\kljucnerijeci{<popis ključnih riječi>}
 \end{sazetak}
 
 \engtitle{Naslov rada na engleskom jeziku}
 \begin{abstract}
 Sažetak na engleskom jeziku.
 
-\vspace{15pt}
-\noindent \textbf{Keywords:} <popis ključnih riječi na engleskom>
+\keywords{<popis ključnih riječi na engleskom>}
 \end{abstract}
 \end{verbatim}
 Nakon sažetka dolazi kraj dokumenta, odnosno naredba:
@@ -1120,7 +1182,6 @@ korištenja:
 \usepackage{algorithm}
 \usepackage{listings}
 \usepackage{longtable}
-\usepackage{multicol}
 \end{verbatim}
 
 \LaTeX{} distribucije dolaze sa velikim brojem već instaliranih paketa.
@@ -1261,20 +1322,25 @@ Za više informacija, instalaciju i podešavanje navedenih alata konzultirajte:
 \end{itemize}
 
 
-% TODO: Napisati sažetak.
 \begin{sazetak}
-Sažetak rada.
+Upute za korištenje razvijenih predložaka za Završni i Diplomski rad te Seminar
+na Fakultetu elektrotehnike i računarstva. Upute se sastoje od dijela koji se
+tiče samo predložaka i dijela koji se tiče \LaTeX-a općenito. Dio o \LaTeX-u
+napravljen s ciljem da bude dovoljan kao uvod u rješavanje pojedinih problema
+pri formatiranju ali ne i preopširan.
 
-\vspace{15pt}
-\noindent \textbf{Ključne riječi:} \ldots
+\kljucnerijeci{FER, \TeX{}.}
 \end{sazetak}
 
 \engtitle{Manual for Bachelor thesis, Master thesis and Seminar \LaTeX{} templates}
 \begin{abstract}
-Sažetak na engleskom jeziku.
+The manual for Bachelor thesis, Master thesis and Seminar \LaTeX{} templates at
+Faculty of Electrical Engineering and Computing. The manual consists of part which
+explain use of templates and part which explain \LaTeX{} in general. The \LaTeX{}
+part is made with to be sufficient as an introduction to solving the text formating
+problemes but still relativly short.
 
-\vspace{15pt}
-\noindent \textbf{Keywords:} \ldots
+\keywords{FER, \TeX{}.}
 \end{abstract}
 
 \end{document}
