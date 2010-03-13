@@ -33,6 +33,7 @@
 \RequirePackage{url}
 \RequirePackage{longtable}
 \RequirePackage{multicol}
+\RequirePackage{textcomp}
 
 \renewcommand{\captionlabelfont}{\bfseries}
 \renewcommand{\captionfont}{\small}
@@ -211,12 +212,26 @@ Koristi \noexpand\voditelj za definiranje}}
 \newpage
 \vspace*{\fill}
 \thispagestyle{empty}
-\hspace*{\fill} {\bf \@title} \hspace*{\fill} \\
-\hspace*{\fill} {\bf Sažetak} \hspace*{\fill} \par
+\begin{center}
+  {\bf \@title}
+\end{center}
+\hspace*{\fill} {\bf Sa\v{z}etak} \hspace*{\fill} \par
 \vspace*{25pt}
 }
 {
 \vspace*{\fill}
+}
+
+\newcommand{\kljucnerijeci}[1]
+{
+\vspace{15pt}
+\noindent \textbf{Klju\v{c}ne rije\v{c}i:} #1
+}
+
+\newcommand{\keywords}[1]
+{
+\vspace{15pt}
+\noindent \textbf{Keywords:} #1
 }
 
 \def\engtitle#1{\gdef\@engtitle{#1}}
@@ -227,7 +242,9 @@ Koristi \noexpand\engtitle za definiranje}}
 {
 \vspace*{\fill}
 \thispagestyle{empty}
-\hspace*{\fill} {\bf \@engtitle} \hspace*{\fill} \\
+\begin{center}
+  {\bf \@engtitle}
+\end{center}
 \hspace*{\fill} {\bf Abstract} \hspace*{\fill} \par
 \vspace*{25pt}
 }
