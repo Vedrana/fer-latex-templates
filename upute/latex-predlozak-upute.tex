@@ -1,15 +1,16 @@
-% Upute za LaTeX predložak ZR-a i Seminara, verzija: 0.3beta
+% Upute za LaTeX predložak ZR-a i Seminara, verzija: 0.5beta
 
 \documentclass{zavrsni}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{listings}
 \usepackage{longtable}
+\usepackage{fancybox}
 \lstset{language=Java, tabsize=2}
 
 \usepackage{tikz}
 \usetikzlibrary{shapes,shadows}
-\tikzstyle{abstractbox} = [draw=black, fill=white, rectangle, 
+\tikzstyle{abstractbox} = [draw=black, fill=white, rectangle,
 inner sep=10pt, style=rounded corners, drop shadow={fill=black,
 opacity=1}]
 \tikzstyle{abstracttitle} =[fill=white]
@@ -17,10 +18,11 @@ opacity=1}]
 \newcommand{\boxresult}[2][fill=white]{
   \begin{center}
     \begin{tikzpicture}
-      \node [abstractbox, #1] (box)
-      {\begin{minipage}{0.90\linewidth}
+      \node [abstractbox, #1] (box){%
+      	\begin{minipage}{0.90\linewidth}
           \footnotesize #2
-        \end{minipage}};
+        \end{minipage}
+	  };
       \node[abstracttitle, right=10pt] at (box.north west) {Rezultat};
     \end{tikzpicture}
   \end{center}
@@ -50,10 +52,9 @@ znanstvena ličnost, Leslie Lamport.
 
 Osnovna ideja \LaTeX-a je koncentriranje posla izrade dokumenata na strukturu i
 sadržaj, a ne na izgled.\footnote{Sličan princip spada u osnove programskog inženjerstva.}
-Primjerice, izgled dokumenta napisanog sadržaja i složene strukture, 
+Primjerice, izgled dokumenta napisanog sadržaja i definirane strukture, 
 mijenja se jednostavnom izmjenom predloška.\footnote{Predložak je skup
 definicija stila.}
-% TODO: "složena struktura"? postoji li neki drugi, bolji izraz? Vdrn
 
 Bitno je napomenuti da \LaTeX{} omogućava jednostavnu izradu lijepih dokumenata
 po predefiniranim stilovima. Veći stilski zahvati znaju biti izuzetno teški (čak i
