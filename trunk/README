@@ -1,2 +1,20 @@
-FER LaTeX template v. -0.1 README
-=================================
+FER LaTeX templates v. 0.5beta README
+=====================================
+
+LaTeX predlošci za pisanje radova na Fakultetu
+elektrotehnike i računarstva.
+
+Struktura
+=========
+ - brzistart:
+   Datoteke s izgrađenom osnovnom strukturom i povezanim stilovima.
+ 
+ - predlosci:
+   Predlošci sa definicijama stila.
+ 
+ - upute:
+   Upute za korištenje predložaka te pisanje LaTeX dokumenata.
+   
+NAPOMENA: Predlošci se nalaze na više mjesta u projektu.
+Ovo se treba zamjeniti simboličkim linkovima (no, prvo je potrebno
+provjeriti podržava li SVN takav način rada).
