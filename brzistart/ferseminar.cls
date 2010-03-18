@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{zavrsni}
+\ProvidesClass{ferseminar}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 
@@ -13,6 +13,7 @@
 \RequirePackage[T1]{fontenc}
 \RequirePackage{graphicx}
 \RequirePackage{enumitem}
+\RequirePackage{enumerate}
 \RequirePackage{booktabs}
 \RequirePackage{lmodern}
 % Da bi se promjenio stil citiranja umjesto:
@@ -20,13 +21,19 @@
 % staviti:
 % [numbers, square]
 \RequirePackage[authoryear, round]{natbib}
+\RequirePackage{amssymb}
 \RequirePackage{amsmath}
 \RequirePackage{subfig}
+\RequirePackage{wrapfig}
 \RequirePackage{fixltx2e}
 \RequirePackage[outsidefoot]{pageno}
 \RequirePackage{caption}
 \RequirePackage{ifthen}
 \RequirePackage[nottoc]{tocbibind}
+\RequirePackage{url}
+\RequirePackage{longtable}
+\RequirePackage{multicol}
+\RequirePackage{textcomp}
 
 \renewcommand{\captionlabelfont}{\bfseries}
 \renewcommand{\captionfont}{\small}
@@ -51,7 +58,7 @@
 \renewcommand\thetable{\ifnum \c@chapter>\z@ \thechapter\fi \@arabic\c@table}
 
 \renewcommand\tableofcontents{%
-   \setcounter{page}{4}
+   \setcounter{page}{2}
    \chapter*{\contentsname
    \@mkboth{%
    \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
@@ -138,10 +145,9 @@
 	\vspace*{\fill}
 }
 
-\def\worknumber#1{\gdef\@worknumber{#1}}
-\def\@worknumber{\@latex@warning@no@line{Broj rada nije definiran.
-Koristi \noexpand\worknumber za definiranje}}
-
+\def\voditelj#1{\gdef\@voditelj{#1}}
+\def\@voditelj{\@latex@warning@no@line{Voditelj nije naveden.
+Koristi \noexpand\voditelj za definiranje}}
 \if@titlepage
 	\renewcommand\maketitle{\begin{titlepage}%
 	\let\footnotesize\small
@@ -154,13 +160,14 @@ Koristi \noexpand\worknumber za definiranje}}
 	\end{center}
 	\vfill
 	\begin{center}%
-		{\large ZAVR\v{S}NI RAD br.~\@worknumber \par}%
-		\vskip 1em%
+		{\large {\bf SEMINAR} \par}%
+		\vskip 3em%
 		{\huge \bfseries \@title \par}%
 		\vskip 1em%
 		{\large\lineskip .75em%
 		\begin{tabular}[t]{c}%
-			\@author
+			\@author \\
+        	Voditelj: \@voditelj
 		\end{tabular}\par}%
 	\end{center}\par
 	\vfill
@@ -205,12 +212,26 @@ Koristi \noexpand\worknumber za definiranje}}
 \newpage
 \vspace*{\fill}
 \thispagestyle{empty}
-\hspace*{\fill} {\bf \@title} \hspace*{\fill} \\
-\hspace*{\fill} {\bf Sažetak} \hspace*{\fill} \par
+\begin{center}
+  {\bf \@title}
+\end{center}
+\hspace*{\fill} {\bf Sa\v{z}etak} \hspace*{\fill} \par
 \vspace*{25pt}
 }
 {
 \vspace*{\fill}
+}
+
+\newcommand{\kljucnerijeci}[1]
+{
+\vspace{15pt}
+\noindent \textbf{Klju\v{c}ne rije\v{c}i:} #1
+}
+
+\newcommand{\keywords}[1]
+{
+\vspace{15pt}
+\noindent \textbf{Keywords:} #1
 }
 
 \def\engtitle#1{\gdef\@engtitle{#1}}
@@ -221,7 +242,9 @@ Koristi \noexpand\engtitle za definiranje}}
 {
 \vspace*{\fill}
 \thispagestyle{empty}
-\hspace*{\fill} {\bf \@engtitle} \hspace*{\fill} \\
+\begin{center}
+  {\bf \@engtitle}
+\end{center}
 \hspace*{\fill} {\bf Abstract} \hspace*{\fill} \par
 \vspace*{25pt}
 }

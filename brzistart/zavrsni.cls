@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ferseminar}
+\ProvidesClass{zavrsni}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 
@@ -58,7 +58,7 @@
 \renewcommand\thetable{\ifnum \c@chapter>\z@ \thechapter\fi \@arabic\c@table}
 
 \renewcommand\tableofcontents{%
-   \setcounter{page}{2}
+   \setcounter{page}{4}
    \chapter*{\contentsname
    \@mkboth{%
    \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
@@ -145,9 +145,10 @@
 	\vspace*{\fill}
 }
 
-\def\voditelj#1{\gdef\@voditelj{#1}}
-\def\@voditelj{\@latex@warning@no@line{Voditelj nije naveden.
-Koristi \noexpand\voditelj za definiranje}}
+\def\thesisnumber#1{\gdef\@thesisnumber{#1}}
+\def\@thesisnumber{\@latex@warning@no@line{Broj rada nije definiran.
+Koristi \noexpand\thesisnumber za definiranje}}
+
 \if@titlepage
 	\renewcommand\maketitle{\begin{titlepage}%
 	\let\footnotesize\small
@@ -160,14 +161,13 @@ Koristi \noexpand\voditelj za definiranje}}
 	\end{center}
 	\vfill
 	\begin{center}%
-		{\large {\bf SEMINAR} \par}%
-		\vskip 3em%
+		{\large ZAVR\v{S}NI RAD br.~\@thesisnumber \par}%
+		\vskip 1em%
 		{\huge \bfseries \@title \par}%
 		\vskip 1em%
 		{\large\lineskip .75em%
 		\begin{tabular}[t]{c}%
-			\@author \\
-        	Voditelj: \@voditelj
+			\@author
 		\end{tabular}\par}%
 	\end{center}\par
 	\vfill
