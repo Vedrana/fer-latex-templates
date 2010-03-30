@@ -29,7 +29,7 @@
 \RequirePackage[outsidefoot]{pageno}
 \RequirePackage{caption}
 \RequirePackage{ifthen}
-\RequirePackage[nottoc]{tocbibind}
+\RequirePackage[nottoc, numbib, chapter]{tocbibind}
 \RequirePackage{url}
 \RequirePackage{longtable}
 \RequirePackage{multicol}
