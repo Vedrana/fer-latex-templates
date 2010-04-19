@@ -12,10 +12,8 @@
 \RequirePackage[croatian]{babel}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{graphicx}
-\RequirePackage{enumitem}
-\RequirePackage{enumerate}
-\RequirePackage{booktabs}
-\RequirePackage{lmodern}
+% Za promjenu fonta, umjesto ``times'' paketa učitajte drugi paket, primjerice ``lmodern''
+\RequirePackage{times}
 % Da bi se promjenio stil citiranja umjesto:
 % [authoryear, round]
 % staviti:
@@ -23,17 +21,12 @@
 \RequirePackage[authoryear, round]{natbib}
 \RequirePackage{amssymb}
 \RequirePackage{amsmath}
-\RequirePackage{subfig}
-\RequirePackage{wrapfig}
 \RequirePackage{fixltx2e}
 \RequirePackage[outsidefoot]{pageno}
 \RequirePackage{caption}
 \RequirePackage{ifthen}
 \RequirePackage[nottoc, numbib, chapter]{tocbibind}
 \RequirePackage{url}
-\RequirePackage{longtable}
-\RequirePackage{multicol}
-\RequirePackage{textcomp}
 
 \renewcommand{\captionlabelfont}{\bfseries}
 \renewcommand{\captionfont}{\small}
@@ -41,13 +34,16 @@
 % 1.5 prored, 1.3 je faktor za množenje
 \linespread{1.3}
 
+% Promjena naziva poglavlja ``Bibliografija'' -> ``Literatura''
 \addto\captionscroatian{%
 	\def\bibname{Literatura}
 }
 
+% Podešavanje oznaka kod listi (1. razina je crtica, 2. puni krug) 
 \renewcommand{\labelitemi}{\textendash}
 \renewcommand{\labelitemii}{\textbullet}
 
+% Dodavanje točke na kraj broja poglavlja, odjeljaka, pododjeljaka ..
 \renewcommand\thechapter{\@arabic\c@chapter.}
 \renewcommand\thesection{\thechapter\@arabic\c@section.}
 \renewcommand\thesubsection{\thesection\@arabic\c@subsection.}
@@ -154,35 +150,37 @@ Koristi \noexpand\voditelj za definiranje}}
 	\let\footnoterule\relax
 
 	\begin{center}
-		{\large SVEU\v{C}ILI\v{S}TE U ZAGREBU}
+		{\large\sffamily SVEU\v{C}ILI\v{S}TE U ZAGREBU}
 		
-		{\large\bfseries FAKULTET ELEKTROTEHNIKE I RA\v{C}UNARSTVA}
+		{\large\sffamily\bfseries FAKULTET ELEKTROTEHNIKE I RA\v{C}UNARSTVA}
 	\end{center}
 	\vfill
 	\begin{center}%
-		{\large {\bf SEMINAR} \par}%
+		{\large\sffamily\bfseries SEMINAR \par}%
 		\vskip 3em%
-		{\huge \bfseries \@title \par}%
+		{\huge \sffamily\bfseries \@title \par}%
 		\vskip 1em%
 		{\large\lineskip .75em%
 		\begin{tabular}[t]{c}%
-			\@author \\
-        	Voditelj: \@voditelj
+			\sffamily\itshape \@author \\
+        	{\sffamily Voditelj: {\itshape \@voditelj}}
 		\end{tabular}\par}%
 	\end{center}\par
 	\vfill
 	\begin{center}
+    	{\sffamily%
 		\large Zagreb, 
 		\ifcase\month\or
 			sije\v{c}anj\or velja\v{c}a\or o\v{z}ujak\or travanj\or svibanj\or
    	 		lipanj\or srpanj\or kolovoz\or rujan\or listopad\or studeni\or
     			prosinac\fi \space \number\year.%
+    	}
 	\end{center}
 	\end{titlepage}%
 	\setcounter{footnote}{0}%
 	\global\let\maketitle\relax
-	\global\let\@thanks\@empty
-	\global\let\@author\@empty
+% 	\global\let\@thanks\@empty
+% 	\global\let\@author\@empty
 	\global\let\@date\@empty
 	%\global\let\@title\@empty
 	%\global\let\title\relax
