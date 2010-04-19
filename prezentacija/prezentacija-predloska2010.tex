@@ -1,0 +1,193 @@
+\documentclass{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[croatian]{babel}
+\usepackage[T1]{fontenc}
+
+\usetheme[pageofpages=od,% String used between the current page and the
+                         % total page count.
+          bullet=circle,% Use circles instead of squares for bullets.
+          titleline=true,% Show a line below the frame title.
+          alternativetitlepage=true,% Use the fancy title page.
+          titlepagelogo=ktlab_logo_m_q,% Logo for the first page.
+          ]{Torino}
+
+\title{Projekt iz programske potpore 2009 -- savjeti}
+\author{Ivan Krišto}
+\institute{Fakultet elektrotehnike i računarstva, Zagreb}
+\date{29.~rujna, 2009.}
+
+\begin{document}
+
+\begin{frame}[t,plain]
+\titlepage
+\end{frame}
+
+\begin{frame}[t]{Projekt i tim}
+\begin{itemize}
+  \item Rad u timu
+  \begin{itemize}
+    \item Kako organizirati rad u timu, s kojim problemima se možete susresti i
+    koje alate možete koristiti.
+  \end{itemize} 
+  \item Programiranje u timu
+  \begin{itemize}
+    \item Koji su problemi pri podjeli posla, malo o osnovama zdravog
+    programskog oblikovanja, o problemima koje treba izbjeći te alatima koje
+    možete koristiti.
+  \end{itemize}
+  \item Konkretni savjeti
+  \begin{itemize}
+    \item Par konkretnih savjeta uglavnom vezanih uz programiranje.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Rad u timu (1)}
+\begin{itemize}
+  \item Potražite srodna rješenja!
+  \begin{itemize}
+    \item http://citeseerx.ist.psu.edu/
+    \item http://scholar.google.com/
+    \item http://sourceforge.net/
+    \item \ldots
+  \end{itemize}
+  \item Komunikacija -- mailing lista i sastanci
+  \begin{itemize}
+    \item Sastanci ($D258$ ili $D269$ $\rightarrow$ ploča!)
+    \item Dogovaranje termina: http://whenisgood.net/
+    \item Sastati se kad god postoji nesporazum ili kasnite s poslom
+    \item Izbjegavati ICQ, MSN i forume
+    \item Mailing lista -- http://groups.google.com/
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Rad u timu (2)}
+\begin{itemize}
+  \item Dogovori moraju biti \emph{jasni} i \emph{zapisani}!
+  \begin{itemize}
+    \item Sve dogovoreno zapišite na servise poput google grupe ili google docsa
+    \item Ako možete, vizualizirajte (ganttogram i sl.~dijagrami)
+    \item Primjer grafičkog prikaza podjele poslova:
+    http://docs.google.com/View?id=ddfk9wtr\_14fmtsbsck
+  \end{itemize}
+  \item Kad mailing lista nije dovoljna, a ne možete se sastati:
+  \begin{itemize}
+    \item Skype (voice chat)
+    \item Google docs -- collaboration
+    \item On-line collaborative whiteboards,
+    npr.~http://www.imaginationcubed.com/
+  \end{itemize}
+  \item Dodatni rokovi su korisna stvar (namijenjeno asistentima i savjetnicima)
+  \item Dokumentacija
+  \begin{itemize}
+    \item wiki (kontinuirano dokumentiranje?), \LaTeX, Google docs
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Rad u timu -- mogući problemi}
+\begin{itemize}
+  \item Član tima ne čita e-mailove ili se ne pojavljuje na sastancima
+  \item Član tima ne obavlja poslove
+  \item Posao je obavljen, ali loše
+  \item Dokumentacija je gotova---nalazi se u $5$ word dokumenata sa različitim
+  formatiranjem!
+  \item Član nešto nije shvatio, a svejedno se srami pitati
+  \item Rad se odgađa za vrijeme koje se očekuje da će biti slobodno
+  (koncentracija rada pred rokove)
+  \item Teorijska podloga nije jasna i nastavljate gubiti vrijeme proučavajući
+  literaturu (pitajte asistente!)
+  \item Voditelj tima prezume previše posla
+  \item Voditelj tima nije fleksibilan
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Programiranje u timu (1)}
+\begin{itemize}
+  \item Napravite dijagrame (npr.~UML ili kvazi-UML)
+  \item Potražite gotove komponente!
+  \begin{itemize}
+    \item http://www.apache.org/
+    \item http://www.java.net/
+    \item http://www.cpan.org/
+    \item http://pythonsource.com/
+    \item \ldots
+  \end{itemize}
+  \item Podrška za grupni rad na istom kodu -- \emph{SVN} i sl.~sustavi
+  \item Kontrola koda
+  \begin{itemize}
+    \item Issue trackeri (http://morgoth.zemris.fer.hr/trac/jcms/report/1)
+    \item Code review (http://code.google.com/p/support/source/detail?r=70)
+    \item Negativna strana: previše posla za relativno malo vremena (prepustiti
+    savjetnicima?)
+  \end{itemize} 
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Programiranje u timu (2)}
+\begin{itemize}
+  \item Podijelite posao na odvojene dijelove koji komuniciraju poštujući
+  programska sučelja
+  \item Pri podjeli poštujte principe dobrog programskog oblikovanja (predmet
+  OOUP)
+  \begin{itemize}
+  	\item http://www.zemris.fer.hr/\textasciitilde ssegvic/pubs/ooup0Intro.pdf
+  	\item http://www.zemris.fer.hr/\textasciitilde ssegvic/pubs/ooup1Principles.pdf\\
+  	(isplati se sve pročitati, no za početak krenite od slidea $63$.)
+  \end{itemize}
+  \item Jasno definirajte i dobro komentirajte programska sučelja!
+  \begin{itemize}
+    \item ``Dobro komentiranje'' -- navedena je odgovornost\footnote{Primjer
+    problema -- što znači ``odgovornost''} metode, opis ulaznih argumenata,
+    opis rezultata, ako je potrebno onda i primjeri
+    \item Nemojte ići u detalje, ionako će se mijenjati
+  \end{itemize}
+  \item ``Dobro'' komentiranje nije rezervirano samo za sučelja -- koristite
+  JavaDoc/nDoc/PyDoc/Haddock (ovisno o jeziku)
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Programiranje u timu -- mogući problemi}
+\begin{itemize}
+  \item Netko nije poštivao propisano programsko sučelje, npr.~proširio ga (nije
+  ga razumio?)
+  \item GUI komunicira sa svim slojevima koda (Model--View--Controller!!!)
+  \item Kod nije komentiran (a trebao je biti)---ostali imaju problema
+  \item Napisane metode su presložene za korištenje čak i za ostale članove tima
+  \item Diranje tuđeg koda bez prethodnog dogovora ili obavijesti
+  \item Promašena ideja implementacije (osoba je trebala napraviti jednu stvar,
+  no krivo je shvatila problematiku ili čekala druge)
+  \item Projekt nije dobro programski dizajniran
+  \item Članovi tima koriste različite kodne stranice (encoding) datoteka sa
+  izvornim kodom
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Konkretni savjeti}
+\begin{itemize}
+  \item GUI radite od samog početka
+  \item Uz svaki SVN commit dodajte opis što ste napravili
+  \item Nemojte gubiti previše vremena komentiranjem, komentira se samo ono što
+  nije očito
+  \item Testirajte stvari koje možete -- poslužite se raznim skriptama
+  (npr.~perl/python) ili okruženjima za testiranje (npr.~jUnit)
+  \item Ako se kod ne može kompajlirati, ne stavljajte ga u SVN repozitorij!\\
+  (osim ako se posebno ne dogovorite)
+  \item Izbjegavajte copy-paste!!!
+  \item Isključivo koristite UTF-8 kodnu stranicu (encoding) za datoteke s
+  izvornim kodom
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Pitanja?}
+Prijedlozi:
+\begin{itemize}
+  \item Neki pojmovi nisu bili jasni
+  \item Neke točke treba dodatno pojasniti
+  \item Koje alate koristiti za neke probleme (npr.~crtanje dijagrama)
+  \item \ldots
+\end{itemize}
+\end{frame}
+
+\end{document}
