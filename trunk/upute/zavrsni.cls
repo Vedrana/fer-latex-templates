@@ -12,10 +12,8 @@
 \RequirePackage[croatian]{babel}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{graphicx}
-\RequirePackage{enumitem}
-\RequirePackage{enumerate}
-\RequirePackage{booktabs}
-\RequirePackage{lmodern}
+% Za promjenu fonta, umjesto ``times'' paketa učitajte drugi paket, primjerice ``lmodern''
+\RequirePackage{times}
 % Da bi se promjenio stil citiranja umjesto:
 % [authoryear, round]
 % staviti:
@@ -23,17 +21,12 @@
 \RequirePackage[authoryear, round]{natbib}
 \RequirePackage{amssymb}
 \RequirePackage{amsmath}
-\RequirePackage{subfig}
-\RequirePackage{wrapfig}
 \RequirePackage{fixltx2e}
 \RequirePackage[outsidefoot]{pageno}
 \RequirePackage{caption}
 \RequirePackage{ifthen}
 \RequirePackage[nottoc]{tocbibind}
 \RequirePackage{url}
-\RequirePackage{longtable}
-\RequirePackage{multicol}
-\RequirePackage{textcomp}
 
 \renewcommand{\captionlabelfont}{\bfseries}
 \renewcommand{\captionfont}{\small}
@@ -41,13 +34,16 @@
 % 1.5 prored, 1.3 je faktor za množenje
 \linespread{1.3}
 
+% Promjena naziva poglavlja ``Bibliografija'' -> ``Literatura''
 \addto\captionscroatian{%
 	\def\bibname{Literatura}
 }
 
+% Podešavanje oznaka kod listi (1. razina je crtica, 2. puni krug) 
 \renewcommand{\labelitemi}{\textendash}
 \renewcommand{\labelitemii}{\textbullet}
 
+% Dodavanje točke na kraj broja poglavlja, odjeljaka, pododjeljaka ..
 \renewcommand\thechapter{\@arabic\c@chapter.}
 \renewcommand\thesection{\thechapter\@arabic\c@section.}
 \renewcommand\thesubsection{\thesection\@arabic\c@subsection.}
@@ -57,15 +53,35 @@
 \renewcommand\thefigure{\ifnum \c@chapter>\z@ \thechapter\fi \@arabic\c@figure}
 \renewcommand\thetable{\ifnum \c@chapter>\z@ \thechapter\fi \@arabic\c@table}
 
+% Rimski brojevi stranica za zahvalu i tablicu sadržaja.
+\renewcommand{\thepage}{\roman{page}}
+
+% Ispis napomene o umetanju izvornika.
+\newcommand{\izvornik}{%
+	\newpage
+	\thispagestyle{empty}
+	\vspace*{\fill}
+	\hfil \textsl{Umjesto ove stranice umetnite izvornik Va\v{s}eg rada.} \par \hfil
+	\hfil \textsl{Da bi ste uklonili ovu stranicu obri\v{s}ite naredbu \texttt{\@backslashchar izvornik}.} \hfil
+	\vspace*{\fill}
+}
+
+% Naredba za dodavanje zahvale.
+\newcommand{\zahvala}[1]{%
+	\newpage
+ 	\setcounter{page}{3}
+	\vspace*{\fill}
+	\hfil {\itshape #1}\hfil
+	\vspace*{\fill}
+}
+
+% TOC
 \renewcommand\tableofcontents{%
-   \setcounter{page}{4}
    \chapter*{\contentsname
    \@mkboth{%
    \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
    \@starttoc{toc}%
 }
-
-\renewcommand{\thepage}{\roman{page}}
 
 \newboolean{atappendix}
 \setboolean{atappendix}{false}
@@ -137,14 +153,6 @@
 }
 }
 
-\newcommand{\posveta}[1]{
-	\newpage
-	\thispagestyle{empty}
-	\vspace*{\fill}
-	\hfil#1\hfil
-	\vspace*{\fill}
-}
-
 \def\thesisnumber#1{\gdef\@thesisnumber{#1}}
 \def\@thesisnumber{\@latex@warning@no@line{Broj rada nije definiran.
 Koristi \noexpand\thesisnumber za definiranje}}
@@ -155,38 +163,39 @@ Koristi \noexpand\thesisnumber za definiranje}}
 	\let\footnoterule\relax
 
 	\begin{center}
-		{\large SVEU\v{C}ILI\v{S}TE U ZAGREBU}
+		{\large\sffamily SVEU\v{C}ILI\v{S}TE U ZAGREBU}
 		
-		{\large\bfseries FAKULTET ELEKTROTEHNIKE I RA\v{C}UNARSTVA}
+		{\large\bfseries\sffamily FAKULTET ELEKTROTEHNIKE I RA\v{C}UNARSTVA}
 	\end{center}
 	\vfill
 	\begin{center}%
-		{\large ZAVR\v{S}NI RAD br.~\@thesisnumber \par}%
+		{\large\sffamily ZAVR\v{S}NI RAD br.~\@thesisnumber \par}%
 		\vskip 1em%
-		{\huge \bfseries \@title \par}%
+		{\huge \bfseries\sffamily \@title \par}%
 		\vskip 1em%
 		{\large\lineskip .75em%
 		\begin{tabular}[t]{c}%
-			\@author
+			{\sffamily\@author}
 		\end{tabular}\par}%
 	\end{center}\par
 	\vfill
 	\begin{center}
-		\large Zagreb, 
+		{\sffamily\large Zagreb, 
 		\ifcase\month\or
 			sije\v{c}anj\or velja\v{c}a\or o\v{z}ujak\or travanj\or svibanj\or
    	 		lipanj\or srpanj\or kolovoz\or rujan\or listopad\or studeni\or
     			prosinac\fi \space \number\year.%
+    	}
 	\end{center}
 	\end{titlepage}%
 	\setcounter{footnote}{0}%
 	\global\let\maketitle\relax
-	\global\let\@thanks\@empty
-	\global\let\@author\@empty
+% 	\global\let\@thanks\@empty
+% 	\global\let\@author\@empty
 	\global\let\@date\@empty
 	%\global\let\@title\@empty
 	%\global\let\title\relax
-	\global\let\author\relax
+% 	\global\let\author\relax
 	\global\let\date\relax
 	\global\let\and\relax
 	}
@@ -205,8 +214,10 @@ Koristi \noexpand\thesisnumber za definiranje}}
 }%
 {\end{list}}
 
+% Naredba \engl
 \newcommand{\engl}[1]{(engl.~\emph{#1})}
 
+% Sažetak na hrvatskom
 \newenvironment{sazetak}
 {
 \newpage
@@ -222,22 +233,24 @@ Koristi \noexpand\thesisnumber za definiranje}}
 \vspace*{\fill}
 }
 
+% Ključne riječi na hrvatskom
 \newcommand{\kljucnerijeci}[1]
 {
 \vspace{15pt}
 \noindent \textbf{Klju\v{c}ne rije\v{c}i:} #1
 }
 
+% Ključne riječi na engleskom
 \newcommand{\keywords}[1]
 {
 \vspace{15pt}
 \noindent \textbf{Keywords:} #1
 }
 
+% Sažetak na engleskom
 \def\engtitle#1{\gdef\@engtitle{#1}}
 \def\@engtitle{\@latex@warning@no@line{Engleski naziv rada nije definiran.
 Koristi \noexpand\engtitle za definiranje}}
-
 \renewenvironment{abstract}
 {
 \vspace*{\fill}
