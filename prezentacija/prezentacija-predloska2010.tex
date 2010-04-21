@@ -58,7 +58,7 @@ objasniti način korištenja predložaka za pismene radove.
 
 \begin{frame}[t]{Što je \LaTeX{}?}
 \begin{itemize}
-  \item Sustav za visokokvalitetno \emph{slovoslagarstvo}
+  \item Sustav za pripremu dokumenata i \emph{slovoslagarstvo} (engl.\ \emph{typesetting})
   \item Nadogradnja \TeX-a
   \item Usmjeravanje posla na strukturu i sadržaj (ne izgled)
   \item Jednostavna izrada lijepih dokumenata po predefiniranim stilovima
@@ -100,8 +100,8 @@ objasniti način korištenja predložaka za pismene radove.
 \begin{itemize}
   \item Odjeljivanje sadržaja i strukture od stila
   \item Dokumenti se pišu kao obične tekstualne datoteke s \TeX\ sintaksom
-  \item Mogućnost korištenja sustava za verzioniranje (VCS sustavi -- SVN, Mercurial, Git, \ldots)
-  \item Mugućnost pisanja dokumenata u dijelovima (naredba \texttt{include})
+  \item Mogućnost korištenja sustava za verziranje (VCS sustavi -- SVN, Mercurial, Git, \ldots)
+  \item Mogućnost pisanja dokumenata u dijelovima (naredba \texttt{include})
   \item Dokumenti su prenosivi kroz verzije \LaTeX-a (primjerice, dokument napisan MS Wordom 2007 nije čitljiv u MS Wordu 2000)
   \item Trudi se poštivati temelje tipografije
 \end{itemize}
@@ -302,8 +302,8 @@ $\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
   \item Brzo i jednostavno (uz malo vježbanja)
   \item Piše se u modu za matematiku
   \begin{itemize}
-    \item \verb|$ ... $| za linijske izraze
-    \item \verb|\[  ... \]| (ili \verb|$$  ... $$|) za više-linijske
+    \item \verb|$ ... $| za izraze u istoj liniji uz tekst
+    \item \verb|\[  ... \]| (ili \verb|$$  ... $$|) za izraze u posebnoj liniji
   \end{itemize}
   \item Primjeri: \verb|$x^2$| -- $x^2$, \verb|$\int_{2}^{10} x^2 dx$| -- $\int_{2}^{10} x^2 dx$
   \[  f(t)\ast g(t) = \int^{\infty}_{-\infty} f(\tau)g(t-\tau)d\tau \]
@@ -323,7 +323,7 @@ $\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
 \begin{itemize}
   \item Neformatirani sadržaj -- tekst koji se mora prikazati s očuvanim izvornim razmacima, redovima i neekspandiranim naredbama
   \item Linijski: naredba \verb|\verb|, primjer: ``\verb|Primjer    \verb naredbe|''
-  \item Više-linijski: okolina \texttt{verbatim}:
+  \item Višelinijski: okolina \texttt{verbatim}:
   \begin{verbatim}
   Linija prva,
     druga
@@ -377,7 +377,7 @@ $\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
 	\item[enumitem] proširenje mogućnosti listi i nabrajanja
 	\item[amsmath] proširenje mogućnosti za pisanje matematičkih izraza
 	\item[multicol] naredbe za pisanje u stupcima
-	\item[hyperref] omogućava interaktivne povezice (reference)
+	\item[hyperref] omogućava interaktivne poveznice (reference)
   \end{description}
 \end{itemize}
 \end{frame}
