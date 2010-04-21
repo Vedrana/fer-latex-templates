@@ -2,19 +2,22 @@
 \usepackage[utf8]{inputenc}
 \usepackage[croatian]{babel}
 \usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{booktabs}
 
 \usetheme[pageofpages=od,% String used between the current page and the
                          % total page count.
           bullet=circle,% Use circles instead of squares for bullets.
           titleline=true,% Show a line below the frame title.
           alternativetitlepage=true,% Use the fancy title page.
-          titlepagelogo=ktlab_logo_m_q,% Logo for the first page.
+          titlepagelogo=FER_logo.jpg,% Logo for the first page.
           ]{Torino}
 
-\title{Projekt iz programske potpore 2009 -- savjeti}
+\title{\LaTeX\ -- prvi koraci}
 \author{Ivan Krišto}
 \institute{Fakultet elektrotehnike i računarstva, Zagreb}
-\date{29.~rujna, 2009.}
+\date{22.~travnja, 2010.}
 
 \begin{document}
 
@@ -22,171 +25,371 @@
 \titlepage
 \end{frame}
 
-\begin{frame}[t]{Projekt i tim}
+\begin{frame}[t]{Organizacija}
+\textbf{Cilj:} dati kratke upute i savjete oko izrade dokumenata u \LaTeX-u te
+objasniti način korištenja predložaka za pismene radove.
+\pause
+\begin{multicols}{2}
 \begin{itemize}
-  \item Rad u timu
+  \item Što je \LaTeX{}?
+  \item Kako \LaTeX{} radi
+  \item Prednost nad tekst procesorima
+  \item Razvojna okruženja
+\pause
+  \item Osnovno o \LaTeX-u:
   \begin{itemize}
-    \item Kako organizirati rad u timu, s kojim problemima se možete susresti i
-    koje alate možete koristiti.
-  \end{itemize} 
-  \item Programiranje u timu
-  \begin{itemize}
-    \item Koji su problemi pri podjeli posla, malo o osnovama zdravog
-    programskog oblikovanja, o problemima koje treba izbjeći te alatima koje
-    možete koristiti.
+    \item Struktura \LaTeX{} dokumenta
+    \item Naredbe i okoline
+    \item Liste, nabrajanja i opisi
+    \item Tablice
+    \item Dodavanje slika
+    \item Pisanje matematičkih izraza
+    \item Uključivanje neformatiranog sadržaja 
+    \item Literatura
+    \item Paketi
+    \item Provjera pravopisa
+    \item Specifičnosti, problemi i savjeti
   \end{itemize}
-  \item Konkretni savjeti
+\pause
+  \item Kako koristiti predloške
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}[t]{Što je \LaTeX{}?}
+\begin{itemize}
+  \item Sustav za visokokvalitetno slovoslagarstvo
+  \item Nadogradnja \TeX-a
+  \item Usmjeravanje posla na strukturu i sadržaj (ne izgled)
+  \item Jednostavna izrada lijepih dokumenata po predefiniranim stilovima
+  \item Izuzetno velike mogućnosti
+  \item Veći stilski zahvati znaju biti izuzetno teški
+  \item Nije zamišljen kao WYSIWYG alat
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Kako \LaTeX{} radi}
+\begin{figure}[htb]
+\begin{center}
+\begin{picture}(270,15)
+\put(3,5){\makebox(40,15){\texttt{dokument.tex}}}
+\put(58,12){\vector(1,0){15}}
+\put(75,5){\framebox(90,15){\texttt{pdflatex}}}
+\put(167,12){\vector(1,0){15}}
+\put(197,5){\makebox(40,15){\texttt{dokument.pdf}}}
+\end{picture}
+\caption{Tok \LaTeX\ prevođenja}
+\label{fig:ru-sustav-dijagram}
+\end{center}
+\end{figure}
+\begin{itemize}
+  \item \texttt{dokument.tex} -- tekstualni dokument sa sadržajem i \LaTeX\ naredbama
+  \item \texttt{pdflatex} -- prevođenje \texttt{tex} dokumenta u \texttt{pdf}\\
+  (prevoditelj \texttt{latex} prevodi u \texttt{dvi})
+  \item Distribucije:
   \begin{itemize}
-    \item Par konkretnih savjeta uglavnom vezanih uz programiranje.
+    \item Windowsi -- Mik\TeX{} (\url{http://miktex.org/})
+    \item Linux -- \TeX\ Live (\url{http://www.tug.org/texlive/}; dostupan također za Windowse i MacOS)
+    \item Sadrže više prevoditelja i skup korisnih alata (\texttt{ps2pdf}, \texttt{ebb}, \ldots)
   \end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Rad u timu (1)}
+\begin{frame}[t]{Prednost nad tekst procesorima}
 \begin{itemize}
-  \item Potražite srodna rješenja!
-  \begin{itemize}
-    \item http://citeseerx.ist.psu.edu/
-    \item http://scholar.google.com/
-    \item http://sourceforge.net/
-    \item \ldots
-  \end{itemize}
-  \item Komunikacija -- mailing lista i sastanci
-  \begin{itemize}
-    \item Sastanci ($D258$ ili $D269$ $\rightarrow$ ploča!)
-    \item Dogovaranje termina: http://whenisgood.net/
-    \item Sastati se kad god postoji nesporazum ili kasnite s poslom
-    \item Izbjegavati ICQ, MSN i forume
-    \item Mailing lista -- http://groups.google.com/
-  \end{itemize}
+  \item Odjeljivanje sadržaja i strukture od stila
+  \item Dokumenti se pišu kao obične tekstualne datoteke s \TeX\ sintaksom
+  \item Mogućnost korištenja sustava za verzioniranje (VCS sustavi -- SVN, Mercurial, Git, \ldots)
+  \item Mugućnost pisanja dokumenata u dijelovima (naredba \texttt{include})
+  \item Dokumenti su prenosivi kroz verzije \LaTeX-a (primjerice, dokument napisan MS Wordom 2007 nije čitljiv u MS Wordu 2000)
+  \item Trudi se poštivati temelje tipografije
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Rad u timu (2)}
+\begin{frame}[t]{Razvojna okruženja}
 \begin{itemize}
-  \item Dogovori moraju biti \emph{jasni} i \emph{zapisani}!
-  \begin{itemize}
-    \item Sve dogovoreno zapišite na servise poput google grupe ili google docsa
-    \item Ako možete, vizualizirajte (ganttogram i sl.~dijagrami)
-    \item Primjer grafičkog prikaza podjele poslova:
-    http://docs.google.com/View?id=ddfk9wtr\_14fmtsbsck
-  \end{itemize}
-  \item Kad mailing lista nije dovoljna, a ne možete se sastati:
-  \begin{itemize}
-    \item Skype (voice chat)
-    \item Google docs -- collaboration
-    \item On-line collaborative whiteboards,
-    npr.~http://www.imaginationcubed.com/
-  \end{itemize}
-  \item Dodatni rokovi su korisna stvar (namijenjeno asistentima i savjetnicima)
-  \item Dokumentacija
-  \begin{itemize}
-    \item wiki (kontinuirano dokumentiranje?), \LaTeX, Google docs
-  \end{itemize}
+\item TexMaker (\url{http://www.xm1math.net/texmaker/})
+\begin{description}
+  \item[+] Veliki broj gotovih primjera (odlično za početnike!)
+  \item[--] Pretrpano sučelje
+\end{description}
+\pause
+\item \TeX{}works (\url{http://code.google.com/p/texworks/})
+\begin{description}
+  \item[+] Jednostavan i malen
+  \item[+] Ugrađeni preglednik
+  \item[--] Nema gotovih primjera (simbola i konstrukcija)
+\end{description}
+\pause
+\item Eclipse \& \TeX{}lipse (\url{http://www.eclipse.org/} \& \url{http://texlipse.sourceforge.net/})
+\begin{description}
+  \item[+] Najmoćnije razvojno okruženje
+  \item[+] Odličan prikaz grešaka (u razini linije!)
+  \item[+] Autocomplete čita čak i \texttt{bib} datoteke
+  \item[+] Prevodi paralelno s radom
+  \item[--] Glomazan
+\end{description} 
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Rad u timu -- mogući problemi}
+\begin{frame}[fragile]
+\frametitle{Struktura \LaTeX{} dokumenta}
+\begin{multicols}{2}
+Osnovni \LaTeX\ dokument:
+\begin{verbatim}
+\documentclass{report}
+\title{Naslov}
+\author{Autor}
+\begin{document}
+\chapter{Uvod}
+Uvod..
+\section{Unutar uvoda}
+Prvi paragraf.
+
+Drugi paragraf.
+\end{document}
+\end{verbatim}
+\pause
 \begin{itemize}
-  \item Član tima ne čita e-mailove ili se ne pojavljuje na sastancima
-  \item Član tima ne obavlja poslove
-  \item Posao je obavljen, ali loše
-  \item Dokumentacija je gotova---nalazi se u $5$ word dokumenata sa različitim
-  formatiranjem!
-  \item Član nešto nije shvatio, a svejedno se srami pitati
-  \item Rad se odgađa za vrijeme koje se očekuje da će biti slobodno
-  (koncentracija rada pred rokove)
-  \item Teorijska podloga nije jasna i nastavljate gubiti vrijeme proučavajući
-  literaturu (pitajte asistente!)
-  \item Voditelj tima prezume previše posla
-  \item Voditelj tima nije fleksibilan
+  \item Stil se definira \verb|\documentclass| naredbom
+  \item Sadržaj se nalazi u \texttt{document} okolini
+  \item Struktura se gradi \verb|\chapter|, \verb|\section|, \verb|\subsection| i
+  \verb|\subsubsection| naredbama te podjelom na paragrafe 
+  \item Tekst se odjeljuje u paragrafe praznim redom
+  \item Prelazak u novi red (bez stvaranja paragrafa) -- sekvenca: \verb|\\|
 \end{itemize}
+\end{multicols}
 \end{frame}
 
-\begin{frame}[t]{Programiranje u timu (1)}
-\begin{itemize}
-  \item Napravite dijagrame (npr.~UML ili kvazi-UML)
-  \item Potražite gotove komponente!
+\begin{frame}[fragile]
+\frametitle{Naredbe i okoline}
+\begin{description}
+  \item[Naredbe:] Elementi \LaTeX-a koji primaju argumente i parametre te se transformiraju u
+  oblikovani tekst
   \begin{itemize}
-    \item http://www.apache.org/
-    \item http://www.java.net/
-    \item http://www.cpan.org/
-    \item http://pythonsource.com/
-    \item \ldots
+    \item Sintaksa: \verb|\naziv[parametar][...]{argument}{...}|
+    \item Primjeri: \verb|\tableofcontents|, \verb|\emph{riječ}|, \verb|\frac{2}{x+2}|, \verb|\usepackage[croatian]{babel}|
   \end{itemize}
-  \item Podrška za grupni rad na istom kodu -- \emph{SVN} i sl.~sustavi
-  \item Kontrola koda
+  \item[Okoline:] Slično kao naredbe, ali umjesto argumenta primaju
+  segment dokumenta (razlika je u obradi paragrafa)
   \begin{itemize}
-    \item Issue trackeri (http://morgoth.zemris.fer.hr/trac/jcms/report/1)
-    \item Code review (http://code.google.com/p/support/source/detail?r=70)
-    \item Negativna strana: previše posla za relativno malo vremena (prepustiti
-    savjetnicima?)
-  \end{itemize} 
-\end{itemize}
-\end{frame}
-
-\begin{frame}[t]{Programiranje u timu (2)}
-\begin{itemize}
-  \item Podijelite posao na odvojene dijelove koji komuniciraju poštujući
-  programska sučelja
-  \item Pri podjeli poštujte principe dobrog programskog oblikovanja (predmet
-  OOUP)
-  \begin{itemize}
-  	\item http://www.zemris.fer.hr/\textasciitilde ssegvic/pubs/ooup0Intro.pdf
-  	\item http://www.zemris.fer.hr/\textasciitilde ssegvic/pubs/ooup1Principles.pdf\\
-  	(isplati se sve pročitati, no za početak krenite od slidea $63$.)
+    \item Sintaksa: \verb|\begin{naziv}[parametar][..]{argument}{..}| \ldots \verb|\end{naziv}|
+    \item Primjeri: \verb|\begin{document}| \ldots \verb|\end{document}|, \verb|\begin{tabular}{ l c r }| \ldots \verb|\end{tabular}|
   \end{itemize}
-  \item Jasno definirajte i dobro komentirajte programska sučelja!
+\end{description}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Liste, nabrajanja i opisi}
+\begin{multicols}{2}
+\begin{itemize}
+  \item Liste:
+  \begin{verbatim}
   \begin{itemize}
-    \item ``Dobro komentiranje'' -- navedena je odgovornost\footnote{Primjer
-    problema -- što znači ``odgovornost''} metode, opis ulaznih argumenata,
-    opis rezultata, ako je potrebno onda i primjeri
-    \item Nemojte ići u detalje, ionako će se mijenjati
+    \item kruh
+    \item mlijeko
+    \item jaja
   \end{itemize}
-  \item ``Dobro'' komentiranje nije rezervirano samo za sučelja -- koristite
-  JavaDoc/nDoc/PyDoc/Haddock (ovisno o jeziku)
+  \end{verbatim}
+  \item Nabrajanja:
+  \begin{verbatim}
+  \begin{enumerate}
+    \item Prva
+    \item Druga
+    \item Treća
+  \end{enumerate}
+  \end{verbatim}
+  \item Opisi:
+  \begin{verbatim}
+  \begin{description}
+    \item[Pingvin] ptica
+    \item[Špar] riba
+  \end{description}
+  \end{verbatim}
+  \item Gniježđenje:
+  \begin{verbatim}
+  \begin{itemize}
+    \item Prva stavka
+    \begin{enumerate}
+      \item Numerirano
+    \end{enumerate}
+  \end{itemize}
+  \end{verbatim}
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Dodavanje slika}
+\begin{multicols}{2}
+\begin{itemize}
+  \item Dodaju se pomoću \texttt{figure} lebdeće (engl.\ \emph{floating}) okoline
+  (slika se ne mora pojaviti tamo gdje je navedete!)
+\begin{verbatim}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2cm]
+                {FER_logo.jpg}
+\caption{Logo FER-a}
+\label{fig:fer-logo}
+\end{figure}
+\end{verbatim}
+\end{itemize}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2cm]{FER_logo.jpg}
+\caption{Logo FER-a}
+\label{fig:fer-logo}
+\end{figure}
+\end{multicols}
+\begin{itemize}
+  \item \texttt{htb} -- pozicioniranje (\emph{here}, \emph{top}, \emph{bottom});
+  \texttt{caption} -- naslov (uvijek na dnu); \texttt{label} -- služi za
+  referenciranje pomoću \texttt{ref} naredbe
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Programiranje u timu -- mogući problemi}
+\begin{frame}[fragile]
+\frametitle{Tablice (1)}
 \begin{itemize}
-  \item Netko nije poštivao propisano programsko sučelje, npr.~proširio ga (nije
-  ga razumio?)
-  \item GUI komunicira sa svim slojevima koda (Model--View--Controller!!!)
-  \item Kod nije komentiran (a trebao je biti)---ostali imaju problema
-  \item Napisane metode su presložene za korištenje čak i za ostale članove tima
-  \item Diranje tuđeg koda bez prethodnog dogovora ili obavijesti
-  \item Promašena ideja implementacije (osoba je trebala napraviti jednu stvar,
-  no krivo je shvatila problematiku ili čekala druge)
-  \item Projekt nije dobro programski dizajniran
-  \item Članovi tima koriste različite kodne stranice (encoding) datoteka sa
-  izvornim kodom
+  \item Ostvaruju se preko \texttt{table} i \texttt{tabular} okolina
+  \item \texttt{table} je lebdeća okolina unutar koje se
+  smješta \texttt{tabular} okolina s podatcima
+  \item Znak \& odvaja stupce; sekvenca \textbackslash\textbackslash\ odvaja retke 
+\begin{verbatim}
+\begin{table}[htb]
+\caption{Konstante}
+\centering
+\begin{tabular}{llr} \hline
+Konstanta & Opis & Vrijednost \\ \hline
+$\pi$ & Pi & 3.14159 \\
+$e$ & Eulerov broj & 2.71828 \\
+$\varphi$ & Zlatni rez & 1.61803 \\ \hline
+\end{tabular}
+\end{table}
+\end{verbatim}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Konkretni savjeti}
+\begin{frame}[fragile]
+\frametitle{Tablice (2)}
+\begin{table}[htb]
+\caption{Konstante}
+\centering
+\begin{tabular}{llr} \hline
+Konstanta & Opis & Vrijednost\\ \hline
+$\pi$ & Pi & 3.14159 \\
+$e$ & Eulerov broj & 2.71828 \\
+$\varphi$ & Zlatni rez & 1.61803 \\ \hline
+\end{tabular}
+\end{table}
+\begin{table}[htb]
+\caption{Konstante (\texttt{booktabs} paket)}
+\centering
+\begin{tabular}{llr} \toprule
+Konstanta & Opis & Vrijednost\\ \midrule
+$\pi$ & Pi & 3.14159 \\
+$e$ & Eulerov broj & 2.71828 \\
+$\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
+\end{tabular}
+\end{table}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Pisanje matematičkih izraza}
 \begin{itemize}
-  \item GUI radite od samog početka
-  \item Uz svaki SVN commit dodajte opis što ste napravili
-  \item Nemojte gubiti previše vremena komentiranjem, komentira se samo ono što
-  nije očito
-  \item Testirajte stvari koje možete -- poslužite se raznim skriptama
-  (npr.~perl/python) ili okruženjima za testiranje (npr.~jUnit)
-  \item Ako se kod ne može kompajlirati, ne stavljajte ga u SVN repozitorij!\\
-  (osim ako se posebno ne dogovorite)
-  \item Izbjegavajte copy-paste!!!
-  \item Isključivo koristite UTF-8 kodnu stranicu (encoding) za datoteke s
-  izvornim kodom
+  \item Brzo i jednostavno (uz malo vježbanja)
+  \item Piše se u modu za matematiku
+  \begin{itemize}
+    \item \verb|$ ... $| za linijske izraze
+    \item \verb|\[  ... \]| (ili \verb|$$  ... $$|) za više-linijske
+  \end{itemize}
+  \item Primjeri: \verb|$x^2$| -- $x^2$, \verb|$\int_{2}^{10} x^2 dx$| -- $\int_{2}^{10} x^2 dx$
+  \[  f(t)\ast g(t) = \int^{\infty}_{-\infty} f(\tau)g(t-\tau)d\tau \]
+\begin{verbatim}
+\[   f(t)\ast g(t) = \int^{\infty}_{-\infty}
+                     f(\tau)g(t-\tau)d\tau   \]
+\end{verbatim}
+  \item Dobre upute za pisanje matematičkih izraza u \LaTeX-u:
+  \url{ftp.ams.org/pub/tex/doc/amsmath/short-math-guide.pdf}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Pitanja?}
-Prijedlozi:
+\lstset{language=C, tabsize=2}
+\begin{frame}[fragile]
+\frametitle{Uključivanje neformatiranog sadržaja}
+\begin{multicols}{2}
 \begin{itemize}
-  \item Neki pojmovi nisu bili jasni
-  \item Neke točke treba dodatno pojasniti
-  \item Koje alate koristiti za neke probleme (npr.~crtanje dijagrama)
-  \item \ldots
+  \item Neformatirani sadržaj -- tekst koji se mora prikazati s očuvanim izvornim razmacima, redovima i neekspandiranim naredbama
+  \item Linijski: naredba \verb|\verb|, primjer: ``\verb|Primjer    \verb naredbe|''
+  \item Više-linijski: okolina \texttt{verbatim}:
+  \begin{verbatim}
+  Linija prva,
+    druga
+      i treća.
+  \end{verbatim}
+  \item Programki kod se može uključiti unutar \texttt{verbatim} okoline
+  \item Posebni paketi za uključivanje programskog koda, primjerice \texttt{listings}
+\end{itemize}
+  \begin{lstlisting}
+  int fib(int n) {
+   if (n <= 0) return 0;
+   else if(n == 1)return 1;
+   else return fib(n-1)
+  	          + fib(n-2);
+  }
+  \end{lstlisting}
+\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Literatura}
+\begin{itemize}
+  \item Upravljanjem literature bavi se Bib\TeX
+  \item Literatura se navodi u \texttt{bib} datoteci (Bib\TeX\ zapisi)
+\begin{verbatim}
+@article{greenwade93,
+ author = "George D. Greenwade",
+ title = "The {C}omprehensive {T}ex {A}rchive {N}etwork",
+ year = "1993",
+ journal = "TUGBoat",
+ volume = "14"
+}
+\end{verbatim}
+\item Povezivanje \texttt{literatura.bib} i \texttt{tex} datoteka: \verb|\bibliography{literatura}|
+\item Postavljanje stila popisa literature \verb|\bibliographystyle{plain}| (stil ``\texttt{plain}'')
+\item Referenciranje na literaturu, primjerice: \verb|\ref{greenwade93}|
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Paketi}
+\begin{itemize}
+  \item Skupovi definicija naredbi i okolina
+  \item Glavni izvor: ``The Comprehensive \TeX\ Archive Network (CTAN)''
+  \item Ručna instalacija je \emph{relativno} složena
+  \item \LaTeX\ distribucije uglavnom same skinu i instaliraju paket koji zatražite
+  \item Dodaju se \texttt{usepackage} naredbom odmah nakon \texttt{documentclass} naredbe
+  \item Par korisnih paketa:
+  \begin{description}
+	\item[natbib] olakšavanje rada s literaturom
+	\item[booktabs] naredbe za stiliziranje tablica
+	\item[enumitem] proširenje mogućnosti listi i nabrajanja
+	\item[amsmath] proširenje mogućnosti za pisanje matematičkih izraza
+	\item[multicol] naredbe za pisanje u stupcima
+  \end{description}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Specifičnosti, problemi i savjeti}
+% TODO: O provjeri pravopisa
+\begin{itemize}
+  \item TODO
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Kako koristiti predloške}
+\begin{itemize}
+  \item TODO
 \end{itemize}
 \end{frame}
 
