@@ -1,32 +1,85 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{zavrsni}
+\ProvidesClass{fer}
 
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
+% Predefinirane vrijednosti opcija
+\newif\if@fontlmodern		\global\@fontlmoderntrue
+\newif\if@fonttimes			\global\@fonttimesfalse
+\newif\if@radzavrsni		\global\@radzavrsnifalse
+\newif\if@radseminar		\global\@radseminartrue
+\newif\if@raddiplomski		\global\@raddiplomskifalse
+\newif\if@citeauthoryear	\global\@citeauthoryeartrue
+\newif\if@citenumeric		\global\@citenumericfalse
+\newif\if@encutf			\global\@encutftrue
+\newif\if@enccp				\global\@enccpfalse
+
+% Postavi font
+\DeclareOption{lmodern}{\@fontlmoderntrue%
+						\@fonttimesfalse}
+\DeclareOption{times}{\@fonttimestrue%
+					  \@fontlmodernfalse}
+					  
+% Tip rada
+\DeclareOption{seminar}{\@radseminartrue%
+					  \@radzavrsnifalse%
+					  \@raddiplomskifalse}
+\DeclareOption{zavrsni}{\@radseminarfalse%
+					  \@radzavrsnitrue%
+					  \@raddiplomskifalse}
+\DeclareOption{diplomski}{\@radseminarfalse%
+					  \@radzavrsnifalse%
+					  \@raddiplomskitrue}
+					  
+% Encoding
+\DeclareOption{utf8}{\@encutftrue%
+					 \@enccpfalse}
+\DeclareOption{cp1250}{\@encutffalse%
+					 \@enccptrue}
+
+% Način citiranja
+\DeclareOption{authoryear}{\@citeauthoryeartrue%
+					       \@citenumericfalse}
+\DeclareOption{numeric}{\@citeauthoryearfalse%
+					    \@citenumerictrue}
+
+% \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 
 \ProcessOptions
 
 \LoadClass[12pt, onecolumn]{report}
 
 \RequirePackage[a4paper, left=3.5cm, right=3cm, bottom=3cm, top=3cm]{geometry}
-\RequirePackage[utf8]{inputenc}
+
+% Postavljanje encodinga
+\if@encutf \RequirePackage[utf8]{inputenc}
+\else \if@enccp \RequirePackage[cp1250]{inputenc} \fi
+\fi
+
 \RequirePackage[croatian]{babel}
 \RequirePackage[T1]{fontenc}
 \RequirePackage{graphicx}
-% Za promjenu fonta, umjesto ``times'' paketa učitajte drugi paket, primjerice ``lmodern''
-\RequirePackage{times}
-% Da bi se promjenio stil citiranja umjesto:
-% [authoryear, round]
-% staviti:
-% [numbers, square]
-\RequirePackage[authoryear, round]{natbib}
 \RequirePackage{amssymb}
 \RequirePackage{amsmath}
 \RequirePackage{fixltx2e}
 \RequirePackage[outsidefoot]{pageno}
 \RequirePackage{caption}
 \RequirePackage{ifthen}
-\RequirePackage[nottoc]{tocbibind}
 \RequirePackage{url}
+
+% Numeriranje literature kod seminara
+\if@radseminar%
+\RequirePackage[nottoc, numbib, chapter]{tocbibind}
+\else
+\RequirePackage[nottoc]{tocbibind}
+\fi
+
+% Postavljanje fonta
+\if@fonttimes\RequirePackage{times} \fi
+\if@fontlmodern\RequirePackage{lmodern} \fi
+
+% Postavljanje stila citiranja
+\if@citeauthoryear \RequirePackage[authoryear, round]{natbib}
+\else \RequirePackage[numbers, square]{natbib}
+\fi
 
 \renewcommand{\captionlabelfont}{\bfseries}
 \renewcommand{\captionfont}{\small}
@@ -56,16 +109,21 @@
 % Rimski brojevi stranica za zahvalu i tablicu sadržaja.
 \renewcommand{\thepage}{\roman{page}}
 
+\if@radseminar\else%
 % Ispis napomene o umetanju izvornika.
 \newcommand{\izvornik}{%
 	\newpage
 	\thispagestyle{empty}
 	\vspace*{\fill}
 	\hfil \textsl{Umjesto ove stranice umetnite izvornik Va\v{s}eg rada.} \par \hfil
-	\hfil \textsl{Da bi ste uklonili ovu stranicu obri\v{s}ite naredbu \texttt{\@backslashchar izvornik}.} \hfil
+	\hfil \textsl{Da bi ste uklonili ovu stranicu obri\v{s}ite naredbu \texttt{\textbackslash izvornik}.} \hfil
 	\vspace*{\fill}
 }
+\fi
 
+% Dodana zahvala
+\newif\if@dodanazahvala		\global\@dodanazahvalafalse
+\if@radseminar\else%
 % Naredba za dodavanje zahvale.
 \newcommand{\zahvala}[1]{%
 	\newpage
@@ -73,10 +131,14 @@
 	\vspace*{\fill}
 	\hfil {\itshape #1}\hfil
 	\vspace*{\fill}
+	\@dodanazahvalatrue
 }
+\fi
 
 % TOC
 \renewcommand\tableofcontents{%
+   \if@dodanazahvala\else \setcounter{page}{4} \fi
+   \if@radseminar \setcounter{page}{2} \fi
    \chapter*{\contentsname
    \@mkboth{%
    \MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
@@ -153,10 +215,15 @@
 }
 }
 
-\def\thesisnumber#1{\gdef\@thesisnumber{#1}}
-\def\@thesisnumber{\@latex@warning@no@line{Broj rada nije definiran.
-Koristi \noexpand\thesisnumber za definiranje}}
-
+\if@radseminar%
+  \def\voditelj#1{\gdef\@voditelj{#1}}
+  \def\@voditelj{\@latex@warning@no@line{Voditelj nije naveden.
+  Koristi \noexpand\voditelj za definiranje}}
+\else%
+  \def\thesisnumber#1{\gdef\@thesisnumber{#1}}
+  \def\@thesisnumber{\@latex@warning@no@line{Broj rada nije definiran.
+  Koristi \noexpand\thesisnumber za definiranje}}
+\fi
 \if@titlepage
 	\renewcommand\maketitle{\begin{titlepage}%
 	\let\footnotesize\small
@@ -169,13 +236,25 @@ Koristi \noexpand\thesisnumber za definiranje}}
 	\end{center}
 	\vfill
 	\begin{center}%
-		{\large\sffamily ZAVR\v{S}NI RAD br.~\@thesisnumber \par}%
-		\vskip 1em%
+    	\if@radzavrsni%
+		  {\large\sffamily ZAVR\v{S}NI RAD br.~\@thesisnumber \par}%
+		\else \if@raddiplomski%
+		  {\large\sffamily DIPLOMSKI RAD br.~\@thesisnumber \par}%
+		\else {\large\sffamily\bfseries SEMINAR \par}%
+		\fi\fi
+		\if@radseminar \vskip 3em%
+		\else \vskip 1em%
+		\fi
 		{\huge \bfseries\sffamily \@title \par}%
 		\vskip 1em%
 		{\large\lineskip .75em%
 		\begin{tabular}[t]{c}%
-			{\sffamily\@author}
+        	\if@radseminar%
+        	  {\sffamily\itshape \@author} \\
+        	  {\sffamily Voditelj: {\itshape \@voditelj}}
+        	\else
+			  {\sffamily\@author}
+			\fi
 		\end{tabular}\par}%
 	\end{center}\par
 	\vfill

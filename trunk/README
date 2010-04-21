@@ -1,8 +1,7 @@
-FER LaTeX templates v. 0.9beta README
+FER LaTeX templates v. 0.97beta README
 =====================================
 
-LaTeX predlošci za pisanje radova na Fakultetu
-elektrotehnike i računarstva.
+LaTeX predložak za pisanje radova na Fakultetu elektrotehnike i računarstva.
 
 Struktura
 =========
@@ -10,7 +9,7 @@ Struktura
    Datoteke s izgrađenom osnovnom strukturom i povezanim stilovima.
  
  - predlosci:
-   Predlošci sa definicijama stila.
+   Predlošci sa definicijama stila za tekst i literaturu.
  
  - upute:
    Upute za korištenje predložaka te pisanje LaTeX dokumenata.
