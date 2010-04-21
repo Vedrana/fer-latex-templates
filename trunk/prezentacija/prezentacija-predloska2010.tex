@@ -28,6 +28,7 @@
 \begin{frame}[t]{Organizacija}
 \textbf{Cilj:} dati kratke upute i savjete oko izrade dokumenata u \LaTeX-u te
 objasniti način korištenja predložaka za pismene radove.
+
 \pause
 \begin{multicols}{2}
 \begin{itemize}
@@ -47,7 +48,6 @@ objasniti način korištenja predložaka za pismene radove.
     \item Uključivanje neformatiranog sadržaja 
     \item Literatura
     \item Paketi
-    \item Provjera pravopisa
     \item Specifičnosti, problemi i savjeti
   \end{itemize}
 \pause
@@ -58,7 +58,7 @@ objasniti način korištenja predložaka za pismene radove.
 
 \begin{frame}[t]{Što je \LaTeX{}?}
 \begin{itemize}
-  \item Sustav za visokokvalitetno slovoslagarstvo
+  \item Sustav za visokokvalitetno \emph{slovoslagarstvo}
   \item Nadogradnja \TeX-a
   \item Usmjeravanje posla na strukturu i sadržaj (ne izgled)
   \item Jednostavna izrada lijepih dokumenata po predefiniranim stilovima
@@ -86,6 +86,7 @@ objasniti način korištenja predložaka za pismene radove.
   \item \texttt{dokument.tex} -- tekstualni dokument sa sadržajem i \LaTeX\ naredbama
   \item \texttt{pdflatex} -- prevođenje \texttt{tex} dokumenta u \texttt{pdf}\\
   (prevoditelj \texttt{latex} prevodi u \texttt{dvi})
+  \pause
   \item Distribucije:
   \begin{itemize}
     \item Windowsi -- Mik\TeX{} (\url{http://miktex.org/})
@@ -328,7 +329,7 @@ $\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
     druga
       i treća.
   \end{verbatim}
-  \item Programki kod se može uključiti unutar \texttt{verbatim} okoline
+  \item Programski kod se može uključiti unutar \texttt{verbatim} okoline
   \item Posebni paketi za uključivanje programskog koda, primjerice \texttt{listings}
 \end{itemize}
   \begin{lstlisting}
@@ -376,14 +377,30 @@ $\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
 	\item[enumitem] proširenje mogućnosti listi i nabrajanja
 	\item[amsmath] proširenje mogućnosti za pisanje matematičkih izraza
 	\item[multicol] naredbe za pisanje u stupcima
+	\item[hyperref] omogućava interaktivne povezice (reference)
   \end{description}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Specifičnosti, problemi i savjeti}
-% TODO: O provjeri pravopisa
+\begin{frame}[fragile]
+\frametitle{Specifičnosti, problemi i savjeti}
 \begin{itemize}
-  \item TODO
+  \item Posebni znakovi (osnova \TeX\ sintakse): \$ \% \_ \} \{ \& \# \textbackslash
+  \begin{itemize}
+    \item Koristi se isključivanje (engl.\ \emph{escape}), primjerice \verb|\$|, a \textbackslash\ se dobiva naredbom \verb|\textbackslash|
+  \end{itemize}
+  \item Nakon točke \LaTeX\ doda malo više razmaka -- pretpostavlja se kraj rečenice; ``\verb|\ |'' nakon točke stvara običan razmak:
+\begin{verbatim}
+prof. dr. sc. Donald E. Knuth\\
+prof.\ dr.\ sc.\ Donald E.\ Knuth
+\end{verbatim}
+prof. dr. sc. Donald E. Knuth\\
+prof.\ dr.\ sc.\ Donald E.\ Knuth
+  \item Može se dogoditi da je riječ loše prelomljena te prelazi rub stranice
+  \begin{itemize}
+    \item Iskoristiti \verb|\hyphenation|, primjerice: \verb|\hyphenation{pre-lo-mlje-na ra-ču-na-lo}|
+  \end{itemize}
+  \item Pravopis možete provjeriti pomoću \emph{aspell} ili \emph{ispell} alata, primjerice: \texttt{aspell -c dokument.tex}
 \end{itemize}
 \end{frame}
 
