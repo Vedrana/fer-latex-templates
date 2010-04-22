@@ -1,3 +1,19 @@
+% LaTeX predložak za pismene radove na
+% Fakultetu elektrotehnike i računarstva.
+%
+% Pokriveni radovi su: Seminar, Završni i Diplomski rad
+%
+% Opcije:
+%  - seminar - podesi stil za Seminar (standardna postavka)
+%  - diplomski - podesi stil za Diplomski rad
+%  - zavrsni - podesi stil za Završni rad
+%  - lmodern - koristi font lmodern (standardna postavka)
+%  - times - koristi font times
+%  - utf8 - učitaj inputenc paket i opcijom utf8 (standardna postavka)
+%  - cp1250 - učitaj inputenc paket i opcijom cp1250
+%  - authoryear - stil citiranja ``(author, year)'' (standardna postavka)
+%  - numeric - stil citiranja ``[broj]''
+
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{fer}
 
