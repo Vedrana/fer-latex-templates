@@ -51,7 +51,7 @@ objasniti način korištenja predložaka za pismene radove.
     \item Specifičnosti, problemi i savjeti
   \end{itemize}
 \pause
-  \item Kako koristiti predloške
+  \item Kako koristiti predložak
 \end{itemize}
 \end{multicols}
 \end{frame}
@@ -103,7 +103,7 @@ objasniti način korištenja predložaka za pismene radove.
   \item Mogućnost korištenja sustava za verziranje (VCS sustavi -- SVN, Mercurial, Git, \ldots)
   \item Mogućnost pisanja dokumenata u dijelovima (naredba \texttt{include})
   \item Dokumenti su prenosivi kroz verzije \LaTeX-a (primjerice, dokument napisan MS Wordom 2007 nije čitljiv u MS Wordu 2000)
-  \item Trudi se poštivati temelje tipografije
+  \item Trudi se poštivati osnove tipografije
 \end{itemize}
 \end{frame}
 
@@ -353,13 +353,14 @@ $\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
  author = "George D. Greenwade",
  title = "The {C}omprehensive {T}ex {A}rchive {N}etwork",
  year = "1993",
- journal = "TUGBoat",
- volume = "14"
+ journal = "TUGBoat"
 }
 \end{verbatim}
-\item Povezivanje \texttt{literatura.bib} i \texttt{tex} datoteka: \verb|\bibliography{literatura}|
-\item Postavljanje stila popisa literature \verb|\bibliographystyle{plain}| (stil ``\texttt{plain}'')
-\item Referenciranje na literaturu, primjerice: \verb|\ref{greenwade93}|
+\item Veza \texttt{literatura.bib} i \texttt{tex} datoteka: \verb|\bibliography{literatura}|
+\item Postavljanje stila popisa literature \verb|\bibliographystyle{plain}|% (stil ``\texttt{plain}'')
+\item Referenciranje na literaturu, primjerice: \verb|\cite{greenwade93}|
+\item Prevođenje: \texttt{pdflatex}, \texttt{bibtex}, \texttt{pdflatex}, \texttt{pdflatex}
+\item \texttt{natbib} paket -- sortiranje, stil, referenciranje preko \verb|\citep|, \verb|\citet| 
 \end{itemize}
 \end{frame}
 
@@ -404,10 +405,94 @@ prof.\ dr.\ sc.\ Donald E.\ Knuth
 \end{itemize}
 \end{frame}
 
-\begin{frame}[t]{Kako koristiti predloške}
+\begin{frame}[fragile]
+\frametitle{Kako koristiti predložak (1)}
 \begin{itemize}
-  \item TODO
+  \item Osnova predloška je \texttt{fer.cls} datoteka (\texttt{fer.bst} -- literatura)
+  \item Predložak se uključuje naredbom \verb|\documentclass{fer}|
+  \item Opcije predloška (standardne postavke su označene sa ``($\ast$)''):
+  \begin{itemize}
+    \item \texttt{seminar} -- podesi stil za Seminar ($\ast$)
+    \item \texttt{diplomski} -- podesi stil za Diplomski rad
+    \item \texttt{zavrsni} -- podesi stil za Završni rad
+    \item \texttt{lmodern} -- koristi font \emph{lmodern} ($\ast$)
+    \item \texttt{times} -- koristi font \emph{times}
+    \item \texttt{utf8} -- učitaj \texttt{inputenc} paket i opcijom \texttt{utf8} ($\ast$)
+    \item \texttt{cp1250} -- učitaj \texttt{inputenc} paket i opcijom \texttt{cp1250}
+    \item \texttt{authoryear} -- stil citiranja ``(author, year)'' ($\ast$)
+    \item \texttt{numeric} -- stil citiranja ``[broj]''
+  \end{itemize}
+  \item Primjer: \verb|\documentclass[zavrsni, numeric]{fer}|
+  \item Redoslijed zadavanja opcija nije bitan
 \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Kako koristiti predložak (2) -- primjer: Završni rad}
+\begin{multicols}{2}
+\begin{verbatim}
+\documentclass[zavrsni]{fer}
+\begin{document}
+\thesisnumber{444}
+\title{Kako trenirati
+       vlastitog zmaja}
+\author{Ivan Krišto}
+\maketitle
+\izvornik
+\zahvala{}
+tableofcontents
+
+\chapter{Uvod}
+Uvod rada.
+
+\bibliography{literatura}
+\bibliographystyle{fer}
+\begin{sazetak}
+Sažetak na hrvatskom jeziku.
+\kljucnerijeci{Ključne riječi}
+\end{sazetak}
+
+\engtitle{How To Train
+          Your Dragon}
+\begin{abstract}
+Abstract.
+\keywords{Keywords.}
+\end{abstract}
+\end{document}
+\end{verbatim}
+\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Kako koristiti predložak (3) -- primjer: Seminar}
+\begin{multicols}{2}
+\begin{verbatim}
+\documentclass[times]{fer}
+
+\begin{document}
+\title{Kako trenirati
+       vlastitog zmaja}
+\voditelj{Hiccup Horrendous
+          Haddock}
+\author{Ivan Krišto}
+\maketitle
+
+\tableofcontents
+
+\chapter{Uvod}
+Uvod rada.
+
+\chapter{Zaključak}
+Zaključak.
+
+\bibliography{literatura}
+\bibliographystyle{fer}
+
+\chapter{Sažetak}
+Sažetak.
+\end{document}
+\end{verbatim}
+\end{multicols}
 \end{frame}
 
 \end{document}
