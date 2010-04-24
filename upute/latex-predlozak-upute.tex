@@ -212,12 +212,13 @@ nabrajanja te \texttt{natbib} za lakši rad s literaturom.
 
 \chapter{Stil i struktura}
 \label{ch:stil-i-struktura}
-Stil Završnog rada (format, font, prored, margine i sl.) određen je predloškom te
-se nije potrebno brinuti o njemu. U nastavku će detaljnije biti opisana struktura
+Stil (format, font, prored, margine i sl.) određen je predloškom te se nije
+potrebno brinuti o njemu. U nastavku će detaljnije biti opisana struktura
 Završnog rada preuzeta iz uputa na stranici
-\url{http://www.fer.hr/predmet/zavrad}. Sve navedeno za Završni rad vrijedi i za Diplomski.
+\url{http://www.fer.hr/predmet/zavrad}. Sve navedeno za Završni rad vrijedi i za
+Diplomski.
 
-Na početak završnog rada uvezuje se \emph{naslovna stranica}, \emph{izvornik
+Na početak Završnog rada uvezuje se \emph{naslovna stranica}, \emph{izvornik
 Završnog zadatka} (dokument koji podižete na vašem Zavodu), \emph{stranica sa zahvalom}
 (ili prazna stranica) te ostatak rada (naslovna stranica se broji kao prva te
 je stranica sa popisom sadržaja četvrta, stoga je označena rimskim brojem ``iv'').
@@ -334,9 +335,14 @@ Texmaker} $\Rightarrow$ \emph{Editor} $\Rightarrow$ \emph{Editor Font Encoding}
 postaviti na UTF-8. Putanje do alata \TeX\ distribucije postavljaju se u
 odjeljku \emph{Commands}.
 
+\TeX{}works je jednostavan po pitanju podešavanja jer ima mali broj opcija, no
+bitno je napomenuti da mu je standardni prevoditelj \texttt{pdftex} te je to
+potrebno promijeniti u \texttt{pdflatex}. Kod \TeX{}worksa mnogima će se svidjeti
+ugrađeni preglednik koji osvježava prikaz nakon prevođenja dokumenata.
+
 Texlipse postavke podešavaju se unutar Eclipsea. Potrebno je ići na \emph{Window}
 $\Rightarrow$ \emph{Preferences} $\Rightarrow$ \emph{Texlipse} $\Rightarrow$
-\emph{Builder Settings} te tu podesiti putanje od \TeX{} alata. Kodna stranica
+\emph{Builder Settings} te tu podesiti putanje do \TeX{} alata. Kodna stranica
 se može podesiti za svaki projekt ili se može iskoristiti uobičajena kodna
 stranica. Preporuka je podesiti uobičajenu kodnu stranicu na UTF-8. Za
 podešavanje uobičajene kodne stranice potrebno je ići \emph{Window} $\Rightarrow$
@@ -757,8 +763,8 @@ novu stranicu. Ako se nađete u situaciji da vam pozicija gdje je \LaTeX{}
 smjestio lebdeću okolinu ne odgovara, kao parametar pozicioniranja možete navesti
 ``!'' (npr., ``[!htb]''), no preporuka je pozicioniranje prepustiti \LaTeX-ovim
 algoritmima. Bitno je spomenuti da se za tablice koje veličinom prelaze jedan
-list papira mora koristiti \texttt{longtable} paket. Paket je uključen u predložak, a
-upoznavanje s paketom je najbolje napraviti u primjerima koje možete naći na
+list papira mora koristiti \texttt{longtable} paket. Upoznavanje s paketom je
+najbolje napraviti u primjerima koje možete naći na
 \url{http://users.sdsc.edu/~ssmallen/latex/longtable.html} ili
 \url{http://www.astro.psu.edu/gradinfo/psuthesis/longtable.html}.
 
@@ -1191,7 +1197,7 @@ Zahvala se dodaje naredbom \verb|\zahvala| na mjestu gdje želite stranicu s
 zahvalom (npr.\ prije tablice sadržaja -- iznad \verb|\tableofcontents|
 naredbe). Primjer korištenja:
 \begin{verbatim}
-\zahvala{Svima koji su pomogli u izradi predloška i uputa!}
+\zahvala{Svima koji su pomogli u izradi predloška i uputa.}
 \end{verbatim}
 
 
