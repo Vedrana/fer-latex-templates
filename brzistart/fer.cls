@@ -72,14 +72,15 @@
 
 \RequirePackage[croatian]{babel}
 \RequirePackage[T1]{fontenc}
-\RequirePackage{graphicx}
-\RequirePackage{amssymb}
-\RequirePackage{amsmath}
+\RequirePackage{graphicx} % Uključeno jer je često korišteno
+\RequirePackage{amssymb} % Uključeno jer je često korišteno
+\RequirePackage{amsmath} % Uključeno jer je često korišteno
 \RequirePackage{fixltx2e}
 \RequirePackage[outsidefoot]{pageno}
 \RequirePackage{caption}
 \RequirePackage{ifthen}
-\RequirePackage{url}
+\RequirePackage{url} % Potrebno radi natbiba
+\RequirePackage{enumitem} % Potrebno radi izmjene itemize okoline
 
 % Numeriranje literature kod seminara
 \if@radseminar%
@@ -173,7 +174,7 @@
 }
 
 \renewcommand{\@makechapterhead}[1]{%
-\ifthenelse{\boolean{atappendix}}{
+\ifthenelse{\boolean{atappendix}}{%
 	\vspace*{50\p@}%
 	{\setlength{\parskip}{0em} \parindent \z@ \raggedright \normalfont
 		\interlinepenalty\@M
@@ -209,7 +210,7 @@
 }
 
 \renewcommand{\@makeschapterhead}[1]{%
-\ifthenelse{\boolean{atappendix}}{
+\ifthenelse{\boolean{atappendix}}{%
 	\vspace*{50\p@}%
 	{\setlength{\parskip}{0em} \parindent \z@ \raggedright
 		\normalfont
@@ -219,7 +220,7 @@
 		\vskip 40\p@
 	}
 }
-{
+{%
 	\vspace*{50\p@}%
 	{\setlength{\parskip}{0em} \parindent \z@ \raggedright
 		\normalfont
@@ -240,48 +241,50 @@
   \def\@thesisnumber{\@latex@warning@no@line{Broj rada nije definiran.
   Koristi \noexpand\thesisnumber za definiranje}}
 \fi
-\if@titlepage
-	\renewcommand\maketitle{\begin{titlepage}%
-	\let\footnotesize\small
-	\let\footnoterule\relax
 
-	\begin{center}
-		{\large\sffamily SVEU\v{C}ILI\v{S}TE U ZAGREBU}
-		
-		{\large\bfseries\sffamily FAKULTET ELEKTROTEHNIKE I RA\v{C}UNARSTVA}
-	\end{center}
-	\vfill
-	\begin{center}%
-    	\if@radzavrsni%
-		  {\large\sffamily ZAVR\v{S}NI RAD br.~\@thesisnumber \par}%
-		\else \if@raddiplomski%
-		  {\large\sffamily DIPLOMSKI RAD br.~\@thesisnumber \par}%
-		\else {\large\sffamily\bfseries SEMINAR \par}%
-		\fi\fi
-		\if@radseminar \vskip 3em%
-		\else \vskip 1em%
-		\fi
-		{\huge \bfseries\sffamily \@title \par}%
-		\vskip 1em%
-		{\large\lineskip .75em%
-		\begin{tabular}[t]{c}%
-        	\if@radseminar%
-        	  {\sffamily\itshape \@author} \\
-        	  {\sffamily Voditelj: {\itshape \@voditelj}}
-        	\else
-			  {\sffamily\@author}
+\if@titlepage
+	\renewcommand\maketitle{%
+	\begin{titlepage}%
+		\let\footnotesize\small
+		\let\footnoterule\relax
+	
+		\begin{center}
+			{\large\sffamily SVEU\v{C}ILI\v{S}TE U ZAGREBU}
+			
+			{\large\bfseries\sffamily FAKULTET ELEKTROTEHNIKE I RA\v{C}UNARSTVA}
+		\end{center}
+		\vfill
+		\begin{center}%
+	    	\if@radzavrsni%
+			  {\large\sffamily ZAVR\v{S}NI RAD br.~\@thesisnumber \par}%
+			\else \if@raddiplomski%
+			  {\large\sffamily DIPLOMSKI RAD br.~\@thesisnumber \par}%
+			\else {\large\sffamily\bfseries SEMINAR \par}%
+			\fi\fi
+			\if@radseminar \vskip 3em%
+			\else \vskip 1em%
 			\fi
-		\end{tabular}\par}%
-	\end{center}\par
-	\vfill
-	\begin{center}
-		{\sffamily\large Zagreb, 
-		\ifcase\month\or
-			sije\v{c}anj\or velja\v{c}a\or o\v{z}ujak\or travanj\or svibanj\or
-   	 		lipanj\or srpanj\or kolovoz\or rujan\or listopad\or studeni\or
-    			prosinac\fi \space \number\year.%
-    	}
-	\end{center}
+			{\huge \bfseries\sffamily \@title \par}%
+			\vskip 1em%
+			{\large\sffamily\lineskip .75em%
+			\begin{tabular}[t]{c}%
+	        	\if@radseminar%
+	        	  {\itshape \@author} \\
+	        	  Voditelj: {\itshape \@voditelj}
+	        	\else
+				    \@author
+				\fi
+			\end{tabular}\par}%
+		\end{center}\par
+		\vfill
+		\begin{center}
+			{\sffamily\large Zagreb, 
+			\ifcase\month\or
+				sije\v{c}anj\or velja\v{c}a\or o\v{z}ujak\or travanj\or svibanj\or
+	   	 		lipanj\or srpanj\or kolovoz\or rujan\or listopad\or studeni\or
+	    			prosinac\fi \space \number\year.%
+	    	}
+		\end{center}
 	\end{titlepage}%
 	\setcounter{footnote}{0}%
 	\global\let\maketitle\relax
@@ -299,6 +302,8 @@
 \newdimen\listindentation
 \setlength{\listindentation}{3 em}
 
+% Podešavanje izemize okoline
+% Zahtjeva enumitem paket
 \renewenvironment{itemize}%
 {
 	\setlength{\parskip}{0em}
