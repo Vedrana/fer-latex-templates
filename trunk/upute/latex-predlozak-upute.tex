@@ -1,6 +1,9 @@
-% Upute za LaTeX predložak ZR-a i Seminara, verzija: 0.9beta
-
-\documentclass{zavrsni}
+% Upute za LaTeX predložak ZR-a i Seminara, verzija: 1.0
+\documentclass[zavrsni, lmodern, utf8]{fer}
+\usepackage{booktabs}
+\usepackage{enumerate}
+\usepackage{multicol}
+\usepackage{textcomp}
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{listings}
@@ -15,25 +18,26 @@ inner sep=10pt, style=rounded corners, drop shadow={fill=black,
 opacity=1}]
 \tikzstyle{abstracttitle} =[fill=white]
 
-\newcommand{\boxresult}[2][fill=white]{
-  \begin{center}
-    \begin{tikzpicture}
+\newcommand{\boxresult}[2][fill=white]{%
+  \begin{center}%
+    \begin{tikzpicture}%
       \node [abstractbox, #1] (box){%
-      	\begin{minipage}{0.90\linewidth}
-          \footnotesize #2
-        \end{minipage}
-	  };
-      \node[abstracttitle, right=10pt] at (box.north west) {Rezultat};
-    \end{tikzpicture}
-  \end{center}
-}
+      	\begin{minipage}{0.90\linewidth}%
+          \footnotesize #2%
+        \end{minipage}%
+	  };%
+      \node[abstracttitle, right=10pt] at (box.north west) {Rezultat};%
+    \end{tikzpicture}%
+  \end{center}}
 
 \begin{document}
 \thesisnumber{000}
-\title{Upute za korištenje \LaTeX{} predloška za Završni i Diplomski rad te Seminar}
+\title{Upute za korištenje \LaTeX\ predloška za Završni i Diplomski rad te Seminar}
 \author{Ivan Krišto \and Boran Car \and Mateja Čuljak \and Vedrana Janković}
 
 \maketitle
+
+\zahvala{}
 
 \tableofcontents
 
@@ -77,7 +81,7 @@ prenosivost dokumenta kroz verzije \TeX-a (primjerice, dokument napisan MS Wordo
 2007 nije čitljiv u MS Wordu 2000). Navedena činjenica je tim bitnija što
 olakšava pisanje velikih dokumenata, primjerice, korištenjem \LaTeX-ove
 mogućnosti da se dokument sastoji od više datoteka (radi se o korištenju
-\verb|\include{}| naredbe, vidi:
+\verb|\include| naredbe, vidi:
 \url{http://en.wikibooks.org/wiki/LaTeX/Multiple_files})
 ili dokumenata koje istovremeno piše više ljudi (knjige, razne korisničke upute i
 sl.) korištenjem sustava za verzioniranje (VCS sustavi poput SVN-a, Mercuriala i
@@ -98,35 +102,54 @@ na način da napredni korisnici trebaju pročitati samo \ref{ch:upute} i
 \ref{ch:stil-i-struktura} poglavlje te odjeljke koji su eksplicitno navedeni u ta dva poglavlja.
 Novim korisnicima \LaTeX-a se predlaže da preskoče \ref{ch:upute} poglavlje te se koncentriraju
 na \ref{ch:latex-upute} poglavlje, odnosno odjeljke koji ih zanimaju (primjerice, ako
-u svojem radu nemate potrebu za korištenjem tablica ili dodatnih paketa, nemojte se zamarati
+u svome radu nemate potrebu za korištenjem tablica ili dodatnih paketa, nemojte se zamarati
 čitanjem tih odjeljaka).
 
 
 \chapter{Upute za korištenje}
 \label{ch:upute}
 % Kratko i jasno za ljude koji znaju koristiti LaTeX.
-Osnova predloška je \texttt{cls} datoteka. Uz navedenu datoteku potrebna
-je \texttt{tex} datoteka za sadržaj rada te \texttt{bib} datoteka za literaturu. Sve
-navedene datoteke moraju se nalaziti u istom direktoriju.
+Osnova predloška je \texttt{fer.cls} datoteka. Uz navedenu datoteku potrebna je
+\texttt{tex} datoteka za sadržaj rada, \texttt{bib} datoteka za literaturu te
+\texttt{fer.bst} datoteka za stil literature. Sve navedene datoteke moraju se
+nalaziti u istom direktoriju.
 
 Razvijena su tri predloška, predlošci za Završni i Diplomski rad te za Seminar.
-Radi jednostavnosti, konkretnosti i sličnosti među razvijenim predlošcima 
-upute će se uvijek referencirati na Završni rad i datoteku \texttt{zavrsni.cls}, 
-iako sve navedeno vrijedi i za ostale predloške. Razlike u predlošcima su
-navedene u ovom poglavlju ispod primjera uporabe.
+Razlike u predlošcima su navedene u ovom poglavlju ispod primjera uporabe.
 
-Povezivanje \texttt{tex} dokumenta i predloška iz \texttt{zavrsni.cls} datoteke
-vrši se naredbom \verb|\documentclass{zavrsni}| koja mora biti prva naredba u
-dokumentu. Za Diplomski rad koristite datoteku \texttt{diplomski.cls} i razred
-\texttt{diplomski}, a za Seminar \texttt{ferseminar.cls} i razred
-\texttt{ferseminar}.\footnote{Razred ``seminar'' već postoji unutar \LaTeX-a i
-namjenjen je izradi prezentacija.}
+Povezivanje \texttt{tex} dokumenta i predloška iz \texttt{fer.cls} datoteke
+vrši se naredbom \verb|\documentclass{fer}| koja mora biti prva naredba u
+dokumentu. Vrsta rada i specifičnosti predloška određuju se u opcijama naredbe
+\verb|\documentclass|, primjerice \verb|\documentclass[zavrsni, times]{fer}|
+što određuje da se radi o Završnom radu i da je font ``Times Roman.''
+Potpuna lista opcija predloška (standardne postavke su označene sa ``($\ast$)''):
+\begin{itemize}
+	\item \texttt{seminar} -- podesi stil za Seminar ($\ast$),
+	\item \texttt{diplomski} -- podesi stil za Diplomski rad,
+	\item \texttt{zavrsni} -- podesi stil za Završni rad,
+	\item \texttt{lmodern} -- koristi font ``Latin Modern'' ($\ast$),
+	\item \texttt{times} -- koristi font ``Times Roman,''
+	\item \texttt{utf8} -- koristi \texttt{utf8} kodnu stranicu ($\ast$),
+	\item \texttt{cp1250} -- koristi \texttt{cp1250} kodnu stranicu,
+	\item \texttt{authoryear} -- stil citiranja ``(author, year)'' ($\ast$),
+	\item \texttt{numeric} -- stil citiranja ``[indeks].''
+\end{itemize}
+Redoslijed zadavanja opcija nije bitan. Osim izbora rada (\texttt{seminar},
+\texttt{diplomski} ili \texttt{zavrsni}) izuzetno je bitno odrediti koju
+kodnu stranicu\footnote{\url{http://en.wikipedia.org/wiki/Text_encoding}}
+koristite. UTF-8 kodna stranica je praktički standard, no morate paziti
+podržava li vaš uređivač teksta tu kodnu stranicu. Korisnici Windows
+operacijskih sustava često će radi odabranog razvojnog okruženja morati
+odabrati opciju \texttt{cp1250} koja označava korištenje \emph{Windows-1250}
+kodne stranice (kodna stranica prilagođena za pisma Srednje i Istočne Europe).
 
 Predložak, osim standardnih polja kao što \texttt{author} i \texttt{title}
-sadrži obavezno polje \texttt{thesisnumber} -- broj Završnog rada. Osnovna
-struktura \texttt{tex} datoteke mora biti:
+sadrži za Završni i Diplomski rad obavezno polje \texttt{thesisnumber} (broj Završnog, odnosno Diplomskog rada)
+te za Seminar obavezno polje \texttt{voditelj}.
+
+Osnovna struktura \texttt{tex} datoteke za Završni rad mora biti:
 \begin{verbatim}
-\documentclass{zavrsni}
+\documentclass[zavrsni]{fer}
 
 % Ovdje možete staviti dodatne pakete koji
 % su vam potrebni, npr.:
@@ -144,7 +167,7 @@ struktura \texttt{tex} datoteke mora biti:
 % Sadržaj rada, ostala poglavlja i odjeljci.
 
 \bibliography{literatura}
-\bibliographystyle{plainnat}
+\bibliographystyle{fer}
 
 % Dodatak nije obavezan
 \appendix
@@ -166,30 +189,26 @@ Sažetak na engleskom jeziku.
 \end{document}
 \end{verbatim}
 
-Ukoliko koristite predložak za Diplomski rad ili Seminar, umjesto naredbe \verb|\documentclass{zavrsni}|
-morate navesti \verb|\documentclass{diplomski}|, odnosno \verb|\documentclass{ferseminar}|.
-Uz to, Seminar nema ``broj rada,'' tj.\ ne postoji naredba \verb|\thesisnumber{}|, ali je potrebno navesti
-voditelja rada naredbom \verb|\voditelj{}| (tj.\ umjesto naredbe \verb|\thesisnumber{}| stavite naredbu
-\verb|\voditelj{}| i kao argument navedite ime i prezime vašeg mentora ili mentorice, odnosno voditelja
-vašeg rada).
+Ukoliko koristite predložak za Seminar, umjesto naredbe \verb|\thesisnumber|
+morate navesti naredbu \verb|\voditelj| te kao argument navedite ime i prezime
+vašeg mentora ili mentorice, odnosno voditelja vašeg rada.
 
 Predložak se temelji na \emph{report} razredu te su gradivni elementi sadržaja
 dokumenta (hijerarhijski navedeno): \emph{chapter}, \emph{section}, \emph{subsection} i
 \emph{subsubsection}.
 
-O stilu i strukturi dokumenta pogledajte poglavlje \ref{ch:stil-i-struktura}, a
+O stilu i strukturi dokumenta pogledajte \ref{ch:stil-i-struktura} poglavlje, a
 za upoznavanje s \LaTeX-om te nekim njegovim posebnostima i receptima pogledajte
-poglavlje \ref{ch:latex-upute} Ako želite koristiti drugačiji font od
-trenutnog, u datoteci \texttt{zavrsni.cls} promijenite liniju
-\verb|\RequirePackage{lmodern}| u npr., \verb|\RequirePackage{times}| za font
-Times New Roman.
+poglavlje \ref{ch:latex-upute}
 
-Napravljeni predložak sadrži rješenje za dodavanje sažetka rada i posvete te
+Napravljeni predložak sadrži rješenje za dodavanje sažetka rada i zahvale te
 naredbu \texttt{engl}. Za navedeno pogledajte odjeljke \ref{sec:sazetak},
-\ref{sec:posveta} i \ref{sec:engl}
+\ref{sec:zahvala} i \ref{sec:engl}
 
-Za pakete uključene u sam predložak pogledajte polja \texttt{RequirePackage} u
-datoteci \texttt{završni.cls}.
+U sam predložak su uključeni paketi \texttt{graphicx} za dodavanje slika,
+\texttt{amssymb} i \texttt{amsmath} za matematičke simbole, \texttt{url}
+za navođenje URL-ova, \texttt{enumitem} za proširene mogućnosti listi i
+nabrajanja te \texttt{natbib} za lakši rad s literaturom.
 
 \chapter{Stil i struktura}
 \label{ch:stil-i-struktura}
@@ -225,9 +244,15 @@ obilježeni. Daljnji opis tog grafičkog prikaza treba se nalaziti u tekstu rada
 Formule se obilježavaju brojevima u zagradi, uz desni rub stranice, a u tekstu se
 poziva na broj formule.
 
-\section{Privitak završnog rada}
-Privitak može činiti tehnička dokumentacija vezana uz završni rad (npr.\
+\section{Privitak Završnog rada}
+Privitak može činiti tehnička dokumentacija vezana uz Završni rad (npr.\
 električka i položajna shema sklopa, sastavnica, predložak tiskane veze i sl.).
+
+\section{Posebnosti stila za Seminar}
+Za razliku od Završnog i Diplomskog rada, Seminar ne predviđa mjesto za zahvalu i
+izvornik rada. Uz to, sažetak kod seminara je standardno poglavlje (ne koriste se
+posebne naredbe kao kod Završnog i Diplomskog rada) koje dolazi nakon literature.
+
 
 \chapter{Upute za \LaTeX}
 \label{ch:latex-upute}
@@ -237,7 +262,7 @@ U nastavku su dane upute za \LaTeX, no sužene za potrebe brzog uvoda u rad s
 Ako se želite bolje upoznati s \LaTeX-om, konzultirajte poveznice navedene u
 dodatku \ref{ch:korisne-stranice} te knjige poput \citep{oetiket2007lshort}.
 
-\section{Instalacija \LaTeX{} prevoditelja}
+\section{Instalacija \LaTeX\ prevoditelja}
 \LaTeX{} dokumenti (dokumenti s \texttt{tex} ekstenzijom) se prevode krajnji
 format (npr.\ \texttt{pdf}), tj.\ jezgra produkcije dokumenata je \TeX{}
 prevoditelj.\footnote{\LaTeX{} je zapravo samo jedan (malo veći) dodatak
@@ -254,7 +279,7 @@ situaciji da vam Mik\TeX{} odbija skinuti novi paket koji želite koristiti,
 najvjerojatnije je problem u verziji.
 
 
-\subsection{Prevođenje \LaTeX{} dokumenta}
+\subsection{Prevođenje \LaTeX\ dokumenta}
 \LaTeX{} dokumenti su obične tekstualne datoteke s ekstenzijom \texttt{tex}
 pisane \TeX{} sintaksom.
 
@@ -290,21 +315,23 @@ Postoji veliki broj \LaTeX{} razvojnih okruženja koja pokušavaju ubrzati rad
 korisnika. Tu je bitno napomenuti da većina \LaTeX{} razvojnih okruženja na
 Windowsima ne podržava UTF-8 kodnu stranicu!
 
-Među razvojnim okruženjima mogu se istaknuti \emph{Texmaker} i \emph{Eclipse} s
-\emph{Texlipse} dodatkom. Navedena razvojna okruženja su besplatna, dostupna
-za sve poznatije operacijske sustave te podržavaju UTF-8 kodnu stranicu.
+Među razvojnim okruženjima mogu se istaknuti \emph{Texmaker}, \emph{\TeX{}works} i
+\emph{Eclipse} s \emph{Texlipse} dodatkom. Navedena razvojna okruženja su
+besplatna, dostupna za sve poznatije operacijske sustave te podržavaju UTF-8
+kodnu stranicu.
 \begin{itemize}
   \item Texmaker -- \url{http://www.xm1math.net/texmaker/}
+  \item \TeX{}works -- \url{http://code.google.com/p/texworks/}
   \item Eclipse -- \url{http://www.eclipse.org/downloads/} (bilo koji paket);
   Texlipse -- \url{http://texlipse.sourceforge.net/manual/installation.html}.
 \end{itemize}
 
-Potrebno je podesiti razvojna okruženja na ispravne putanje od alata iz \TeX{}
+Potrebno je podesiti razvojna okruženja na ispravne putanje od alata iz \TeX\ 
 distribucije te podesiti kodnu stranicu dokumenata na UTF-8.
 
 Za Texmaker potrebno je ići \emph{Options} $\Rightarrow$ \emph{Configure
 Texmaker} $\Rightarrow$ \emph{Editor} $\Rightarrow$ \emph{Editor Font Encoding}
-postaviti na UTF-8. Putanje do alata \TeX{} distribucije postavljaju se u
+postaviti na UTF-8. Putanje do alata \TeX\ distribucije postavljaju se u
 odjeljku \emph{Commands}.
 
 Texlipse postavke podešavaju se unutar Eclipsea. Potrebno je ići na \emph{Window}
@@ -329,11 +356,10 @@ upravljanje stilom relativno jednostavnim.
 
 \subsection{Struktura \LaTeX{} dokumenta}
 Osnovni dijelovi \LaTeX{} dokumenta su definicija stila naredbom
-\verb|\documentclass{}| te okolina \texttt{document}. Naredba
-\texttt{documentclass} kao parametar prima definirani stil (predložak za Završni
-rad je stil definiran u datoteci \texttt{zavrsni.cls}; ostali često korišteni
-stilovi su \emph{article} te \emph{report} na kojem se temelji stil predloška za
-Završni rad).
+\verb|\documentclass| te okolina \texttt{document}. Naredba
+\texttt{documentclass} kao parametar prima definirani stil (predložak je
+definiran u datoteci \texttt{fer.cls}; ostali često korišteni stilovi su
+\emph{article} te \emph{report} na kojem se temelji stil razvijenog predloška).
 
 U okolinu \texttt{document} dolazi sadržaj dokumenta. Primjer
 osnovne strukture dokumenta možete vidjeti u \ref{ch:upute} poglavlju.
@@ -407,12 +433,12 @@ i sveg ga smrska.
 }
 
 Sekvencom ``\verb|\\|'' se ne može stvoriti prazna linija. Za prazninu između
-redaka iskoristite naredbu \verb|\vspace{}|, npr., \verb|\vspace{10pt}|
+redaka iskoristite naredbu \verb|\vspace|, npr., \verb|\vspace{10pt}|
 (umjesto ``pt'' možete staviti drugu jedinicu).
 
 \LaTeX{} također ignorira višestruke razmake, npr., ``\verb|tri   razmaka|''
 rezultira s ``tri   razmaka.'' Dodatni razmak možete postići naredbom
-\verb|\hspace{}|.
+\verb|\hspace|.
 
 \subsection{Naredbe i okoline}
 Izgled, stil i struktura \LaTeX{} dokumenta definiraju se naredbama i
@@ -429,14 +455,14 @@ Uz argumente postoje i parametri. Argumenti naredbi se zadaju u vitičastim
 zagradama, a parametri u uglatim (``[]'').
 
 Okoline se mogu promatrati kao naredbe koje primaju jedan segment dokumenta.
-Početak djelovanja okoline označava se naredbom \verb|\begin{}|, a kraj
-naredbom \verb|\end{}|, primjerice:
+Početak djelovanja okoline označava se naredbom \verb|\begin|, a kraj
+naredbom \verb|\end|, primjerice:
 \begin{verbatim}
 \begin{okolina}
 Segment dokumenta unutar okoline.
 \end{okolina}
 \end{verbatim}
-Dodatni argumenti i parametri okoline navode se uz naredbu \verb|\begin{}|.
+Dodatni argumenti i parametri okoline navode se uz naredbu \verb|\begin|.
 
 Neke često korištene \LaTeX{} naredbe se mogu vidjeti u tablici
 \ref{tbl:ceste-naredbe}.
@@ -466,8 +492,8 @@ Osnovni problem na koji ćete nailaziti proizlazi iz \LaTeX-ovih pokušaja
 da poravna sadržaj. Pri poravnanju koristi se dodavanjem razmaka između riječi
 i prelamanjem riječi na slogove. Ponekad se dogodi da je riječ loše prelomljena, 
 primjerice, kad je potrebno prelomiti neku riječ koja sadrži dijakritike ili kad
-koristite verbatim naredbe (uključujući \verb|\url{}| naredbu). Ukoliko dođe do
-problema s prelamanjem, iskoristite naredbu \verb|\hyphenation{}| čiji primjer
+koristite verbatim naredbe (uključujući \verb|\url| naredbu). Ukoliko dođe do
+problema s prelamanjem, iskoristite naredbu \verb|\hyphenation| čiji primjer
 uporabe možete vidjeti na \url{http://ahyco.ffri.hr/seminari2007/latex/2.1.html}.
 
 Prema tipografskim pravilima nakon kraja rečenice (tj.\ točke) trebalo bi doći malo
@@ -551,13 +577,39 @@ Film ``\$9.99'' je odličan! % TODO: Ponovo pogledati.
 Film ``\$9.99'' je odličan! % TODO: Ponovo pogledati.
 }
 
+
+\section{Korištenje dodatnih paketa}
+\label{sec:koristenje-dod-paketa}
+\LaTeX\ paketi se mogu promatrati kao dodatne biblioteke u programskim
+jezicima. Dodavanje novih paketa vrši se \verb|\usepackage| naredbom.
+Navedena naredba dolazi nakon \verb|\documentclass| naredbe. Primjer
+korištenja:
+\begin{verbatim}
+\documentclass[zavrsni]{fer}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{listings}
+\usepackage{longtable}
+\end{verbatim}
+
+\LaTeX\ distribucije dolaze s velikim brojem već instaliranih paketa.
+Također, distribucije je moguće podesiti da, u slučaju korištenja paketa koji
+nije instaliran, same dohvate paket sa CTAN-a i instaliraju ga.
+
+Za više informacija o \LaTeX{} paketima, konzultirajte CTAN
+(\url{http://tug.ctan.org/}). Korisne upute za korištenje i instalaciju \LaTeX{}
+paketa možete naći na \url{http://en.wikibooks.org/wiki/LaTeX/Packages}.
+Bitno je spomenuti da se uz svaki \TeX{} paket s CTAN-a može skinuti pripadna
+dokumentacija.
+
+
 \section{Dodavanje popisa sadržaja, slika i tablica}
 Sadržaj se dodaje naredbom \verb|\tableofcontents| na mjestu na kojemu ga želite
 prikazati. Analogno tome, popis slika se dodaje naredbom \verb|\listoffigures|,
 a popis tablica naredbom \verb|\listoftables|.
 
 \section{Dodavanje fusnota i referenci}
-Fusnote se dodaju naredbom \verb|\footnote{}|, npr.:
+Fusnote se dodaju naredbom \verb|\footnote|, npr.:
 \begin{verbatim}
 Popis fusnota\footnote{Objašnjenja koja se prikazuju
 na dnu stranice} nije potreban.
@@ -567,15 +619,15 @@ prikazuju na dnu stranice} nije potreban.}
 
 Reference služe za povezivanje s nekim dijelom rada. Da biste omogućili
 referenciranje na neki dio rada, tom dijelu morate postaviti oznaku
-\engl{label} naredbom \verb|\label{}|, npr.:
+\engl{label} naredbom \verb|\label|, npr.:
 \begin{verbatim}
-\section{Dodavanje posvete}
-\label{sec:posveta}
+\section{Dodavanje zahvale}
+\label{sec:zahvala}
 \end{verbatim}
-referencirate se pomoću naredbe \verb|\ref{}|, npr.:
+referencirate se pomoću naredbe \verb|\ref|, npr.:
 \begin{verbatim}
 Za navedeno pogledajte odjeljke \ref{sec:sazetak},
-\ref{sec:posveta} i \ref{sec:engl}
+\ref{sec:zahvala} i \ref{sec:engl}
 \end{verbatim}
 
 Oznaku za referenciranje možete postaviti većini elemenata, a najčešće se
@@ -594,13 +646,11 @@ Liste tvore u okolini \texttt{itemize}, nabrajanja u okolini
   \item druga stavka.
 \end{itemize}
 \end{verbatim}
-\boxresult{
-\begin{itemize}
-  \item prva stavka,
-  \item druga stavka.
-\end{itemize}
-}
-
+\boxresult{%
+\begin{itemize}%
+  \item prva stavka,%
+  \item druga stavka.%
+\end{itemize}}
   \item[Lista s više razina] -- kod:
 \begin{verbatim}
 \begin{itemize}
@@ -611,15 +661,14 @@ Liste tvore u okolini \texttt{itemize}, nabrajanja u okolini
   \end{itemize}
 \end{itemize}
 \end{verbatim}
-\boxresult{
-\begin{itemize}
-  \item prva stavka,
-  \item druga stavka,
-  \begin{itemize}
-    \item druga razina. 
-  \end{itemize}
+\boxresult{%
+\begin{itemize}%
+  \item prva stavka,%
+  \item druga stavka,%
+  \begin{itemize}%
+    \item druga razina. %
+  \end{itemize}%
 \end{itemize}}
-
   \item[Nabrajanje] -- kod:
 \begin{verbatim}
 \begin{enumerate}
@@ -627,25 +676,23 @@ Liste tvore u okolini \texttt{itemize}, nabrajanja u okolini
   \item druga stavka.
 \end{enumerate}
 \end{verbatim}
-\boxresult{
-\begin{enumerate}
-  \item prva stavka,
-  \item druga stavka.
+\boxresult{%
+\begin{enumerate}%
+  \item prva stavka,%
+  \item druga stavka.%
 \end{enumerate}}
-
-  \item[Nabrajanje s proizvoljnim brojačem] -- kod:
+  \item[Nabrajanje s proizvoljnim brojačem] (zahtjeva \texttt{enumitem} paket) -- kod:
 \begin{verbatim}
 \begin{enumerate}[(a)]
   \item prva stavka,
   \item druga stavka.
 \end{enumerate}
 \end{verbatim}
-\boxresult{
-\begin{enumerate}[(a)]
-  \item prva stavka,
-  \item druga stavka.
+\boxresult{%
+\begin{enumerate}[(a)]%
+  \item prva stavka,%
+  \item druga stavka.%
 \end{enumerate}}
-
   \item[Opisi] -- kod:
 \begin{verbatim}
 \begin{description}
@@ -654,13 +701,12 @@ Liste tvore u okolini \texttt{itemize}, nabrajanja u okolini
   \item[Toki pona:] minimalistički umjetni prirodni jezik.
 \end{description}
 \end{verbatim}
-\boxresult{
-\begin{description}
-  \item[Esperanto:] najpoznatiji umjetni prirodni jezik.
-  \item[Lojban:] sintaksno jednoznačan umjetni prirodni jezik.
-  \item[Toki pona:] minimalistički umjetni prirodni jezik.
+\boxresult{%
+\begin{description}%
+  \item[Esperanto:] najpoznatiji umjetni prirodni jezik.%
+  \item[Lojban:] sintaksno jednoznačan umjetni prirodni jezik.%
+  \item[Toki pona:] minimalistički umjetni prirodni jezik.%
 \end{description}}
-
 \end{description}
 
 Za izradu složenijih listi, nabrajanja i opisa iskoristite paket
@@ -677,11 +723,11 @@ tablice:
 \caption{Konstante}
 \label{tbl:konstante}
 \centering
-\begin{tabular}{llr} \toprule
-Konstanta & Opis & Vrijednost\\ \midrule
+\begin{tabular}{llr} \hline
+Konstanta & Opis & Vrijednost\\ \hline
 $\pi$ & Pi & 3.14159 \\
 $e$ & Eulerov broj & 2.71828 \\
-$\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
+$\varphi$ & Zlatni rez & 1.61803 \\ \hline
 \end{tabular}
 \end{table}
 \end{verbatim}
@@ -690,11 +736,11 @@ Rezultat je tablica \ref{tbl:konstante}.
 \caption{Konstante}
 \label{tbl:konstante}
 \centering
-\begin{tabular}{llr} \toprule
-Konstanta & Opis & Vrijednost\\ \midrule
+\begin{tabular}{llr} \hline
+Konstanta & Opis & Vrijednost\\ \hline
 $\pi$ & Pi & 3.14159 \\
 $e$ & Eulerov broj & 2.71828 \\
-$\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
+$\varphi$ & Zlatni rez & 1.61803 \\ \hline
 \end{tabular}
 \end{table}
 
@@ -735,19 +781,18 @@ objašnjenja možete naći na
 
 \item 
 \begin{verbatim}
-Konstanta & Opis & Vrijednost\\ \midrule
+Konstanta & Opis & Vrijednost\\ \hline
 $\pi$ & Pi & 3.14159 \\
 $e$ & Eulerov broj & 2.71828 \\
-$\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
+$\varphi$ & Zlatni rez & 1.61803 \\ \hline
 \end{verbatim}
 Podatci u tablici. Podatci u pojedinim stupcima se odvajaju znakom ``\&''. Redovi
-tablice prekidaju se sekvencom ``\verb|\\|.'' Naredbe \verb|\toprule|,
-\verb|\midrule|, \verb|\bottomrule| i \verb|\hline| odvajaju retke horizontalnim
-linijama. Same naredbe razlikuju se u debljini linije koju stvaraju i količinama
+tablice prekidaju se sekvencom ``\verb|\\|.'' Naredba \verb|\hline| odvajaju retke horizontalnim
+linijama. Preporuka je uključiti \texttt{booktabs} paket te umjesto \verb|\hline| naredbe koristiti:
+\verb|\toprule|, \verb|\midrule| i \verb|\bottomrule| (redom, ispod naslova, nakon zaglavlja, na kraju tablice).
+Same naredbe razlikuju se u debljini linije koju stvaraju i količinama
 praznine iznad i ispod linije. Preporuka je raditi tablice bez vertikalnih
-linija, s linijom \verb|\toprule| iznad naslova stupaca, linijom \verb|\midrule|
-ispod naslova te linijom \verb|\bottomrule| ispod zadnjeg podatka
-\citep{simon2005booktabs}.
+linija \citep{simon2005booktabs}.
 \end{itemize}
 
 Prilikom izrade tablica preporuka je poštivati smjernice dane u
@@ -756,10 +801,9 @@ dokumentaciji \texttt{booktabs} paketa \citep{simon2005booktabs}:
   \item nemojte koristiti vertikalne linije,
   \item nemojte koristiti dvostruke linije,
   \item jedinice stavljajte u naslov stupca, ne u tijelo tablice\\*
-(npr., ako imate stupac ``Masa'', umjesto da za podatke navodite npr., ``1
-kg'', jedinicu stavite u naslov -- ``Masa (kg)''),
-  \item uvijek stavljajte broj ispred decimalne točke; znači ``0.1,'' a ne
-``.1,''
+(npr., ako imate stupac ``Masa'', umjesto da za podatke navodite npr., ``1 kg'',
+jedinicu stavite u naslov -- ``Masa (kg)''),
+  \item uvijek stavljajte broj ispred decimalne točke; znači ``0.1,'' a ne ``.1,''
   \item nemojte koristiti ``ditto'' znak za ponavljanje prethodne vrijednosti;
 ostavite praznu liniju ili ponovo navedite vrijednost.
 \end{itemize}
@@ -778,7 +822,7 @@ Slike se dodaju pomoću \texttt{figure} okoline. Primjer je slika
 
 Okolina \texttt{figure}, poput \texttt{table} okoline, spada u lebdeće okoline i
 ne mora se naći točno na mjestu na kojem ste je naveli. Za detalje pogledajte
-odjeljak \ref{sec:tablice}
+\ref{sec:tablice} odjeljak.
 
 \begin{figure}[htb]
 \centering
@@ -787,12 +831,12 @@ odjeljak \ref{sec:tablice}
 \label{fig:fer-logo}
 \end{figure}
 
-Naredba \verb|\includegraphics{}| prima slike u \emph{jpg}, \emph{png} i
+Naredba \verb|\includegraphics| prima slike u \emph{jpg}, \emph{png} i
 \emph{pdf} formatima ako se koristi s \emph{pdflatex} prevoditeljem. Dodatnim
 opcijama naredbe sliku je moguće skalirati po visini (npr.,
 \texttt{[height=2cm]}), širini ili za određeni faktor (parametar
 \texttt{scale}) te rotirati za određeni kut u stupnjevima (parametar
-\texttt{angle}). Detaljnije o uključivanju slika u \LaTeX{} dokumente
+\texttt{angle}). Detaljnije o uključivanju slika u \LaTeX\ dokumente
 pročitajte na \url{http://en.wikibooks.org/wiki/LaTeX/Importing_Graphics}.
 Alati poput \emph{Mathematice} mogu generirati slike u
 vektorskom formatu \emph{eps} bez definiranog ``bounding boxa.'' Za ispravno
@@ -806,9 +850,8 @@ ebb slika.png
 \end{verbatim}
 Alat generira datoteku ``slika.bb'' koju stavite u direktorij sa slikom.
 
-Ako sliku trebate staviti unutar teksta, koristite paket \texttt{wrapfig}, a
-za prikaz više slika u nizu koristite paket \texttt{subfig}. Oba paketa su
-uključena u predložak. Za primjere korištenja
+Ako sliku trebate staviti unutar teksta, uključite paket \texttt{wrapfig}, a
+za prikaz više slika u nizu koristite paket \texttt{subfig}. Za primjere korištenja
 \texttt{wrapfig} i \texttt{subfig} paketa te savjete oko korištenja lebdećih
 okolina pogledajte stranicu
 \url{http://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions}.
@@ -827,7 +870,7 @@ Za izraze koji se nalaze u posebnoj liniji:
 \begin{verbatim}
 \[ c^2 = a^2 + b^2 \]
 \end{verbatim}
-\boxresult{
+\boxresult{%
 \[ c^2 = a^2 + b^2 \]
 }
 
@@ -845,7 +888,7 @@ f(t)\ast g(t) = \int^{\infty}_{-\infty} f(\tau)g(t-\tau)d\tau.
 \label{eq:conv}
 \end{equation}
 \end{verbatim}
-\boxresult{
+\boxresult{%
 \begin{equation}
 f(t)\ast g(t) = \int^{\infty}_{-\infty} f(\tau)g(t-\tau)d\tau.
 \label{eq:conv}
@@ -946,7 +989,7 @@ različitih paketa koje morate posebno uključiti. Primjer takvih paketa su
 \texttt{algorithmic} i \texttt{algorithm}. Navedene pakete morate dodati na način
 koji je opisan u \ref{sec:koristenje-dod-paketa}. Primjer korištenja je dan
 algoritmom~\ref{algo:bubble-sort} (radi se o lebdećoj okolini koja se ne mora
-naći točno gdje je napisana). \LaTeX{} kod algoritma:
+naći točno gdje je napisana). \LaTeX\ kod algoritma:
 \begin{verbatim}
 \begin{algorithm}
 \caption{Bubble sort}
@@ -993,9 +1036,8 @@ naći točno gdje je napisana). \LaTeX{} kod algoritma:
 
 
 \section{Podjela sadržaja na više stupaca}
-Za podjelu sadržaja na stupce koristite \texttt{multicol} paket koji je
-uključen u predložak. Primjer korištenja:\footnote{Korišteni citati pripadaju
-Donaldu E.~Knuthu, tvorcu \TeX-a}
+Za podjelu sadržaja na stupce koristite \texttt{multicol} paket. Primjer
+korištenja:\footnote{Korišteni citati pripadaju Donaldu E.~Knuthu, tvorcu \TeX-a}
 \begin{verbatim}
 \begin{multicols}{2}
 The most important thing in the programming language is the
@@ -1009,7 +1051,7 @@ between what we know is possible with today's machines and
 what we have so far been able to finish.
 \end{multicols}
 \end{verbatim}
-\boxresult{
+\boxresult{%
 \begin{multicols}{2}
 The most important thing in the programming language is the name. A language will
 not succeed without a good name. I have recently invented a very good name and
@@ -1023,7 +1065,7 @@ with today's machines and what we have so far been able to finish.
 Bitno je primijetiti da \texttt{multicol} okolina nije kompatibilna s
 \texttt{figure} i \texttt{table} okolinama. Za ubacivanje \texttt{figure}
 okoline unutar \texttt{multicol} okoline potrebno je koristiti
-\texttt{multipage} paket, primjerice:
+\texttt{minipage} paket, primjerice:
 \begin{verbatim}
 \begin{minipage}{\linewidth} 
 \vspace{10pt}
@@ -1034,21 +1076,23 @@ okoline unutar \texttt{multicol} okoline potrebno je koristiti
 \end{minipage}
 \end{verbatim}
 
-Za korištenje tablica iskoristite također \texttt{multipage} paket sa
+Za korištenje tablica iskoristite također \texttt{minipage} paket sa
 \texttt{tabular} okolinom ili, ako imate šire tablice za koje želite da se pojave
 u širini cijele stranice, \texttt{table*} okolinu koja ima funkcionalnost
 \texttt{table} okoline, ali se uvijek proteže cijelom širinom stranice.
 
 \section{Dodavanje literature}
 \label{sec:literatura}
-Za navođenje literature u \LaTeX{} dokumentima zadužen je alat Bib\TeX{}.
-Bib\TeX{} omogućuje korištenje raznih stilova prikaza navoda literature i
-referenciranja preko naredbe \verb|\bibliographystyle{}|.
+Za navođenje literature u \LaTeX\ dokumentima zadužen je alat Bib\TeX.
+Bib\TeX\ omogućuje korištenje raznih stilova prikaza navoda literature i
+referenciranja preko naredbe \verb|\bibliographystyle|. Uz predložak, preveden
+je stil \texttt{natbib} paketa \texttt{plainnat.bst} i spremljen kao \texttt{fer.bst} 
+(uključuje se naredbom \verb|\bibliographystyle{fer}|).
 
 Literaturu možete navoditi unutar \texttt{thebibliography} okoline ili
 korištenjem \texttt{bib} baze literature (preporučeni način). Baza literature je
 standardna tekstualna datoteka sa nastavkom ``bib'' koja sadrži Bib\TeX{} zapise,
-a u dokument se uključuje naredbom \verb|\bibliography{}|, npr.\
+a u dokument se uključuje naredbom \verb|\bibliography|, npr.\
 \verb|\bibliography{literatura}| za datoteku \texttt{literatura.bib}. Primjer
 Bib\TeX{} zapisa:
 \begin{verbatim}
@@ -1074,10 +1118,9 @@ njegov Bib\TeX{} zapis. Za Google Scholar tu opciju je potrebno eksplicitno
 omogućiti (u postavkama navedite da se prikazuju veze za uvoz navoda iz
 Bib\TeX-a).
 
-
-Za referenciranje na navod literature koriste se naredbe \verb|\citep{}| i
-\verb|citet{}| (ove naredbe su specifične za \texttt{natbib} paket koji se
-koristi u ovom predlošku, sam Bib\TeX{} koristi \verb|\cite{}| naredbu). Kao
+Za referenciranje na navod literature koriste se naredbe \verb|\citep| i
+\verb|citet| (ove naredbe su specifične za \texttt{natbib} paket koji se
+koristi u ovom predlošku, sam Bib\TeX{} koristi \verb|\cite| naredbu). Kao
 parametar tim naredbama predaje se ključ navoda, npr.\ ``greenwade93'' iz
 gornjeg primjera. Naredba \texttt{citep} proizvodi standardni navod literature,
 a \texttt{citet} navodi ime autora, primjerice:
@@ -1096,20 +1139,10 @@ literature u \LaTeX{} dokumente možete naći na
 \url{http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management}.
 
 \subsection{Promjena načina citiranja}
-Trenutni način citiranja je ``(autor, godina).'' Ako želite promijeniti stil
-citiranja u ``[indeks]'' (npr.\ [1]) tada u datoteci \texttt{zavrsni.cls}
-promijenite parametre \emph{natbib} paketa:
-\begin{verbatim}
-\RequirePackage[authoryear, round]{natbib}
-\end{verbatim}
-u
-\begin{verbatim}
-\RequirePackage[numbers, square]{natbib}
-\end{verbatim}
+Pretpostavljeni način citiranja je ``(autor, godina).'' Ako želite promijeniti stil
+citiranja u ``[indeks]'' (npr.\ [1]) tada prilikom učitavanja stila dodajte parametar
+``numeric,'' primjerice \verb|\documentclass[zavrsni, numeric]{fer}|.
 
-% \section{Dodavanje indeksa}
-% Ma, ovo je nepotrebno..
-% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=makeindex
 
 \section{Dodatci dokumenta \engl{appendix}}
 Dodavanje dodataka vrši se dodavanjem poglavlja nakon naredbe \verb|\appendix|.
@@ -1129,7 +1162,7 @@ Sažetak rada je obavezan dio koji dolazi na sam kraj rada. Za sažetak na
 hrvatskom jeziku koristite okolinu \emph{sazetak}, a za
 sažetak na engleskom jeziku okolinu \emph{abstract}. Prije korištenja
 \emph{abstract} okoline potrebno je navesti naslov na engleskom jeziku naredbom
-\verb|\engtitle{}|. Primjer korištenja:
+\verb|\engtitle|. Primjer korištenja:
 \begin{verbatim}
 \begin{sazetak}
 Sažetak rada.
@@ -1152,51 +1185,24 @@ Nakon sažetka dolazi kraj dokumenta, odnosno naredba:
 U popis ključnih riječi navedite pojmove bitne za vaš rad koji nisu već
 spomenuti u naslovu.
 
-\section{Dodavanje posvete}
-\label{sec:posveta}
-Posveta se dodaje naredbom \verb|\posveta{}| na mjestu gdje želite stranicu s
-posvetom (npr.\ prije tablice sadržaja -- iznad \verb|\tableofcontents|
+\section{Dodavanje zahvale}
+\label{sec:zahvala}
+Zahvala se dodaje naredbom \verb|\zahvala| na mjestu gdje želite stranicu s
+zahvalom (npr.\ prije tablice sadržaja -- iznad \verb|\tableofcontents|
 naredbe). Primjer korištenja:
 \begin{verbatim}
-\posveta{Svima koji žele naučiti koristiti \LaTeX{}.}
+\zahvala{Svima koji su pomogli u izradi predloška i uputa!}
 \end{verbatim}
 
 
 \section{Korištenje naredbe \texttt{engl}}
 \label{sec:engl}
-Naredba \verb|\engl{}| služi navođenju engleskog
+Naredba \verb|\engl| služi navođenju engleskog
 prijevoda nekog termina (radi se o nestandardnoj naredbi), npr.:
 \begin{verbatim}
 Dodatak dokumenta \engl{appendix}.
 \end{verbatim}
 \boxresult{Dodatak dokumenta \engl{appendix}.}
-
-
-\section{Korištenje dodatnih paketa}
-\label{sec:koristenje-dod-paketa}
-\LaTeX{} paketi se mogu promatrati kao dodatne biblioteke u programskim
-jezicima. Dodavanje novih paketa vrši se \verb|\usepackage{}| naredbom.
-Navedena naredba dolazi nakon \verb|\documentclass{}| naredbe. Primjer
-korištenja:
-\begin{verbatim}
-\documentclass{zavrsni}
-\usepackage{algorithmic}
-\usepackage{algorithm}
-\usepackage{listings}
-\usepackage{longtable}
-\end{verbatim}
-
-\LaTeX{} distribucije dolaze s velikim brojem već instaliranih paketa.
-Također, distribucije je moguće podesiti da, u slučaju korištenja paketa koji
-nije instaliran, same dohvate paket sa CTAN-a i instaliraju ga.
-
-Za više informacija o \LaTeX{} paketima, konzultirajte CTAN
-(\url{http://tug.ctan.org/}). Korisne upute za korištenje i instalaciju \LaTeX{}
-paketa možete naći na \url{http://en.wikibooks.org/wiki/LaTeX/Packages}.
-
-Bitno je spomenuti da se uz svaki \TeX{} paket s CTAN-a može skinuti pripadna
-dokumentacija.
-
 
 \section{Provjera pravopisa}
 Programi \emph{aspell} i \emph{ispell} omogućavaju jednostavnu provjeru
