@@ -76,7 +76,6 @@
 \RequirePackage{amssymb} % Uključeno jer je često korišteno
 \RequirePackage{amsmath} % Uključeno jer je često korišteno
 \RequirePackage{fixltx2e}
-\RequirePackage[outsidefoot]{pageno}
 \RequirePackage{caption}
 \RequirePackage{ifthen}
 \RequirePackage{url} % Potrebno radi natbiba
@@ -97,6 +96,17 @@
 \if@citeauthoryear \RequirePackage[authoryear, round]{natbib}
 \else \RequirePackage[numbers, square]{natbib}
 \fi
+
+% Umjesto poziva \RequirePackage[outsidefoot]{pageno}.
+% Neke LaTeX distribucije odbijaju automatski instalirati pageno paket.
+% Stoga, dio paketa koji se koristi je kopiran u ovu cls datoteku.
+\renewcommand{\ps@plain}{%
+   \renewcommand{\@mkboth}{\@gobbletwo}%
+   \renewcommand{\@oddhead}{}%
+   \renewcommand{\@evenhead}{}%
+   \renewcommand{\@evenfoot}{\reset@font\rmfamily\thepage\hfil}%
+   \renewcommand{\@oddfoot}{\reset@font\rmfamily\hfil\thepage}}
+\pagestyle{plain}
 
 \renewcommand{\captionlabelfont}{\bfseries}
 \renewcommand{\captionfont}{\small}
