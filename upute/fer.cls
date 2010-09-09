@@ -124,14 +124,26 @@
 \renewcommand{\labelitemii}{\textbullet}
 
 % Dodavanje točke na kraj broja poglavlja, odjeljaka, pododjeljaka ..
-\renewcommand\thechapter{\@arabic\c@chapter.}
-\renewcommand\thesection{\thechapter\@arabic\c@section.}
-\renewcommand\thesubsection{\thesection\@arabic\c@subsection.}
-\renewcommand\thesubsubsection{\thesubsection\@arabic\c@subsubsection.}
+%\renewcommand\thechapter{\@arabic\c@chapter.}
+%\renewcommand\thesection{\thechapter\@arabic\c@section.}
+%\renewcommand\thesubsection{\thesection\@arabic\c@subsection.}
+%\renewcommand\thesubsubsection{\thesubsection\@arabic\c@subsubsection.}
 
-\renewcommand\theequation{\ifnum \c@chapter>\z@ \thechapter\fi \@arabic\c@equation}
-\renewcommand\thefigure{\ifnum \c@chapter>\z@ \thechapter\fi \@arabic\c@figure}
-\renewcommand\thetable{\ifnum \c@chapter>\z@ \thechapter\fi \@arabic\c@table}
+% http://www.tex.ac.uk/cgi-bin/texfaq2html?label=seccntfmt
+% dodaje tocku nakon section broja ali ne i nakon chapter!
+% za chapter se koristi jednostavno http://theoval.cmp.uea.ac.uk/~nlct/latex/thesis/node10.html
+\renewcommand*{\@seccntformat}[1]{%
+  \csname the#1\endcsname.\quad
+}
+
+% http://stackoverflow.com/questions/2426963/modifying-latex-table-of-contents-to-add-a-period-after-chapter-table-figure-numb
+% Dodaje u toc tocke
+\let \savenumberline \numberline
+\def \numberline#1{\savenumberline{#1.}}
+
+\renewcommand\theequation{\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@equation}
+\renewcommand\thefigure{\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@figure}
+\renewcommand\thetable{\ifnum \c@chapter>\z@ \thechapter.\fi \@arabic\c@table}
 
 % Rimski brojevi stranica za zahvalu i tablicu sadržaja.
 \renewcommand{\thepage}{\roman{page}}
@@ -210,7 +222,7 @@
 	{\setlength{\parskip}{0em} \parindent \z@ \raggedright \normalfont
 		\interlinepenalty\@M
 		\ifnum \c@secnumdepth >\m@ne
-			\Huge\bfseries \thechapter~#1
+			\Huge\bfseries \thechapter.~#1
 			\par\nobreak
 		\fi
 		\nobreak
