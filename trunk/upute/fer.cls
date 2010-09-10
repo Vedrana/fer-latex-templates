@@ -1,5 +1,6 @@
 % LaTeX predložak za pismene radove na
 % Fakultetu elektrotehnike i računarstva.
+% Verzija: 1.0
 %
 % Pokriveni radovi su: Seminar, Završni i Diplomski rad
 %
@@ -56,8 +57,6 @@
 					       \@citenumericfalse}
 \DeclareOption{numeric}{\@citeauthoryearfalse%
 					    \@citenumerictrue}
-
-% \DeclareOption*{\PassOptionsToClass{\CurrentOption}{report}}
 
 \ProcessOptions
 
@@ -122,12 +121,6 @@
 % Podešavanje oznaka kod listi (1. razina je crtica, 2. puni krug) 
 \renewcommand{\labelitemi}{\textendash}
 \renewcommand{\labelitemii}{\textbullet}
-
-% Dodavanje točke na kraj broja poglavlja, odjeljaka, pododjeljaka ..
-%\renewcommand\thechapter{\@arabic\c@chapter.}
-%\renewcommand\thesection{\thechapter\@arabic\c@section.}
-%\renewcommand\thesubsection{\thesection\@arabic\c@subsection.}
-%\renewcommand\thesubsubsection{\thesubsection\@arabic\c@subsubsection.}
 
 % http://www.tex.ac.uk/cgi-bin/texfaq2html?label=seccntfmt
 % dodaje tocku nakon section broja ali ne i nakon chapter!
@@ -313,8 +306,8 @@
 % 	\global\let\@thanks\@empty
 % 	\global\let\@author\@empty
 	\global\let\@date\@empty
-	%\global\let\@title\@empty
-	%\global\let\title\relax
+%	\global\let\@title\@empty
+%	\global\let\title\relax
 % 	\global\let\author\relax
 	\global\let\date\relax
 	\global\let\and\relax
