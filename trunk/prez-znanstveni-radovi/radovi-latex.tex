@@ -1,0 +1,635 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+\usetheme{default}
+\setbeamercovered{invisible}
+}
+\usepackage[utf8]{inputenc}
+\usepackage[croatian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{mathptmx}
+\usepackage{palatino}
+\usepackage{multicol}
+\usepackage[absolute,overlay]{textpos}
+\usepackage{listings}
+\usepackage{booktabs}
+
+\setbeamerfont{frametitle}{family=\rmfamily,size=\LARGE}
+\setbeamerfont{title}{shape=\upshape,size=\Large,series=\bfseries}
+\setbeamerfont{author}{series=\bfseries}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{institute}{size=\small}
+\definecolor{mso2007}{RGB}{0,124,168}
+\setbeamercolor{frametitle}{fg=mso2007}
+\setbeamercolor{title}{fg=mso2007}
+\setbeamercolor{item}{fg=mso2007}
+\setbeamercolor{section in toc}{fg=black,parent=structure,series=\bfseries}
+\setbeamertemplate{sections/subsections in toc}[circle]
+\setbeamertemplate{sidebar right}{}% or get rid of navigation entries there somehow
+\setbeamertemplate{footline}[frame number]
+\setbeamercolor{footline}{fg=white}
+
+\setbeamertemplate{frametitle}
+{
+\insertframetitle
+\vspace{15pt} % Nakon ovoga mora ići prazna linija!!
+
+}
+
+\title{Pisanje znanstvenih radova u \LaTeX-u}
+\author{Ivan Krišto}
+
+\institute[Universities of]
+{
+Fakultet Elektrotehnike i Računarstva\\
+Sveučilište u Zagrebu}
+
+\date{08.03.2011.}
+
+\begin{document}
+
+\begin{frame}
+\begin{textblock}{7}(1,1.2)
+\begin{figure}
+\centering
+\includegraphics[width=1.5cm]{logo-sveuciliste.jpg}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{7}(7.2,1.2)
+\begin{figure}
+\centering
+\includegraphics[width=1.25cm]{FER_logo.jpg}
+\end{figure}
+\end{textblock}
+
+\begin{textblock}{7}(12,1.6)
+\begin{figure}
+\centering
+\includegraphics[width=2.5cm]{logo-ieee.png}
+\end{figure}
+\end{textblock}
+
+\vspace{70pt}
+\titlepage
+\end{frame}
+
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{background}}
+
+\begin{frame}[t]{Organizacija}
+\textbf{Cilj:} upoznavanje s \LaTeX-om, njegovim prednostima u odnosu na
+tekstualne procesore, uz konkretnu primjenu na pisanje znanstvenih radova.
+
+\begin{multicols}{2}
+\tableofcontents
+\end{multicols}
+\end{frame}
+
+% Done
+% TODO provjeri još jednom
+\section{Što je \LaTeX{}?}
+\begin{frame}[t]{Što je \LaTeX{}?}
+\begin{itemize}
+  \item Sustav za pripremu dokumenata i \emph{slovoslagarstvo} (engl.\ \emph{typesetting})
+  \item Nadogradnja \TeX-a
+  \item Usmjeravanje posla na strukturu i sadržaj (ne izgled)
+  \item Jednostavna izrada lijepih dokumenata po predefiniranim stilovima
+  \item Veliki broj dodataka (izrada tablica, grafova, crteža, \ldots)
+  \item Veći stilski zahvati znaju biti izuzetno teški
+  \item Nije zamišljen kao WYSIWYG alat
+\end{itemize}
+\end{frame}
+
+\subsection{Kako \LaTeX{} radi}
+\begin{frame}[t]{Kako \LaTeX{} radi}
+\begin{figure}[htb]
+\begin{center}
+\begin{picture}(270,15)
+\put(13,5){\makebox(40,15){\texttt{dokument.tex}}}
+\put(74,12){\vector(1,0){15}}
+\put(91,5){\framebox(90,15){\texttt{pdflatex}}}
+\put(183,12){\vector(1,0){15}}
+\put(219,4){\makebox(40,15){\texttt{dokument.pdf}}}
+\end{picture}
+\caption{Tok \LaTeX\ prevođenja}
+\label{fig:ru-sustav-dijagram}
+\end{center}
+\end{figure}
+\begin{itemize}
+  \item \texttt{dokument.tex} -- tekstualni dokument sa sadržajem i \LaTeX\ naredbama
+  \item \texttt{pdflatex} -- prevođenje \texttt{tex} dokumenta u \texttt{pdf}\\
+  (prevoditelj \texttt{latex} prevodi u \texttt{dvi})
+  \pause
+  \item Distribucije:
+  \begin{itemize}
+    \item Windowsi -- Mik\TeX{} (\url{http://miktex.org/})
+    \item Linux -- \TeX\ Live (\url{http://www.tug.org/texlive/}; dostupan također za Windowse i MacOS)
+    \item Sadrže više prevoditelja i skup korisnih alata (\texttt{ps2pdf}, \texttt{ebb}, \ldots)
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\section{Zašto koristiti \LaTeX}
+\begin{frame}[t]{Zašto koristiti \LaTeX\ (1)}
+\begin{itemize}
+  \item Odjeljivanje sadržaja i strukture od stila -- jednostavna promjena predložaka (primjerice, kod promjene konferencije)
+  \item Dokumenti su prenosivi kroz verzije \LaTeX\ distribucija (primjerice, dokument napisan MS Wordom 2007 nije čitljiv u MS Wordu 2000)
+  \item Izuzetno dobro vođenje referenci -- {\sc Bib}\TeX{}
+  \item Mogućnost korištenja sustava za verzioniranje (VCS sustavi -- SVN, Mercurial, Git, \ldots) -- izuzetno korisno kod tekstova sa više autora!
+  \item Mogućnost umetanja komentara pri čemu se ne narušava dizajn
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Zašto koristiti \LaTeX\ (2)}
+\begin{itemize}
+  \item Dokumenti se pišu kao obične tekstualne datoteke s \TeX\ sintaksom --
+  različite verzije teksta su lako usporedive \emph{diff} alatima % note: trend je odmicanje od binarnog zapisa -- odf i docx su zapravo XML
+  \item Mogućnost pisanja dokumenata u dijelovima (naredba \texttt{include})
+  \item Trudi se poštivati osnove tipografije -- poštivanje tipografskih pravila poboljšava čitljivost  
+\end{itemize}
+\end{frame}
+
+\section{Razvojna okruženja}
+\begin{frame}[t]{Razvojna okruženja}
+\begin{itemize}
+\item TexMaker (\url{http://www.xm1math.net/texmaker/})
+\begin{description}
+  \item[+] Veliki broj gotovih primjera %(odlično za početnike!)
+  \item[--] Pretrpano sučelje
+\end{description}
+\pause
+\item \TeX{}works (\url{http://code.google.com/p/texworks/})
+\begin{description}
+  \item[+] Jednostavan i malen
+  \item[+] Ugrađeni preglednik
+  \item[--] Nema gotovih primjera (simbola i konstrukcija)
+\end{description}
+\pause
+\item Eclipse \& \TeX{}lipse (\url{http://www.eclipse.org/} \& \url{http://texlipse.sourceforge.net/})
+\begin{description}
+  \item[+] Najmoćnije razvojno okruženje
+  \item[+] Odličan prikaz grešaka (u razini linije!)
+  \item[+] Autocomplete čita čak i \texttt{bib} datoteke
+  \item[+] Prevodi paralelno s radom
+  \item[--] Glomazan
+\end{description} 
+\end{itemize}
+\end{frame}
+
+\section{Osnove \LaTeX-a}
+\subsection{\LaTeX{} dokument}
+\begin{frame}[fragile]
+\frametitle{Struktura \LaTeX{} dokumenta}
+\begin{multicols}{2}
+Osnovni \LaTeX\ dokument:
+\begin{verbatim}
+\documentclass{article}
+\title{Naslov}
+\author{Autor}
+\begin{document}
+\section{Uvod}
+Uvod..
+\subsection{Unutar uvoda}
+Prvi paragraf.
+
+Drugi paragraf.
+\end{document}
+\end{verbatim}
+
+\begin{itemize}
+  \item Stil se definira \verb|\documentclass| naredbom
+  \item Sadržaj se nalazi u \texttt{document} okolini
+  \item Struktura se gradi \verb|\section|, \verb|\subsection| i
+  \verb|\subsubsection| naredbama te podjelom na paragrafe ($\star$) 
+  \item Tekst se odjeljuje u paragrafe praznim redom
+  \item Prelazak u novi red (bez stvaranja paragrafa) -- sekvenca: \verb|\\|
+\end{itemize}
+\end{multicols}
+\end{frame}
+
+\subsection{Naredbe i okoline}
+\begin{frame}[fragile]
+\frametitle{Naredbe i okoline}
+\begin{description}
+  \item[Naredbe:] Elementi \LaTeX-a koji primaju argumente i parametre te se transformiraju u
+  oblikovani tekst
+  \begin{itemize}
+    \item Sintaksa: \verb|\naziv[parametar][...]{argument}{...}|
+    \item Primjeri: \verb|\tableofcontents|, \verb|\emph{fakultet}|, \verb|\frac{2}{x+2}|, \verb|\usepackage[croatian]{babel}|
+  \end{itemize}
+  \item[Okoline:] Slično kao naredbe, ali umjesto argumenta primaju
+  segment dokumenta (razlika je u obradi paragrafa)
+  \begin{itemize}
+    \item Sintaksa: \verb|\begin{naziv}[parametar][..]{argument}{..}| \ldots \verb|\end{naziv}|
+    \item Primjer: \verb|\begin{tabular}{ l c r }| \ldots \verb|\end{tabular}|
+  \end{itemize}
+\end{description}
+\end{frame}
+
+% \subsection{Liste, nabrajanja i opisi}
+% \begin{frame}[fragile]
+% \frametitle{Liste, nabrajanja i opisi}
+% \begin{multicols}{2}
+% \begin{itemize}
+%   \item Liste:
+% \begin{verbatim}
+% \begin{itemize}
+%   \item kruh
+%   \item mlijeko
+%   \item jaja
+% \end{itemize}
+% \end{verbatim}
+%   \item Nabrajanja:
+% \begin{verbatim}
+% \begin{enumerate}
+%   \item Prva
+%   \item Druga
+%   \item Treća
+% \end{enumerate}
+% \end{verbatim}
+%   \item Opisi:
+% \begin{verbatim}
+% \begin{description}
+%   \item[Pingvin] ptica
+%   \item[Špar] riba
+% \end{description}
+% \end{verbatim}
+%   \item Gniježđenje:
+% \begin{verbatim}
+% \begin{itemize}
+%   \item Prva stavka
+%   \begin{enumerate}
+%     \item Numerirano
+%   \end{enumerate}
+% \end{itemize}
+% \end{verbatim}
+% \end{itemize}
+% \end{multicols}
+% \end{frame}
+
+\subsection{Slike i tablice}
+\begin{frame}[fragile]
+\frametitle{Dodavanje slika}
+\begin{itemize}
+  \item Dodaju se pomoću \texttt{figure} lebdeće okoline
+  (slika se ne mora pojaviti tamo gdje je navedete!)
+\begin{verbatim}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=2cm]
+                {FER_logo.jpg}
+\caption{Logo FER-a}
+\label{fig:fer-logo}
+\end{figure}
+\end{verbatim}
+\end{itemize}
+\begin{textblock}{10}(8,5.3)
+\begin{figure}
+\centering
+\includegraphics[width=2cm]{FER_logo.jpg}
+\caption{Logo FER-a}
+\label{fig:fer-logo}
+\end{figure}
+\end{textblock}
+\begin{itemize}
+  \item \texttt{htb} -- pozicioniranje (\emph{here}, \emph{top}, \emph{bottom});
+  \texttt{caption} -- naslov (uvijek na dnu); \texttt{label} -- za referenciranje pomoću {\tt ref} naredbe.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Dodavanje tablica (1)}
+\begin{itemize}
+  \item Ostvaruju se preko \texttt{table} i \texttt{tabular} okolina
+  \item \texttt{table} je lebdeća okolina unutar koje se
+  smješta \texttt{tabular} okolina s podatcima
+  \item Znak \& odvaja stupce; sekvenca \textbackslash\textbackslash\ odvaja retke 
+\begin{verbatim}
+\begin{table}[htb]
+\caption{Konstante}
+\centering
+\begin{tabular}{llr} \hline
+Konstanta & Opis & Vrijednost \\ \hline
+$\pi$ & Pi & 3.14159 \\
+$e$ & Eulerov broj & 2.71828 \\
+$\varphi$ & Zlatni rez & 1.61803 \\ \hline
+\end{tabular}
+\end{table}
+\end{verbatim}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Dodavanje tablica (2)}
+\begin{table}[htb]
+\caption{Konstante}
+\centering
+\begin{tabular}{llr} \hline
+Konstanta & Opis & Vrijednost\\ \hline
+$\pi$ & Pi & 3.14159 \\
+$e$ & Eulerov broj & 2.71828 \\
+$\varphi$ & Zlatni rez & 1.61803 \\ \hline
+\end{tabular}
+\end{table}
+% \begin{table}[htb]
+% \caption{Konstante (\texttt{booktabs} paket)}
+% \centering
+% \begin{tabular}{llr} \toprule
+% Konstanta & Opis & Vrijednost\\ \midrule
+% $\pi$ & Pi & 3.14159 \\
+% $e$ & Eulerov broj & 2.71828 \\
+% $\varphi$ & Zlatni rez & 1.61803 \\ \bottomrule
+% \end{tabular}
+% \end{table}
+\end{frame}
+
+\subsection{Matematički izrazi}
+\begin{frame}[fragile]
+\frametitle{Matematički izrazi}
+\begin{itemize}
+  \item Brzo i jednostavno (uz malo vježbanja)
+  \item Piše se u modu za matematiku
+  \begin{itemize}
+    \item \verb|$ ... $| za izraze u istoj liniji uz tekst
+    \item \verb|\[  ... \]| (ili \verb|$$  ... $$|) za izraze u posebnoj liniji
+    \item okolina {\tt equation} -- dodaje brojač
+  \end{itemize}
+  \item Primjeri: \verb|$x^2$| -- $x^2$, \verb|$\int_{2}^{10} x^2 dx$| -- $\int_{2}^{10} x^2 dx$
+  \[  f(t)\ast g(t) = \int^{\infty}_{-\infty} f(\tau)g(t-\tau)d\tau \]
+\begin{verbatim}
+\[   f(t)\ast g(t) = \int^{\infty}_{-\infty}
+                     f(\tau)g(t-\tau)d\tau   \]
+\end{verbatim}
+  \item Dobre upute za pisanje matematičkih izraza u \LaTeX-u:
+  \url{ftp.ams.org/pub/tex/doc/amsmath/short-math-guide.pdf}
+\end{itemize}
+\end{frame}
+
+% \subsection{Neformatirani sadržaj}
+% \lstset{language=C, tabsize=2}
+% \begin{frame}[fragile]
+% \frametitle{Neformatirani sadržaj}
+% \begin{multicols}{2}
+% \begin{itemize}
+%   \item Neformatirani sadržaj -- tekst koji se mora prikazati s očuvanim izvornim razmacima, redovima i neekspandiranim naredbama
+%   \item Linijski, naredba \verb|\verb|, primjer: ``\verb@\verb|\emph{nešto}|@''
+%   \item Višelinijski, okolina \texttt{verbatim}:
+%   \begin{verbatim}
+%   Linija prva,
+%     druga
+%       i treća.
+%   \end{verbatim}
+%   \item Programski kod se može uključiti unutar \texttt{verbatim} okoline
+%   \item Posebni paketi za uključivanje programskog koda, primjerice \texttt{listings}:
+% \end{itemize}
+%   \begin{lstlisting}
+%   int fib(int n) {
+%    if (n <= 0) return 0;
+%    else if(n==1)return 1;
+%    else return fib(n-1)
+%   	          + fib(n-2);
+%   }
+%   \end{lstlisting}
+% \end{multicols}
+% \end{frame}
+
+\subsection{Literatura}
+\begin{frame}[fragile]
+\frametitle{Literatura}
+\begin{itemize}
+  \item Upravljanjem literature bavi se {\sc Bib}\TeX
+  \item Literatura se navodi u \texttt{bib} datoteci ({\sc Bib}\TeX\ zapisi)
+\begin{verbatim}
+@article{greenwade93,
+ author = {Greenwade, D., George},
+ title = {The Comprehensive Tex Archive Network},
+ year = {1993},
+ journal = {TUGBoat}
+}
+\end{verbatim}
+\item Veza \texttt{literatura.bib} i \texttt{tex} datoteka: \verb|\bibliography{literatura}|
+\item Postavljanje stila popisa literature \verb|\bibliographystyle{plain}|% (stil ``\texttt{plain}'')
+\item Referenciranje na literaturu: \verb|\cite{greenwade93}|
+\item Prevođenje: \texttt{pdflatex}, \texttt{bibtex}, \texttt{pdflatex}, \texttt{pdflatex}
+\item \texttt{natbib} paket -- sortiranje, stil, referenciranje preko \verb|\citep|, \verb|\citet| 
+\end{itemize}
+\end{frame}
+
+\subsection{Paketi}
+\begin{frame}[t]{Paketi}
+\begin{itemize}
+  \item Skupovi definicija naredbi i okolina
+  \item Glavni izvor: ``The Comprehensive \TeX\ Archive Network (CTAN)''
+  \item Ručna instalacija je \emph{relativno} složena
+  \item \LaTeX\ distribucije uglavnom same skinu i instaliraju paket koji zatražite
+  \item Dodaju se \texttt{usepackage} naredbom odmah nakon \texttt{documentclass} naredbe
+  \item Par korisnih paketa:
+  \begin{description}
+	\item[natbib] olakšavanje rada s literaturom
+	\item[booktabs] naredbe za stiliziranje tablica
+	\item[enumitem] proširenje mogućnosti listi i nabrajanja
+	\item[amsmath] proširenje mogućnosti za pisanje matematičkih izraza
+	\item[multicol] naredbe za pisanje u stupcima
+  \end{description}
+\end{itemize}
+\end{frame}
+
+\subsection{Specifičnosti i savjeti}
+\begin{frame}[fragile]
+\frametitle{Specifičnosti i savjeti}
+\begin{itemize}
+  \item<1-> Posebni znakovi (osnova \TeX\ sintakse): \$ \% \_ \} \{ \& \# \textbackslash
+  \begin{itemize}
+    \item Koristi se isključivanje (engl.\ \emph{escape}), primjerice \verb|\$|, a \textbackslash\ se dobiva naredbom \verb|\textbackslash|
+  \end{itemize}
+  \item<2-> Može se dogoditi da je riječ loše prelomljena te prelazi rub stranice
+  \begin{itemize}
+    \item Razlomite riječ: \verb|pre\-lo\-mlje\-na| ili \verb|ra\-ču\-na\-lo|
+  \end{itemize}
+  \item<3-> Pravopis možete provjeriti pomoću \emph{aspell} ili \emph{ispell} alata, primjerice: \texttt{aspell -c dokument.tex}
+  \item<4-> Ponekad je potrebno prevođenje pokrenuti više puta (primjerice, kod dodavanja, uklanjanja ili mijenjanja naziva odjeljaka)
+  \item<5-> Acrobat Reader (MS Windows) ``zaključa'' {\tt pdf} datoteku -- prevođenjem {\tt
+  tex} datoteke uz otvoreni Acrobat Reader rezultira greškom (možete koristiti
+  \emph{Evince})
+\end{itemize}
+\end{frame}
+
+\section{Korištenje predložaka za znanstvene radove}
+\begin{frame}[fragile]
+\frametitle{O predlošcima za radove}
+\begin{itemize}
+  \item Predlošci se obično nalaze u sklopu dijela ``Instructions for Authors'' -- \emph{obavezno} ih slijedite!
+  \item Uz predloške uvijek dolaze opširne upute
+  \item Postoje predlošci za sadržaj ({\tt cls}) i navode literature ({\tt bst})
+  \item Instalacija: kopirajte ih u direktorij s {\tt tex} datotekom
+  \item Često korišteni predlošci: Springer (LNCS), IEEE, ACM
+  \item Obratite pozornost na opcije stila (opcije {\tt documentclass} naredbe)
+  i novodefinirane naredbe (primjerice, {\tt keywords}, {\tt email}, i sl.)
+  \item Ako postoji pokazni primjer predloška, iskoristite ga
+  \item Uz imena autora morate navesti i institucije (engl.\ \emph{affiliations})
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Springer}
+\begin{itemize}
+  \item Predložak: \url{ftp://ftp.springer.de/pub/tex/latex/llncs/latex2e/llncs2e.zip}
+  \item Osnova predloška: \texttt{llncs.cls} \& \texttt{splncs03.bst} -- definira \texttt{llncs} klasu
+  \item Povezivanje predloška s {\tt tex} datotekom: \scriptsize \verb|\documentclass{llncs}| \& \verb|\bibliographystyle{splncs}| \normalsize
+\end{itemize}
+\vspace{-10pt}
+\scriptsize
+\begin{verbatim}
+     \title{Naslov}
+     \author{Ivan Krišto \and Groucho Marx}
+     \institute{Faculty of Electrical and Computing Engineering\\
+     University of Zagreb\\
+     Unska 3, 10000 Zagreb, Croatia\\
+     \email{\{ivan.kristo, groucho.marx\}@fer.hr}}
+
+     \maketitle
+
+     \begin{abstract}
+     Sažetak.
+
+     \textbf{Keywords:} primjer, \LaTeX{}, Springer.
+     \end{abstract}
+\end{verbatim}
+\normalsize
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{IEEE}
+\begin{itemize}
+  \item Predložak: \small \url{www.ieee.org/documents/IEEEtran5.zip}, \normalsize 
+  literatura: \small \url{www.ieee.org/documents/IEEEtranBST2.zip} \normalsize 
+  \item Osnova predloška: \small \texttt{IEEEtran.cls} \& \texttt{IEEEtran.bst} \normalsize (više
+  verzija, preporuka je \small \texttt{IEEEtranS.bst} \normalsize ili \small \texttt{IEEEtranNS.bst}) \normalsize
+  \item Povezivanje predloška s {\tt tex} \& {\tt bib} datotekama:
+  \scriptsize
+  \begin{verbatim}
+\documentclass[conference]{IEEEtran}|
+...  
+\bibliographystyle{IEEEtran}
+\bibliography{IEEEabrv,literatura}
+  \end{verbatim}
+  \normalsize
+  \item Dodavanje autora:
+\scriptsize
+\begin{verbatim}
+\author{\IEEEauthorblockN{Groucho Marx}
+\IEEEauthorblockA{School of Good Entertainment\\
+Holywood\\
+Los Angeles, California, USA\\
+Email: president@freedonia.gov}
+\and
+\IEEEauthorblockN{Homer Simpson}
+\IEEEauthorblockA{Twentieth Century Fox\\
+Springfield, USA\\
+Email: homer@thesimpsons.com}}
+\end{verbatim}
+\normalsize
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{IEEE -- napomene}
+\begin{itemize}
+  \item Uz predloške dolaze sažete upute i primjeri
+  \item Primjeri sadrže dosta korisnih informacija (zakomentirani unutar {\tt tex} datoteke)
+  \item Preporuka: koristite \texttt{IEEEtranNS.bst} za stil literature uz {\tt natbib} paket
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{ACM (1)}
+\begin{itemize}
+  \item Predložak: \small \url{http://www.acm.org/sigs/publications/acm_proc_article-sp.cls}\normalsize, za
+  literaturu koristi se standardni {\tt abbrv} {\sc Bib}\TeX\ stil.
+  \item Povezivanje predloška s {\tt tex} \& {\tt bib} datotekama:
+  \scriptsize
+  \begin{verbatim}
+\documentclass{acm_proc_article-sp}
+...  
+\bibliographystyle{abbrv}
+\bibliography{literatura}
+  \end{verbatim}
+  \normalsize
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{ACM (2)}
+\begin{itemize}
+  \item Dodavanje autora:
+\scriptsize
+\begin{verbatim}
+\numberofauthors{2}
+\author{
+\alignauthor
+Ivan Krišto\\
+       \affaddr{Faculty of Electrical and Computing Engineering}\\
+       \affaddr{University of Zagreb}\\
+       \affaddr{Unska 3, 10000 Zagreb, Croatia}\\
+       \email{ivan.kristo@fer.hr}
+\and
+\alignauthor
+Groucho Marx\\
+       \affaddr{School of Good Entertainment}\\
+       \affaddr{Holywood}\\
+       \affaddr{Los Angeles, California, USA}\\
+       \email{president@freedonia.gov}
+}
+\end{verbatim}
+\normalsize
+\end{itemize}
+\end{frame}
+
+\subsection{Specifičnosti i savjeti}
+\begin{frame}[fragile]
+\frametitle{Specifičnosti i savjeti (1)}
+\begin{itemize}
+  \item<1-> Ako možete koristiti \texttt{natbib}, koristite ga
+  \item<2-> Kodnu stranicu uvijek postavite na UTF-8:
+  \begin{verbatim}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+  \end{verbatim}
+  \item<3-> Odjeljak ``Acknowledgement'' se ne numerira, koristite okolinu {\tt section*} (primjeti $\star$)
+  \item<4-> Ako imate dvostupčani predložak te veliku tablicu ili sliku, koristite okolinu {\tt table*} odnosno {\tt figure*}
+  \item<5-> Matematičke izraze uvijek numerirajte:
+  \begin{verbatim}
+\begin{equation}
+  \sin^2\varphi + \cos^2\varphi = 1
+  \label{equ:trigonometry-first-lady}
+\end{equation}
+  \end{verbatim}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Specifičnosti i savjeti (2)}
+\begin{itemize}
+  \item {\sc Bib}\TeX\ citate nude: \url{http://scholar.google.com}, \url{http://citeseerx.ist.psu.edu},
+  \url{http://www.springerlink.com}, \url{http://www.sciencedirect.com}, \url{http://portal.acm.org}, \ldots.
+  \item Ako koristite javni VCS repozitorij (primjerice \url{code.google.com}), pazite na licence!
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Pitanja?}
+Korisna literatura:
+\begin{itemize}
+  \item \LaTeX\ wikibook -- wiki s puno primjera: \url{http://en.wikibooks.org/wiki/LaTeX}
+  \item Pitanja i odgovori (programiranje \& \TeX): \url{http://stackoverflow.com/} \& \url{http://tex.stackexchange.com/}
+  \item ``Ne baš tako kratak uvod u \TeX\ s naglaskom na \LaTeX:'' \url{web.math.hr/~ungar/lkratko2e_internet.pdf}
+  \item ``\TeX\ Frequently Asked Questions on the Web:'' \url{http://www.tex.ac.uk/cgi-bin/texfaq2html}
+  \item Upute za pisanje radova na FER-u korištenjem \LaTeX-a: \url{http://fer-latex-templates.googlecode.com/files/latex-predlozak-upute.pdf}
+\end{itemize}
+
+\end{frame}
+
+\end{document}
