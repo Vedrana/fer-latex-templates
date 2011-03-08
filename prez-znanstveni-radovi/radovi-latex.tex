@@ -477,7 +477,7 @@ $\varphi$ & Zlatni rez & 1.61803 \\ \hline
 \begin{itemize}
   \item Predložak: \url{ftp://ftp.springer.de/pub/tex/latex/llncs/latex2e/llncs2e.zip}
   \item Osnova predloška: \texttt{llncs.cls} \& \texttt{splncs03.bst} -- definira \texttt{llncs} klasu
-  \item Povezivanje predloška s {\tt tex} datotekom: \scriptsize \verb|\documentclass{llncs}| \& \verb|\bibliographystyle{splncs}| \normalsize
+  \item Povezivanje predloška s {\tt tex} datotekom: \scriptsize \verb|\documentclass{llncs}| \& \verb|\bibliographystyle{splncs03}| \normalsize
 \end{itemize}
 \vspace{-10pt}
 \scriptsize
@@ -613,6 +613,7 @@ Groucho Marx\\
 \begin{frame}[fragile]
 \frametitle{Specifičnosti i savjeti (2)}
 \begin{itemize}
+  \item Kod dvostupčanih predložaka često se zahtjeva balansiranje zadnje stranice --- uključite: \verb|\usepackage{flushend}|
   \item {\sc Bib}\TeX\ citate nude: \url{http://scholar.google.com}, \url{http://citeseerx.ist.psu.edu},
   \url{http://www.springerlink.com}, \url{http://www.sciencedirect.com}, \url{http://portal.acm.org}, \ldots.
   \item Ako koristite javni VCS repozitorij (primjerice \url{code.google.com}), pazite na licence!
