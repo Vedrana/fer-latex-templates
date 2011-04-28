@@ -9,11 +9,11 @@ Struktura
    Datoteke s izgrađenom osnovnom strukturom i povezanim stilovima.
  
  - predlosci:
-   Predlošci sa definicijama stila za tekst i literaturu.
+   Predlošci s definicijama stila za tekst i literaturu.
  
  - upute:
    Upute za korištenje predložaka te pisanje LaTeX dokumenata.
    
 NAPOMENA: Predlošci se nalaze na više mjesta u projektu.
-Ovo se treba zamjeniti simboličkim linkovima (no, prvo je potrebno
+Ovo se treba zamijeniti simboličkim linkovima (no, prvo je potrebno
 provjeriti podržava li SVN takav način rada).
