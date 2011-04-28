@@ -148,7 +148,7 @@
 	\thispagestyle{empty}
 	\vspace*{\fill}
 	\hfil \textsl{Umjesto ove stranice umetnite izvornik Va\v{s}eg rada.} \par \hfil
-	\hfil \textsl{Da bi ste uklonili ovu stranicu obri\v{s}ite naredbu \texttt{\textbackslash izvornik}.} \hfil
+	\hfil \textsl{Kako biste uklonili ovu stranicu, obri\v{s}ite naredbu \texttt{\textbackslash izvornik}.} \hfil
 	\vspace*{\fill}
 }
 \fi
