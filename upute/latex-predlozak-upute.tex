@@ -1,7 +1,7 @@
 % Upute za LaTeX predložak ZR-a i Seminara, verzija: 1.1
 \documentclass[zavrsni, lmodern, utf8]{fer}
 \usepackage{booktabs}
-\usepackage{enumerate}
+\usepackage{enumitem}
 \usepackage{multicol}
 \usepackage{textcomp}
 \usepackage{algorithm}
@@ -690,13 +690,13 @@ Liste tvore u okolini \texttt{itemize}, nabrajanja u okolini
 \end{enumerate}}
   \item[Nabrajanje s proizvoljnim brojačem] (zahtjeva \texttt{enumitem} paket) -- kod:
 \begin{verbatim}
-\begin{enumerate}[(a)]
+\begin{enumerate}[label=(\alph*)]
   \item prva stavka,
   \item druga stavka.
 \end{enumerate}
 \end{verbatim}
 \boxresult{%
-\begin{enumerate}[(a)]%
+\begin{enumerate}[label=(\alph*)]%
   \item prva stavka,%
   \item druga stavka.%
 \end{enumerate}}
