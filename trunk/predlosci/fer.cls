@@ -62,7 +62,7 @@
 
 \LoadClass[12pt, onecolumn]{report}
 
-\RequirePackage[a4paper, left=3.5cm, right=3cm, bottom=3cm, top=3cm]{geometry}
+\RequirePackage[a4paper, left=3cm, right=2.5cm, bottom=3cm, top=3cm]{geometry}
 
 % Postavljanje encodinga
 \if@encutf \RequirePackage[utf8]{inputenc}
@@ -82,9 +82,9 @@
 
 % Numeriranje literature kod seminara
 \if@radseminar%
-\RequirePackage[nottoc, numbib, chapter]{tocbibind}
+\RequirePackage[nottoc, notlof, notlot, numbib, chapter]{tocbibind}
 \else
-\RequirePackage[nottoc]{tocbibind}
+\RequirePackage[nottoc, notlof, notlot]{tocbibind}
 \fi
 
 % Postavljanje fonta
