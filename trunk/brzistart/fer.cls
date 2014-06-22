@@ -1,6 +1,6 @@
 % LaTeX predložak za pismene radove na
 % Fakultetu elektrotehnike i računarstva.
-% Verzija: 1.0
+% Verzija: 1.1
 %
 % Pokriveni radovi su: Seminar, Završni i Diplomski rad
 %
@@ -14,6 +14,7 @@
 %  - cp1250 - učitaj inputenc paket i opcijom cp1250
 %  - authoryear - stil citiranja ``(author, year)'' (standardna postavka)
 %  - numeric - stil citiranja ``[broj]''
+%  - english - omogući pisanje radova na engleskom jeziku
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{fer}
@@ -28,6 +29,7 @@
 \newif\if@citenumeric		\global\@citenumericfalse
 \newif\if@encutf			\global\@encutftrue
 \newif\if@enccp				\global\@enccpfalse
+\newif\if@langeng				\global\@langengfalse
 
 % Postavi font
 \DeclareOption{lmodern}{\@fontlmoderntrue%
@@ -58,6 +60,51 @@
 \DeclareOption{numeric}{\@citeauthoryearfalse%
 					    \@citenumerictrue}
 
+% Postavi varijable za konstantne stringove u tekstu
+% (svrha: omogućavanje prijevoda).
+\newcommand{\strdodatak}{Dodatak}
+\newcommand{\strsveuciliste}{SVEU\v{C}ILI\v{S}TE U ZAGREBU}
+\newcommand{\strfer}{FAKULTET ELEKTROTEHNIKE I RA\v{C}UNARSTVA}
+\newcommand{\strzavrsni}{ZAVR\v{S}NI RAD br}
+\newcommand{\strdiplomski}{DIPLOMSKI RAD br}
+\newcommand{\strseminar}{SEMINAR}
+\newcommand{\strvoditelj}{Voditelj}
+\newcommand{\strsijecanj}{sije\v{c}anj}
+\newcommand{\strveljaca}{velja\v{c}a}
+\newcommand{\strozujak}{o\v{z}ujak}
+\newcommand{\strtravanj}{travanj}
+\newcommand{\strsvibanj}{svibanj}
+\newcommand{\strlipanj}{lipanj}
+\newcommand{\strsrpanj}{srpanj}
+\newcommand{\strkolovoz}{kolovoz}
+\newcommand{\strrujan}{rujan}
+\newcommand{\strlistopad}{listopad}
+\newcommand{\strstudeni}{studeni}
+\newcommand{\strprosinac}{prosinac}
+
+% Koristi engleski jezik
+\DeclareOption{english}{%
+  \@langengtrue%
+  \renewcommand{\strdodatak}{Appendix}%
+  \renewcommand{\strsveuciliste}{UNIVERSITY OF ZAGREB}%
+  \renewcommand{\strfer}{FACULTY OF ELECTRICAL ENGINEERING AND COMPUTING}%
+  \renewcommand{\strzavrsni}{BACHELOR THESIS num}%
+  \renewcommand{\strdiplomski}{MASTER THESIS num}%
+  \renewcommand{\strseminar}{SEMINAR}%
+  \renewcommand{\strvoditelj}{Mentor}%
+  \renewcommand{\strsijecanj}{January}%
+  \renewcommand{\strveljaca}{February}%
+  \renewcommand{\strozujak}{March}%
+  \renewcommand{\strtravanj}{April}%
+  \renewcommand{\strsvibanj}{May}%
+  \renewcommand{\strlipanj}{June}%
+  \renewcommand{\strsrpanj}{July}%
+  \renewcommand{\strkolovoz}{August}%
+  \renewcommand{\strrujan}{September}%
+  \renewcommand{\strlistopad}{October}%
+  \renewcommand{\strstudeni}{November}%
+  \renewcommand{\strprosinac}{December}}
+
 \ProcessOptions
 
 \LoadClass[12pt, onecolumn]{report}
@@ -69,7 +116,9 @@
 \else \if@enccp \RequirePackage[cp1250]{inputenc} \fi
 \fi
 
-\RequirePackage[croatian]{babel}
+\if@langeng \RequirePackage[english]{babel}
+\else \RequirePackage[croatian]{babel}
+\fi
 \RequirePackage[T1]{fontenc}
 \RequirePackage{graphicx} % Uključeno jer je često korišteno
 \RequirePackage{amssymb} % Uključeno jer je često korišteno
@@ -82,9 +131,9 @@
 
 % Numeriranje literature kod seminara
 \if@radseminar%
-\RequirePackage[nottoc, numbib, chapter]{tocbibind}
+\RequirePackage[nottoc, notlof, notlot, numbib, chapter]{tocbibind}
 \else
-\RequirePackage[nottoc]{tocbibind}
+\RequirePackage[nottoc, notlof, notlot]{tocbibind}
 \fi
 
 % Postavljanje fonta
@@ -194,7 +243,7 @@
 	{\setlength{\parskip}{0em} \parindent \z@ \raggedright \normalfont
 		\interlinepenalty\@M
 		\ifnum \c@secnumdepth >\m@ne
-			\Huge\bfseries Dodatak \thechapter \\ #1
+			\Huge\bfseries \strdodatak\ \thechapter \\ #1
 			\par\nobreak
 		\fi
 		\nobreak
@@ -230,7 +279,7 @@
 	{\setlength{\parskip}{0em} \parindent \z@ \raggedright
 		\normalfont
 		\interlinepenalty\@Mdef
-		\Huge\scshape Dodatak \\ #1\par
+		\Huge\scshape \strdodatak\ \\ #1\par
 		\nobreak
 		\vskip 40\p@
 	}
@@ -258,23 +307,23 @@
 \fi
 
 \if@titlepage
-	\renewcommand\maketitle{%
+  \renewcommand{\maketitle}{%
 	\begin{titlepage}%
 		\let\footnotesize\small
 		\let\footnoterule\relax
 	
 		\begin{center}
-			{\large\sffamily SVEU\v{C}ILI\v{S}TE U ZAGREBU}
+			{\large\sffamily \strsveuciliste}
 			
-			{\large\bfseries\sffamily FAKULTET ELEKTROTEHNIKE I RA\v{C}UNARSTVA}
+			{\large\bfseries\sffamily \strfer}
 		\end{center}
 		\vfill
 		\begin{center}%
 	    	\if@radzavrsni%
-			  {\large\sffamily ZAVR\v{S}NI RAD br.~\@thesisnumber \par}%
+        {\large\sffamily \strzavrsni{}.~\@thesisnumber \par}%
 			\else \if@raddiplomski%
-			  {\large\sffamily DIPLOMSKI RAD br.~\@thesisnumber \par}%
-			\else {\large\sffamily\bfseries SEMINAR \par}%
+        {\large\sffamily \strdiplomski{}.~\@thesisnumber \par}%
+        \else {\large\sffamily\bfseries \strseminar\ \par}%
 			\fi\fi
 			\if@radseminar \vskip 3em%
 			\else \vskip 1em%
@@ -285,7 +334,7 @@
 			\begin{tabular}[t]{c}%
 	        	\if@radseminar%
 	        	  {\itshape \@author} \\
-	        	  Voditelj: {\itshape \@voditelj}
+              \strvoditelj{}: {\itshape \@voditelj}
 	        	\else
 				    \@author
 				\fi
@@ -295,20 +344,16 @@
 		\begin{center}
 			{\sffamily\large Zagreb, 
 			\ifcase\month\or
-				sije\v{c}anj\or velja\v{c}a\or o\v{z}ujak\or travanj\or svibanj\or
-	   	 		lipanj\or srpanj\or kolovoz\or rujan\or listopad\or studeni\or
-	    			prosinac\fi \space \number\year.%
+				\strsijecanj\or \strveljaca\or \strozujak\or \strtravanj\or
+        \strsvibanj\or \strlipanj\or \strsrpanj\or \strkolovoz\or
+        \strrujan\or \strlistopad\or \strstudeni\or
+	    	\strprosinac\fi \space \number\year.%
 	    	}
 		\end{center}
 	\end{titlepage}%
 	\setcounter{footnote}{0}%
 	\global\let\maketitle\relax
-% 	\global\let\@thanks\@empty
-% 	\global\let\@author\@empty
 	\global\let\@date\@empty
-%	\global\let\@title\@empty
-%	\global\let\title\relax
-% 	\global\let\author\relax
 	\global\let\date\relax
 	\global\let\and\relax
 	}
@@ -333,13 +378,19 @@
 \newcommand{\engl}[1]{(engl.~\emph{#1})}
 
 % Sažetak na hrvatskom
+\if@langeng
+\long\def\hrtitle#1{\gdef\@hrtitle{#1}}
+\def\@hrtitle{\@latex@warning@no@line{Hrvatski naziv rada nije definiran.
+Koristi \noexpand\hrtitle za definiranje}}
+\fi
 \newenvironment{sazetak}
 {
-\newpage
+% Ako je rad na engleskom, nemoj preći na novu stranicu
+\if@langeng\else\newpage\fi
 \vspace*{\fill}
 \thispagestyle{empty}
 \begin{center}
-  {\bf \@title}
+  {\bf \if@langeng\@hrtitle\else\@title\fi}
 \end{center}
 \hspace*{\fill} {\bf Sa\v{z}etak} \hspace*{\fill} \par
 \vspace*{25pt}
@@ -363,15 +414,18 @@
 }
 
 % Sažetak na engleskom
-\def\engtitle#1{\gdef\@engtitle{#1}}
+\if@langeng \else
+\long\def\engtitle#1{\gdef\@engtitle{#1}}
 \def\@engtitle{\@latex@warning@no@line{Engleski naziv rada nije definiran.
 Koristi \noexpand\engtitle za definiranje}}
+\fi
 \renewenvironment{abstract}
 {
+\if@langeng\newpage\fi
 \vspace*{\fill}
 \thispagestyle{empty}
 \begin{center}
-  {\bf \@engtitle}
+  {\bf \if@langeng\@title\else\@engtitle\fi}
 \end{center}
 \hspace*{\fill} {\bf Abstract} \hspace*{\fill} \par
 \vspace*{25pt}
