@@ -109,7 +109,7 @@
 
 \LoadClass[12pt, onecolumn]{report}
 
-\RequirePackage[a4paper, left=3.5cm, right=3cm, bottom=3cm, top=3cm]{geometry}
+\RequirePackage[a4paper, left=3cm, right=2.5cm, bottom=2.5cm, top=2.5cm]{geometry}
 
 % Postavljanje encodinga
 \if@encutf \RequirePackage[utf8]{inputenc}
@@ -306,56 +306,67 @@
   Koristi \noexpand\thesisnumber za definiranje}}
 \fi
 
+% Definiranje naslovne stranice.
 \if@titlepage
   \renewcommand{\maketitle}{%
-	\begin{titlepage}%
-		\let\footnotesize\small
-		\let\footnoterule\relax
-	
-		\begin{center}
-			{\large\sffamily \strsveuciliste}
-			
-			{\large\bfseries\sffamily \strfer}
-		\end{center}
-		\vfill
-		\begin{center}%
-	    	\if@radzavrsni%
-        {\large\sffamily \strzavrsni{}.~\@thesisnumber \par}%
-			\else \if@raddiplomski%
-        {\large\sffamily \strdiplomski{}.~\@thesisnumber \par}%
-        \else {\large\sffamily\bfseries \strseminar\ \par}%
-			\fi\fi
-			\if@radseminar \vskip 3em%
-			\else \vskip 1em%
-			\fi
-			{\huge \bfseries\sffamily \@title \par}%
-			\vskip 1em%
-			{\large\sffamily\lineskip .75em%
-			\begin{tabular}[t]{c}%
-	        	\if@radseminar%
-	        	  {\itshape \@author} \\
-              \strvoditelj{}: {\itshape \@voditelj}
-	        	\else
-				    \@author
-				\fi
-			\end{tabular}\par}%
-		\end{center}\par
-		\vfill
-		\begin{center}
-			{\sffamily\large Zagreb, 
-			\ifcase\month\or
-				\strsijecanj\or \strveljaca\or \strozujak\or \strtravanj\or
-        \strsvibanj\or \strlipanj\or \strsrpanj\or \strkolovoz\or
-        \strrujan\or \strlistopad\or \strstudeni\or
-	    	\strprosinac\fi \space \number\year.%
-	    	}
-		\end{center}
-	\end{titlepage}%
-	\setcounter{footnote}{0}%
-	\global\let\maketitle\relax
-	\global\let\@date\@empty
-	\global\let\date\relax
-	\global\let\and\relax
+    \addtolength{\voffset}{0.5cm}%
+    \addtolength{\hoffset}{0.5cm}%
+    \addtolength{\marginparwidth}{0.5cm}%
+    \addtolength{\textwidth}{-1cm}%
+    \addtolength{\textheight}{-1cm}%
+    \begin{titlepage}%
+      \let\footnotesize\small
+      \let\footnoterule\relax
+    
+      \begin{center}
+        {\large\sffamily \strsveuciliste}
+        
+        {\large\bfseries\sffamily \strfer}
+      \end{center}
+      \vfill
+      \begin{center}%
+          \if@radzavrsni%
+          {\large\sffamily \strzavrsni{}.~\@thesisnumber \par}%
+        \else \if@raddiplomski%
+          {\large\sffamily \strdiplomski{}.~\@thesisnumber \par}%
+          \else {\large\sffamily\bfseries \strseminar\ \par}%
+        \fi\fi
+        \if@radseminar \vskip 3em%
+        \else \vskip 1em%
+        \fi
+        {\huge \bfseries\sffamily \@title \par}%
+        \vskip 1em%
+        {\large\sffamily\lineskip .75em%
+        \begin{tabular}[t]{c}%
+              \if@radseminar%
+                {\itshape \@author} \\
+                \strvoditelj{}: {\itshape \@voditelj}
+              \else
+              \@author
+          \fi
+        \end{tabular}\par}%
+      \end{center}\par
+      \vfill
+      \begin{center}
+        {\sffamily\large Zagreb, 
+        \ifcase\month\or
+          \strsijecanj\or \strveljaca\or \strozujak\or \strtravanj\or
+          \strsvibanj\or \strlipanj\or \strsrpanj\or \strkolovoz\or
+          \strrujan\or \strlistopad\or \strstudeni\or
+          \strprosinac\fi \space \number\year.%
+          }
+      \end{center}
+    \end{titlepage}%
+    \addtolength{\voffset}{-0.5cm}%
+    \addtolength{\hoffset}{-0.5cm}%
+    \addtolength{\marginparwidth}{-0.5cm}%
+    \addtolength{\textwidth}{1cm}%
+    \addtolength{\textheight}{1cm}%
+    \setcounter{footnote}{0}%
+    \global\let\maketitle\relax
+    \global\let\@date\@empty
+    \global\let\date\relax
+    \global\let\and\relax
 	}
 \fi
 
