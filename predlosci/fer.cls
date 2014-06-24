@@ -119,7 +119,6 @@
 \if@langeng \RequirePackage[english]{babel}
 \else \RequirePackage[croatian]{babel}
 \fi
-\RequirePackage[T1]{fontenc}
 \RequirePackage{graphicx} % Uključeno jer je često korišteno
 \RequirePackage{amssymb} % Uključeno jer je često korišteno
 \RequirePackage{amsmath} % Uključeno jer je često korišteno
@@ -139,6 +138,7 @@
 % Postavljanje fonta
 \if@fonttimes\RequirePackage{times} \fi
 \if@fontlmodern\RequirePackage{lmodern} \fi
+\RequirePackage[T1]{fontenc}
 
 % Postavljanje stila citiranja
 \if@citeauthoryear \RequirePackage[authoryear, round]{natbib}
@@ -309,34 +309,38 @@
 % Definiranje naslovne stranice.
 \if@titlepage
   \renewcommand{\maketitle}{%
+    % Postavi margine na veličine za naslovnu stranicu
     \addtolength{\voffset}{0.5cm}%
     \addtolength{\hoffset}{0.5cm}%
     \addtolength{\marginparwidth}{0.5cm}%
     \addtolength{\textwidth}{-1cm}%
     \addtolength{\textheight}{-1cm}%
     \begin{titlepage}%
+      % Koristi Helvetica font na naslovnoj stranici
+      % (zamjena za Arial koji nije dostupan na svim platformama).
+      \fontfamily{phv}\selectfont% 
       \let\footnotesize\small
       \let\footnoterule\relax
     
       \begin{center}
-        {\large\sffamily \strsveuciliste}
+        {\large \strsveuciliste}
         
-        {\large\bfseries\sffamily \strfer}
+        {\large\bfseries \strfer}
       \end{center}
       \vfill
       \begin{center}%
           \if@radzavrsni%
-          {\large\sffamily \strzavrsni{}.~\@thesisnumber \par}%
+          {\large \strzavrsni{}.~\@thesisnumber \par}%
         \else \if@raddiplomski%
-          {\large\sffamily \strdiplomski{}.~\@thesisnumber \par}%
-          \else {\large\sffamily\bfseries \strseminar\ \par}%
+          {\large \strdiplomski{}.~\@thesisnumber \par}%
+          \else {\large\bfseries \strseminar\ \par}%
         \fi\fi
         \if@radseminar \vskip 3em%
         \else \vskip 1em%
         \fi
-        {\huge \bfseries\sffamily \@title \par}%
+        {\huge \bfseries \@title \par}%
         \vskip 1em%
-        {\large\sffamily\lineskip .75em%
+        {\large\lineskip .75em%
         \begin{tabular}[t]{c}%
               \if@radseminar%
                 {\itshape \@author} \\
@@ -348,15 +352,19 @@
       \end{center}\par
       \vfill
       \begin{center}
-        {\sffamily\large Zagreb, 
+        {\large Zagreb, 
         \ifcase\month\or
           \strsijecanj\or \strveljaca\or \strozujak\or \strtravanj\or
           \strsvibanj\or \strlipanj\or \strsrpanj\or \strkolovoz\or
           \strrujan\or \strlistopad\or \strstudeni\or
           \strprosinac\fi \space \number\year.%
-          }
+        }
       \end{center}
     \end{titlepage}%
+    % Vrati sf typeface na pravu vrijednost
+    \if@fonttimes\renewcommand{\sfdefault}{ptm}\fi%
+    \if@fontlmodern\renewcommand{\sfdefault}{lmr}\fi
+    % Vrati margine na postavke za ostale stranice
     \addtolength{\voffset}{-0.5cm}%
     \addtolength{\hoffset}{-0.5cm}%
     \addtolength{\marginparwidth}{-0.5cm}%
