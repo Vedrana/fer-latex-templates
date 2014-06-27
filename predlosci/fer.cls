@@ -8,6 +8,7 @@
 %  - seminar - podesi stil za Seminar (standardna postavka)
 %  - diplomski - podesi stil za Diplomski rad
 %  - zavrsni - podesi stil za Završni rad
+%  - proizvoljni - podesi stil za "proizvoljni" rad (za nestandardne radove)
 %  - lmodern - koristi font lmodern (standardna postavka)
 %  - times - koristi font times
 %  - utf8 - učitaj inputenc paket i opcijom utf8 (standardna postavka)
@@ -20,45 +21,53 @@
 \ProvidesClass{fer}
 
 % Predefinirane vrijednosti opcija
-\newif\if@fontlmodern		\global\@fontlmoderntrue
-\newif\if@fonttimes			\global\@fonttimesfalse
-\newif\if@radzavrsni		\global\@radzavrsnifalse
-\newif\if@radseminar		\global\@radseminartrue
-\newif\if@raddiplomski		\global\@raddiplomskifalse
-\newif\if@citeauthoryear	\global\@citeauthoryeartrue
-\newif\if@citenumeric		\global\@citenumericfalse
-\newif\if@encutf			\global\@encutftrue
-\newif\if@enccp				\global\@enccpfalse
-\newif\if@langeng				\global\@langengfalse
+\newif\if@fontlmodern     \global\@fontlmoderntrue
+\newif\if@fonttimes       \global\@fonttimesfalse
+\newif\if@radzavrsni      \global\@radzavrsnifalse
+\newif\if@radseminar      \global\@radseminartrue
+\newif\if@raddiplomski    \global\@raddiplomskifalse
+\newif\if@radproizvoljni  \global\@radproizvoljnifalse
+\newif\if@citeauthoryear  \global\@citeauthoryeartrue
+\newif\if@citenumeric     \global\@citenumericfalse
+\newif\if@encutf          \global\@encutftrue
+\newif\if@enccp           \global\@enccpfalse
+\newif\if@langeng         \global\@langengfalse
 
 % Postavi font
 \DeclareOption{lmodern}{\@fontlmoderntrue%
-						\@fonttimesfalse}
+            \@fonttimesfalse}
 \DeclareOption{times}{\@fonttimestrue%
-					  \@fontlmodernfalse}
-					  
+            \@fontlmodernfalse}
+            
 % Tip rada
 \DeclareOption{seminar}{\@radseminartrue%
-					  \@radzavrsnifalse%
-					  \@raddiplomskifalse}
+            \@radzavrsnifalse%
+            \@raddiplomskifalse%
+            \@radproizvoljnifalse}
 \DeclareOption{zavrsni}{\@radseminarfalse%
-					  \@radzavrsnitrue%
-					  \@raddiplomskifalse}
+            \@radzavrsnitrue%
+            \@raddiplomskifalse%
+            \@radproizvoljnifalse}
 \DeclareOption{diplomski}{\@radseminarfalse%
-					  \@radzavrsnifalse%
-					  \@raddiplomskitrue}
-					  
+            \@radzavrsnifalse%
+            \@raddiplomskitrue%
+            \@radproizvoljnifalse}
+\DeclareOption{proizvoljni}{\@radseminarfalse%
+            \@radzavrsnifalse%
+            \@raddiplomskifalse%
+            \@radproizvoljnitrue}
+            
 % Encoding
 \DeclareOption{utf8}{\@encutftrue%
-					 \@enccpfalse}
+           \@enccpfalse}
 \DeclareOption{cp1250}{\@encutffalse%
-					 \@enccptrue}
+           \@enccptrue}
 
 % Način citiranja
 \DeclareOption{authoryear}{\@citeauthoryeartrue%
-					       \@citenumericfalse}
+           \@citenumericfalse}
 \DeclareOption{numeric}{\@citeauthoryearfalse%
-					    \@citenumerictrue}
+           \@citenumerictrue}
 
 % Postavi varijable za konstantne stringove u tekstu
 % (svrha: omogućavanje prijevoda).
@@ -130,9 +139,9 @@
 
 % Numeriranje literature kod seminara
 \if@radseminar%
-\RequirePackage[nottoc, notlof, notlot, numbib, chapter]{tocbibind}
+  \RequirePackage[nottoc, notlof, notlot, numbib, chapter]{tocbibind}
 \else
-\RequirePackage[nottoc, notlof, notlot]{tocbibind}
+  \RequirePackage[nottoc, notlof, notlot]{tocbibind}
 \fi
 
 % Postavljanje fonta
@@ -164,7 +173,7 @@
 
 % Promjena naziva poglavlja ``Bibliografija'' -> ``Literatura''
 \addto\captionscroatian{%
-	\def\bibname{Literatura}
+  \def\bibname{Literatura}
 }
 
 % Podešavanje oznaka kod listi (1. razina je crtica, 2. puni krug) 
@@ -193,26 +202,26 @@
 \if@radseminar\else%
 % Ispis napomene o umetanju izvornika.
 \newcommand{\izvornik}{%
-	\newpage
-	\thispagestyle{empty}
-	\vspace*{\fill}
-	\hfil \textsl{Umjesto ove stranice umetnite izvornik Va\v{s}eg rada.} \par \hfil
-	\hfil \textsl{Kako biste uklonili ovu stranicu, obri\v{s}ite naredbu \texttt{\textbackslash izvornik}.} \hfil
-	\vspace*{\fill}
+  \newpage
+  \thispagestyle{empty}
+  \vspace*{\fill}
+  \hfil \textsl{Umjesto ove stranice umetnite izvornik Va\v{s}eg rada.} \par \hfil
+  \hfil \textsl{Kako biste uklonili ovu stranicu, obri\v{s}ite naredbu \texttt{\textbackslash izvornik}.} \hfil
+  \vspace*{\fill}
 }
 \fi
 
 % Dodana zahvala
-\newif\if@dodanazahvala		\global\@dodanazahvalafalse
+\newif\if@dodanazahvala    \global\@dodanazahvalafalse
 \if@radseminar\else%
 % Naredba za dodavanje zahvale.
 \newcommand{\zahvala}[1]{%
-	\newpage
- 	\setcounter{page}{3}
-	\vspace*{\fill}
-	\hfil {\itshape #1}\hfil
-	\vspace*{\fill}
-	\@dodanazahvalatrue
+  \newpage
+  \setcounter{page}{3}
+  \vspace*{\fill}
+  \hfil {\itshape #1}\hfil
+  \vspace*{\fill}
+  \@dodanazahvalatrue
 }
 \fi
 
@@ -226,85 +235,99 @@
    \@starttoc{toc}%
 }
 
+% Podešavanje dodatka
 \newboolean{atappendix}
 \setboolean{atappendix}{false}
 \newboolean{secondpart}
 \setboolean{secondpart}{false}
 
 \renewcommand{\appendix}{
-	\setboolean{atappendix}{true}
-	\setcounter{chapter}{0}
-	\renewcommand{\thechapter}{\Alph{chapter}}
+  \setboolean{atappendix}{true}
+  \setcounter{chapter}{0}
+  \renewcommand{\thechapter}{\Alph{chapter}}
 }
 
 \renewcommand{\@makechapterhead}[1]{%
 \ifthenelse{\boolean{atappendix}}{%
-	\vspace*{50\p@}%
-	{\setlength{\parskip}{0em} \parindent \z@ \raggedright \normalfont
-		\interlinepenalty\@M
-		\ifnum \c@secnumdepth >\m@ne
-			\Huge\bfseries \strdodatak\ \thechapter \\ #1
-			\par\nobreak
-		\fi
-		\nobreak
-		\vskip 40\p@
-	}
+  \vspace*{50\p@}%
+  {\setlength{\parskip}{0em} \parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \ifnum \c@secnumdepth >\m@ne
+      \Huge\bfseries \strdodatak\ \thechapter \\ #1
+      \par\nobreak
+    \fi
+    \nobreak
+    \vskip 40\p@
+  }
 }
 {
-	\ifthenelse{\boolean{secondpart}}
-	{
-	}
-	{
-		\setcounter{page}{1}
-		\renewcommand{\thepage}{\arabic{page}}
-		\setboolean{secondpart}{true}
-	}
+  \ifthenelse{\boolean{secondpart}}
+  {
+  }
+  {
+    \setcounter{page}{1}
+    \renewcommand{\thepage}{\arabic{page}}
+    \setboolean{secondpart}{true}
+  }
 
-	\vspace*{50\p@}%
-	{\setlength{\parskip}{0em} \parindent \z@ \raggedright \normalfont
-		\interlinepenalty\@M
-		\ifnum \c@secnumdepth >\m@ne
-			\Huge\bfseries \thechapter.~#1
-			\par\nobreak
-		\fi
-		\nobreak
-		\vskip 40\p@
-	}
+  \vspace*{50\p@}%
+  {\setlength{\parskip}{0em} \parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@M
+    \ifnum \c@secnumdepth >\m@ne
+      \Huge\bfseries \thechapter.~#1
+      \par\nobreak
+    \fi
+    \nobreak
+    \vskip 40\p@
+  }
 }
 }
 
 \renewcommand{\@makeschapterhead}[1]{%
 \ifthenelse{\boolean{atappendix}}{%
-	\vspace*{50\p@}%
-	{\setlength{\parskip}{0em} \parindent \z@ \raggedright
-		\normalfont
-		\interlinepenalty\@Mdef
-		\Huge\scshape \strdodatak\ \\ #1\par
-		\nobreak
-		\vskip 40\p@
-	}
+  \vspace*{50\p@}%
+  {\setlength{\parskip}{0em} \parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@Mdef
+    \Huge\scshape \strdodatak\ \\ #1\par
+    \nobreak
+    \vskip 40\p@
+  }
 }
 {%
-	\vspace*{50\p@}%
-	{\setlength{\parskip}{0em} \parindent \z@ \raggedright
-		\normalfont
-		\interlinepenalty\@M
-		\Huge\scshape #1\par
-		\nobreak
-		\vskip 40\p@
-	}
+  \vspace*{50\p@}%
+  {\setlength{\parskip}{0em} \parindent \z@ \raggedright
+    \normalfont
+    \interlinepenalty\@M
+    \Huge\scshape #1\par
+    \nobreak
+    \vskip 40\p@
+  }
 }
 }
 
-\if@radseminar%
+% Dodavanje naredbe \voditelj za tip rada seminar
+\if@radseminar
   \def\voditelj#1{\gdef\@voditelj{#1}}
   \def\@voditelj{\@latex@warning@no@line{Voditelj nije naveden.
   Koristi \noexpand\voditelj za definiranje}}
-\else%
+\fi
+  
+% Dodavanje naredbe \tiprada za proizvoljni tip rada.
+% Primjer korištenja: \tiprada{Diplomski projekt}
+\if@radproizvoljni
+  \def\tiprada#1{\gdef\@tiprada{#1}}
+  \def\@tiprada{\@latex@warning@no@line{Tip rada nije definiran.
+  Koristi \noexpand\tiprada za definiranje}}
+\fi
+  
+% Ako je tip rada diplomski ili zavrsni, dodaj naredbu
+% \thesisnumber za definiranje broja rada.
+\if@radseminar\else\if@radproizvoljni\else
   \def\thesisnumber#1{\gdef\@thesisnumber{#1}}
   \def\@thesisnumber{\@latex@warning@no@line{Broj rada nije definiran.
   Koristi \noexpand\thesisnumber za definiranje}}
-\fi
+\fi\fi
 
 % Definiranje naslovne stranice.
 \if@titlepage
@@ -328,27 +351,30 @@
         {\large\bfseries \strfer}
       \end{center}
       \vfill
-      \begin{center}%
-          \if@radzavrsni%
-          {\large \strzavrsni{}.~\@thesisnumber \par}%
-        \else \if@raddiplomski%
-          {\large \strdiplomski{}.~\@thesisnumber \par}%
-          \else {\large\bfseries \strseminar\ \par}%
-        \fi\fi
-        \if@radseminar \vskip 3em%
-        \else \vskip 1em%
+      \begin{center}
+        \if@radzavrsni
+          {\large \strzavrsni{}.~\@thesisnumber \par}
+        \else \if@raddiplomski
+          {\large \strdiplomski{}.~\@thesisnumber \par}
+        \else \if@radproizvoljni
+          {\large \@tiprada \par}
+        \else
+          {\large\bfseries \strseminar\ \par}
+        \fi\fi\fi
+        \if@radseminar \vskip 3em
+        \else \vskip 1em
         \fi
-        {\huge \bfseries \@title \par}%
-        \vskip 1em%
-        {\large\lineskip .75em%
-        \begin{tabular}[t]{c}%
-              \if@radseminar%
+        {\huge \bfseries \@title \par}
+        \vskip 1em
+        {\large\lineskip .75em
+        \begin{tabular}[t]{c}
+              \if@radseminar
                 {\itshape \@author} \\
                 \strvoditelj{}: {\itshape \@voditelj}
               \else
               \@author
           \fi
-        \end{tabular}\par}%
+        \end{tabular}\par}
       \end{center}\par
       \vfill
       \begin{center}
@@ -375,7 +401,7 @@
     \global\let\@date\@empty
     \global\let\date\relax
     \global\let\and\relax
-	}
+  }
 \fi
 
 \newdimen\listindentation
@@ -385,11 +411,11 @@
 % Zahtjeva enumitem paket
 \renewenvironment{itemize}%
 {
-	\setlength{\parskip}{0em}
-	\advance\@itemdepth\@ne
-	\edef\@itemitem{labelitem\romannumeral\@itemdepth}%
+  \setlength{\parskip}{0em}
+  \advance\@itemdepth\@ne
+  \edef\@itemitem{labelitem\romannumeral\@itemdepth}%
 
-	\begin{list}{\csname\@itemitem\endcsname}{\setlength{\leftmargin}{\listindentation}\setlength{\itemsep}{0 em}\setlength{\topsep}{0 em}}
+  \begin{list}{\csname\@itemitem\endcsname}{\setlength{\leftmargin}{\listindentation}\setlength{\itemsep}{0 em}\setlength{\topsep}{0 em}}
 }%
 {\end{list}}
 
