@@ -383,7 +383,7 @@
           \strsijecanj\or \strveljaca\or \strozujak\or \strtravanj\or
           \strsvibanj\or \strlipanj\or \strsrpanj\or \strkolovoz\or
           \strrujan\or \strlistopad\or \strstudeni\or
-          \strprosinac\fi \space \number\year.%
+          \strprosinac\fi \space \number\year\if@langeng\else.\fi%
         }
       \end{center}
     \end{titlepage}%
